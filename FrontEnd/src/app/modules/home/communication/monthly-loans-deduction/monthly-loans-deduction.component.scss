@@ -1,0 +1,53 @@
+.panel1bgColor{
+    background-color: var(--fluroscent-blue);
+}
+.ArFontStyle {
+    font-family: Cairo;
+}
+.tableArFontStyle {
+    font-family: Cairo;
+}
+.filter-label {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+}
+.header_color {
+    color: #000 !important;
+}
+.light-sea-green {
+    background-color: var(--light-sea-green) !important;
+  
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--comm-btn-hover) !important; 
+        }
+    }
+}
+.filter-btn-div {
+    display: flex;
+    justify-content: end;
+    padding-right: 200px;
+}
+.t_row_header {
+    background-color: #8fdedc !important;
+}
+.row_header {
+    background-color: var(--leaf);
+    color: #fff !important;
+}
+.mat-sort-header-content {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.left-div {
+    display: flex;
+    justify-content: center;
+}
+.right-div {
+    display: flex;
+    justify-content: flex-start;
+}

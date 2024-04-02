@@ -1,0 +1,21 @@
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.bg-header{
+    background-color: var(--fluroscent-green);
+}
+
+.btn-website{
+    background-color: #317c23;
+
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: #1f4c17 !important; 
+        }
+    }
+}
+
+.t-header-carousal{
+    background-color:#48ad36 !important ;
+}

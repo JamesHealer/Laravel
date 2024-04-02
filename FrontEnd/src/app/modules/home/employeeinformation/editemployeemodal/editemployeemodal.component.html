@@ -1,0 +1,226 @@
+<h1 class="text-center" mat-dialog-title>Edit Employee Information</h1>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="p-5 dialog-body">
+        <div class="row">
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">EnglishNAme:</label>
+                <input type="text" class="form-control input-sm" formControlName="EnglishNAme" placeholder="EnglishNAme">
+                <span class="text-danger"
+                    *ngIf="empForm.EnglishNAme.errors?.required">
+                    EnglishNAme is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">ArabicNAme:</label>
+                <input type="text" class="form-control input-sm" formControlName="ArabicNAme" placeholder="EnglishNAme">
+                <span class="text-danger"
+                    *ngIf="empForm.ArabicNAme.errors?.required">
+                    ArabicNAme is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">Birthday:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                        bsDatepicker 
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                        formControlName="Birthday"
+                        placeholder="Birthday"
+                    />
+                </div>
+                <span class="text-danger"
+                    *ngIf="empForm.Birthday.errors?.required">
+                    Birthday is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">Gender</label>              
+                <ng-select formControlName="Gender" [items]="genderArray" bindLabel="name" bindValue="id">
+                  <ng-option value="1" label="Male">Male</ng-option>
+                  <ng-option value="2" label="Female">Female</ng-option>
+                </ng-select>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">Mobile:</label>
+                <input type="text" class="form-control input-sm" formControlName="Mobile" placeholder="Mobile">
+                <span class="text-danger"
+                    *ngIf="empForm.Mobile.errors?.required">
+                    Mobile is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">Email:</label>
+                <input type="text" class="form-control input-sm" formControlName="Email" placeholder="Email">
+                <span class="text-danger"
+                    *ngIf="empForm.Email.errors?.required">
+                    Email is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">Nationality</label>
+                <ng-select formControlName="Nationality" [items]="data.countries" bindLabel="counamE1"
+                  bindValue="countryid" [class]="{'error':empForm.Nationality.errors?.required || empForm.Nationality.errors?.min}">
+                </ng-select>
+                <span class="text-danger"
+                    *ngIf="empForm.Nationality.errors?.required || empForm.Nationality.errors?.min">
+                    Nationality is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">CivilID:</label>
+                <input type="text" class="form-control input-sm" formControlName="CivilID" placeholder="CivilID">
+                <span class="text-danger"
+                    *ngIf="empForm.CivilID.errors?.required">
+                    CivilID is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">Department:</label>
+                <ng-select formControlName="Department" [items]="data.departments" bindLabel="shortname"
+                    bindValue="refid" [class]="{'error':empForm.Department.errors?.min || empForm.Department.errors?.required}">
+                </ng-select>
+                <span class="text-danger"
+                    *ngIf="empForm.Department.errors?.required">
+                    Department is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">Occupation:</label>
+                <ng-select formControlName="Occupation" [items]="data.occupations" bindLabel="shortname"
+                    bindValue="refid" [class]="{'error':empForm.Occupation.errors?.min || empForm.Occupation.errors?.required}">
+                </ng-select>
+                <span class="text-danger"
+                    *ngIf="empForm.Occupation.errors?.min || empForm.Occupation.errors?.required">
+                    Occupation is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">ContractType:</label>
+                <ng-select formControlName="ContractType" [items]="data.contractTypes" bindLabel="shortname"
+                    bindValue="refid" [class]="{'error':empForm.ContractType.errors?.required || empForm.ContractType.errors?.min}">
+                </ng-select>
+                <span class="text-danger"
+                    *ngIf="empForm.ContractType.errors?.required || empForm.ContractType.errors?.min">
+                    ContractType is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle">PFNo:</label>
+                <input type="number" class="form-control input-sm" formControlName="PFNo" placeholder="PFNo" disabled>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">EmploymentDate:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                        bsDatepicker 
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                        formControlName="EmploymentDate"
+                        placeholder="EmploymentDate"
+                    />
+                </div>
+                <span class="text-danger"
+                    *ngIf="empForm.EmploymentDate.errors?.required">
+                    EmploymentDate is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">JoinedDate:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                        bsDatepicker 
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                        formControlName="JoinedDate"
+                        placeholder="JoinedDate"
+                    />
+                </div>
+                <span class="text-danger"
+                    *ngIf="empForm.JoinedDate.errors?.required">
+                    JoinedDate is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">SubscribedDate:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                        bsDatepicker 
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                        formControlName="SubscribedDate"
+                        placeholder="SubscribedDate"
+                    />
+                </div>
+                <span class="text-danger"
+                    *ngIf="empForm.SubscribedDate.errors?.required">
+                    SubscribedDate is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">TerminationDate:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                        bsDatepicker 
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                        formControlName="TerminationDate"
+                        placeholder="TerminationDate"
+                    />
+                </div>
+                <span class="text-danger"
+                    *ngIf="empForm.TerminationDate.errors?.required">
+                    TerminationDate is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">MemStatus:</label>
+                <input type="number" class="form-control input-sm" formControlName="MemStatus" placeholder="MemStatus">
+                <span class="text-danger"
+                    *ngIf="empForm.MemStatus.errors?.required">
+                    MemStatus is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">AgreedSubmt:</label>
+                <input type="text" class="form-control input-sm" formControlName="AgreedSubmt" placeholder="AgreedSubmt">
+                <span class="text-danger"
+                    *ngIf="empForm.AgreedSubmt.errors?.required">
+                    AgreedSubmt is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">AmountReceivedTillNow:</label>
+                <input type="number" class="form-control input-sm" formControlName="AmountReceivedTillNow" placeholder="AmountReceivedTillNow">
+                <span class="text-danger"
+                    *ngIf="empForm.AmountReceivedTillNow.errors?.required">
+                    AmountReceivedTillNow is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">LastSalary:</label>
+                <input type="number" class="form-control input-sm" formControlName="LastSalary" placeholder="LastSalary">
+                <span class="text-danger"
+                    *ngIf="empForm.LastSalary.errors?.required">
+                    LastSalary is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">EmpPaciNo:</label>
+                <input type="number" class="form-control input-sm" formControlName="EmpPaciNo" placeholder="EmpPaciNo">
+                <span class="text-danger"
+                    *ngIf="empForm.EmpPaciNo.errors?.required">
+                    EmpPaciNo is required
+                </span>
+            </div>
+            <div class="col-3 p-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle required">NextToKin:</label>
+                <input type="text" class="form-control input-sm" formControlName="NextToKin" placeholder="NextToKin">
+                <span class="text-danger"
+                    *ngIf="empForm.NextToKin.errors?.required">
+                    NextToKin is required
+                </span>
+            </div>  
+        </div>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-end mt-5">
+        <button type='submit' class="mx-2" mat-raised-button color="primary">Save</button>
+        <span class="btn btn-secondary" (click)="onClose()">Cancel</span>
+    </div>
+</form>
+

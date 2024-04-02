@@ -1,0 +1,221 @@
+<input type="hidden" #ServiceSetupDetail name="ServiceSetupDetail" value="ServiceSetupDetail">
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panelBgColor1">
+       <!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+        <div class="card-toolbar" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="text-dark ArFontStyle header-color" lang="AR-SA" id="ServiceSetupDetail">{{lang == "en" ? label.headerName : "تفاصيل إعداد الخدمة "}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example"
+                *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary ArFontStyle english-vermillion" lang="AR-SA"
+                    routerLink="/service-setup/add-service-setup">{{lang == "en" ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle candy-pink" lang="AR-SA">{{lang == "en" ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</button>
+            </div>
+        </h3>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        <div class="card-toolbar">
+            <!--begin::Menu-->
+            <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                <span class="svg-icon svg-icon-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="5" y="5" width="5" height="5" rx="1" fill="currentColor"></rect>
+                            <rect x="14" y="5" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                            <rect x="5" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                            <rect x="14" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                        </g>
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->
+            </button>
+            <!--begin::Menu 2-->
+            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
+                data-kt-menu="true">
+                <!--begin::Menu item-->
+                <div class="menu-item px-3">
+                    <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">Quick Actions</div>
+                </div>
+                <!--end::Menu item-->
+                <!--begin::Menu separator-->
+                <div class="separator mb-3 opacity-75"></div>
+                <!--end::Menu separator-->
+                <!--begin::Menu item-->
+                <div class="menu-item px-3">
+                    <a href="#" class="menu-link px-3">New Ticket</a>
+                </div>
+                <!--end::Menu item-->
+                <!--begin::Menu item-->
+                <div class="menu-item px-3">
+                    <a href="#" class="menu-link px-3">New Customer</a>
+                </div>
+                <!--end::Menu item-->
+                <!--begin::Menu item-->
+                <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
+                    <!--begin::Menu item-->
+                    <a href="#" class="menu-link px-3">
+                        <span class="menu-title">New Group</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <!--end::Menu item-->
+                    <!--begin::Menu sub-->
+                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">Admin Group</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">Staff Group</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">Member Group</a>
+                        </div>
+                        <!--end::Menu item-->
+                    </div>
+                    <!--end::Menu sub-->
+                </div>
+                <!--end::Menu item-->
+                <!--begin::Menu item-->
+                <div class="menu-item px-3">
+                    <a href="#" class="menu-link px-3">New Contact</a>
+                </div>
+                <!--end::Menu item-->
+                <!--begin::Menu separator-->
+                <div class="separator mt-3 opacity-75"></div>
+                <!--end::Menu separator-->
+                <!--begin::Menu item-->
+                <div class="menu-item px-3">
+                    <div class="menu-content px-3 py-3">
+                        <a class="btn btn-primary btn-sm px-4" href="#">Generate Reports</a>
+                    </div>
+                </div>
+                <!--end::Menu item-->
+            </div>
+            <!--end::Menu 2-->
+            <!--end::Menu-->
+        </div>
+        <!--begin::Table container-->
+        <div class="table-responsive mt-3" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                    <mat-label>Search</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                        class="ArFontStyle" />
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form>
+            <div class="table-container">
+                <table mat-table class="w-100" [dataSource]="serviceSetupDto" matSort>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="ArFontStyle">{{lang == "en" ? bodyLabel[0].title : bodyLabel[0].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="text-center">
+
+                            <a href="javascript:void(0)"> <i class="bi fs-2 bi-card-list text-warning" [matMenuTriggerFor]="menu"></i></a> &nbsp;
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('edit', item.serviceId)"
+                                routerLink="/service-setup/add-service-setup/{{item.serviceId}}"><i
+                                        class="bi bi-pencil-square fs-2 text-success"></i> {{lang == "en" ? "Edit" : "يحرر"}} </button>
+                                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('delete', item.serviceId)"
+                                (click)="openDeleteModal(deleteModal,item.serviceId)"><i
+                                        class="bi bi-trash fs-2 text-danger"></i> {{lang == "en" ? "Delete" : "يمسح"}}</button>
+                            </mat-menu>
+                            <a  *ngIf="selectedBtn =='delete' && selectedId==item.serviceId " href="javascript:void(0)"
+                            (click)="openDeleteModal(deleteModal,item.serviceId)"><i
+                                class="bi bi-trash fs-2 text-danger"></i></a>
+                            <a *ngIf="selectedId!=item.serviceId || selectedBtn =='edit'"
+                            routerLink="/service-setup/add-service-setup/{{item.serviceId}}"><i
+                                class="bi bi-pencil-square fs-2 text-success"></i></a> 
+
+                                
+                            <!-- <button mat-raised-button color="warn"
+                                (click)="openDeleteModal(deleteModal,item.serviceId)">{{lang == "en" ? "Delete" : "يمسح"}}</button>
+                            &nbsp; <button mat-raised-button color="accent"
+                                routerLink="/service-setup/add-service-setup/{{item.serviceId}}"
+                                id={{item.serviceId}}>{{lang == "en" ? "Edit" : "يحرر"}}</button> -->
+                        </td>
+                    </ng-container>
+                    <div *ngIf="lang == 'en'">
+                        <ng-container matColumnDef="services">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                                {{lang == "en" ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}
+                            </th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.serviceName1 }}</td>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="lang == 'ar'">
+                        <ng-container matColumnDef="services">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                                {{lang == "en" ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}
+                            </th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.serviceName2 }}</td>
+                        </ng-container>
+                    </div>
+                    <ng-container matColumnDef="serviceType">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                            {{lang == "en" ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.serviceTypeName}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="minMax">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                            {{lang == "en" ? bodyLabel[5].title : bodyLabel[5].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+                            {{item.minInstallment}}-{{item.maxInstallment}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="discountAllow">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                            {{lang == "en" ? bodyLabel[6].title : bodyLabel[6].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+                            {{item.allowDiscountAmount}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="forEmployee">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                            {{lang == "en" ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+                            {{item.allowedNonEmployes?  'Yes':'No'}}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                        [ngClass]="{'hidden':!isLoadingCompleted}"></tr>
+                    <tr mat-row *matRowDef="let refTableDto; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="pageChanged($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+
+    </div>
+    <!--begin::Body-->
+    <div class="card-footer">
+
+    </div>
+</div>
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ lang == 'en' ? modalLabels[0].Delete.title : modalLabels[0].Delete.arabicTitle}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <span>D{{ lang == 'en' ? modalLabels[0].Doyouwanttodeletethisrecord.title : modalLabels[0].Doyouwanttodeletethisrecord.arabicTitle}}</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">        
+        <button mat-raised-button color="warn" (click)="modal.close('yes')">{{ lang == 'en' ? modalLabels[0].Yes.title : modalLabels[0].Yes.arabicTitle}}</button> &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="modal.close('Save click')">{{ lang == 'en' ? modalLabels[0].No.title : modalLabels[0].No.arabicTitle}}</button>
+    </div>
+</ng-template>

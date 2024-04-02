@@ -1,0 +1,562 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input
+  type="hidden"
+  #ImportEmployeeMaster
+  name="ImportEmployeeMaster"
+  value="ImportEmployeeMaster"
+/>
+
+<div class="card mb-5 mb-xl-10">
+  <!--begin::Card header-->
+  <div class="card-header card-header-stretch pb-0 header_bg">
+    <!--begin::Title-->
+    <div class="card-title">
+      <h3 class="m-0 text-white ArFontStyle" lang="AR-SA">
+        {{
+          lang == "en"
+            ? formBodyLabels[0].hdrImportEmployeeMaster.title
+            : formBodyLabels[0].hdrImportEmployeeMaster.arabicTitle
+        }}
+      </h3>
+    </div>
+    <!--end::Title-->
+  </div>
+  
+  <!--end::Card header-->
+  <!--begin::Tab content-->
+  <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+    <!--begin::Tab panel-->
+    <div
+      id="kt_billing_creditcard"
+      class="tab-pane fade show active"
+      role="tabpanel"
+    >
+      <!--begin::Title-->
+      <!-- <h3 class="mb-5">Personal Information</h3> -->
+      <!--end::Title-->
+      <!--begin::Row-->
+      <div class="row gx-9 gy-6">
+        <form autocomplete="off">
+          <div class="row mb-4">
+            <div class="col-lg-6 fv-row">
+              <div class="mt-4">
+                <label
+                  for="formFile"
+                  class="form-label ArFontStyle"
+                  lang="AR-SA"
+                  >{{
+                    lang == "en"
+                      ? formBodyLabels[0].lblSelectFile.title
+                      : formBodyLabels[0].lblSelectFile.arabicTitle
+                  }}</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  accept=".xls,.xlsx"
+                  (change)="onFileChange($event)"
+                />
+                <span
+                  ><small class="text-danger ArFontStyle" lang="AR-SA"></small
+                ></span>
+              </div>
+            </div>
+
+            <div class="col-lg-6 fv-row">
+              <div class="mt-4">
+                <label
+                  for="formFile"
+                  class="form-label ArFontStyle"
+                  lang="AR-SA"
+                  >{{
+                    lang == "en"
+                      ? formBodyLabels[0].lblUploaderType.title
+                      : formBodyLabels[0].lblUploaderType.arabicTitle
+                  }}</label>
+                <div class="row d-flex">
+                  <div class="col-lg-7">
+                    <ng-select [(ngModel)]="selectedSampleFile" name="uploaderType" disabled>
+                      <ng-option
+                        *ngFor="let sampleFileType of sampleFileTypes"
+                        [value]="sampleFileType.shortname"
+                        >{{
+                          lang == "en"
+                            ? sampleFileType.refnamE1
+                            : sampleFileType.refnamE2
+                        }}</ng-option
+                      >
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-5 d-flex flex-column justify-content-center">
+                    <span class="text-right">
+                      <span class="btn btn-success" (click)="downloadFile()">
+                        <i class="fa fa-download"></i>
+                        {{
+                          lang == "en"
+                            ? formBodyLabels[0].lblDownloadUploaderSample.title
+                            : formBodyLabels[0].lblDownloadUploaderSample.arabicTitle
+                        }}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <span class="text-success">
+              ( {{
+                lang == "en"
+                  ? formBodyLabels[0].lblUploadFullEmployee.title
+                  : formBodyLabels[0].lblUploadFullEmployee.arabicTitle
+              }} )
+            </span>
+          </div>
+        </form>
+      </div>
+      <!--end::Row-->
+    </div>
+  </div>
+  <!--end::Tab content-->
+  <div
+    class="card-footer d-flex justify-content-end py-6 px-9"
+    *ngFor="let bodyLabel of formBodyLabels; let i = index"
+  >
+    <button
+      type="button"
+      class="btn btn-primary float-right ArFontStyle btn-bg"
+      lang="AR-SA"
+      (click)="importEmployeeData()"
+    >
+      {{
+        lang == "en"
+          ? formBodyLabels[0].btnDataImport.title
+          : formBodyLabels[0].btnDataImport.arabicTitle
+      }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="filteredEmployeeData?.data?.length > 0" class="card mb-5 mb-xl-10">
+  <div class="table-container">
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+        <mat-label>Search</mat-label>
+        <input
+          type="search"
+          matInput
+          formControlName="searchTerm"
+          class="ArFontStyle"
+        />
+        <mat-icon matPrefix class="material-icons">search</mat-icon>
+        <mat-icon matSuffix (click)="clearFilter()" class="material-icons"
+          >close</mat-icon
+        >
+      </mat-form-field>
+    </form>
+    <table mat-table class="w-100" [dataSource]="filteredEmployeeData" matSort>
+      <ng-container matColumnDef="Action">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+        >
+          Action
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <div class="d-flex">
+            <span class="ArFontStyle cursor-pointer"
+              (click)="editEmployee(item)" title="Edit">
+              <i class="bi bi-pencil-square fs-2"></i> 
+            </span>
+            <span class="ArFontStyle cursor-pointer mx-1"
+              (click)="removeEmployee(item)" title="Remove">
+              <i class="bi bi-trash fs-2 text-danger"></i> 
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Exception">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+        >
+          Exception
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1 w-100px">
+          <ng-template [ngIf]="item.exceptions.length > 0">
+            <div *ngFor="let except of item.exceptions; index as i" class="text-danger">
+              {{ i+1 }}.{{ except }}
+            </div>
+          </ng-template>
+          <ng-template [ngIf]="item.exceptions.length == 0">
+            <div class="text-success">Accepted</div>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="EmployeeUnivNo">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1 text-center"
+          mat-sort-header
+        >
+          EmployeeUnivNo
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle text-center p-1">
+          {{ item.EmployeeUnivNo }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="EnglishNAme">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+          mat-sort-header
+        >
+          EnglishNAme
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <div>{{ item.EnglishNAme }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ArabicNAme">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+          mat-sort-header
+        >
+          ArabicNAme
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <div>{{ item.ArabicNAme }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="JoinedDate">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+          mat-sort-header
+        >
+          JoinedDate
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.JoinedDate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="PFNo">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          PFNo
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle text-center">
+          {{ item.PFNo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="SubscribedDate">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          SubscribedDate
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.SubscribedDate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="MemStatus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          MemStatus
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.MemStatus }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="AgreedSubmt">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          AgreedSubmt
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.AgreedSubmt }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="AmountReceivedTillNow">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          AmountReceivedTillNow
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle text-center">
+          {{ item.AmountReceivedTillNow }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="LastSalary">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          LastSalary
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.LastSalary }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="TerminationDate">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          TerminationDate
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.TerminationDate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Occupation">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Occupation
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <div [class]="item.Occupation == 0 ? 'text-danger' : '' ">{{ occupationName(item.Occupation) }}</div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Gender">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Gender
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <div [class]="item.Gender == 0 ? 'text-danger' : ''">{{ genderName(item.Gender) }}</div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Mobile">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Mobile
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.Mobile }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="CivilID">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          CivilID
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.CivilID }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Birthday">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Birthday
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.Birthday }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Department">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Department
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <div [class]="item.Department == 0 ? 'text-danger':''">{{ departmentName(item.Department) }}</div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ContractType">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          ContractType
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <div [class]="item.ContractType == 0 ? 'text-danger':''">{{ contractTypeName(item.ContractType) }}</div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Email">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Email
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.Email }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="EmpPaciNo">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          EmpPaciNo
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.EmpPaciNo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Nationality">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          Nationality
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <div [class]="item.Nationality == 0 ? 'text-danger' : ''">{{ nationalityName(item.Nationality) }}</div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="NextToKin">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+          NextToKin
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          {{ item.NextToKin }}
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+        class="importTableHeader"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let item; columns: displayedColumns"
+        [class]="item.previous_Amount == item.amount ? '' : 'highlightRow'"
+      ></tr>
+    </table>
+  </div>
+</div>
+<!-- <div *ngIf="employeeData.length" class="card mb-5 mb-xl-10"> -->
+<!-- <h3>Employee Data</h3>
+  <table class="table table-bordered"> -->
+<!-- <thead class="thead-dark">
+        <tr>
+          <th scope="col">EmployeeUnivNo</th>
+          <th scope="col">EnglishNAme</th>
+          <th scope="col">ArabicNAme</th>
+          <th scope="col">JoinedDate</th>
+          <th scope="col">PFNo</th>
+          <th scope="col">SubscribedDate</th>
+          <th scope="col">MemStatus</th>
+          <th scope="col">AgreedSubmt</th>
+          <th scope="col">AmountReceivedTillNow</th>
+          <th scope="col">LastSalary</th>
+          <th scope="col">TerminationDate</th>
+          <th scope="col">Occupation</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">CivilID</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">ContractType</th>
+          <th scope="col">Email</th>
+          <th scope="col">EmpPaciNo</th>
+          <th scope="col">Nationality</th>
+          <th scope="col">NextToKin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Employee of employeeData">
+          <td>
+            <span
+              class="label label-inline label-light-primary font-weight-bold"
+              >{{ Employee.EmployeeUnivNo }}</span
+            >
+          </td>
+          <td>{{ Employee.EnglishNAme }}</td>
+          <td>{{ Employee.ArabicNAme }}</td>
+          <td>{{ Employee.JoinedDate }}</td>
+          <td>{{ Employee.PFNo }}</td>
+          <td>{{ Employee.SubscribedDate }}</td>
+          <td>{{ Employee.MemStatus }}</td>
+          <td>{{ Employee.AgreedSubmt }}</td>
+          <td>{{ Employee.AmountReceivedTillNow }}</td>
+          <td>{{ Employee.LastSalary }}</td>
+          <td>{{ Employee.TerminationDate }}</td>
+          <td>{{ Employee.Occupation }}</td>
+          <td>{{ Employee.Gender }}</td>
+          <td>{{ Employee.Mobile }}</td>
+          <td>{{ Employee.CivilID }}</td>
+          <td>{{ Employee.Birthday }}</td>
+          <td>{{ Employee.ContractType }}</td>
+          <td>{{ Employee.Email }}</td>
+          <td>{{ Employee.EmpPaciNo }}</td>
+          <td>{{ Employee.Nationality }}</td>
+          <td>{{ Employee.NextToKin }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

@@ -1,0 +1,1 @@
+{"ast":null,"code":"var InlineSVGConfig = function () {\n  function InlineSVGConfig() {}\n\n  return InlineSVGConfig;\n}();\n\nexport { InlineSVGConfig };","map":null,"metadata":{},"sourceType":"module"}

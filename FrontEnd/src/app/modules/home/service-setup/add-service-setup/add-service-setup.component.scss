@@ -1,0 +1,52 @@
+.panelBgColor1{
+    background-color: var(--sweet-brown);
+}
+.panelBgColor2{
+    background-color: #C8C8A9 
+}
+.panelBgColor3{
+    background-color: #83AF9B 
+}
+.card-title-font-color{
+    color:#FFFFFF
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+input:focus {
+    background-color: #E9E9E9;
+  }
+
+  .english-vermillion{
+  background-color: var(--english-vermillion);
+}
+
+.candy-pink{
+  background-color: var(--candy-pink);
+}
+
+.ruddy-pink {
+  background-color: var(--ruddy-pink);
+}
+
+.english-vermillion, .candy-pink, .ruddy-pink{
+  &.btn {
+      &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+          background-color: var(--setup-btn-hover) !important; 
+      }
+  }
+}
+
+.btn-group{
+    column-gap: 20px;
+}
+
+.theader{
+    color: #fff !important;
+}
+input[type=checkbox]{
+    background-color: #5f6d7a!important;
+}
+.form-switch .form-check-input:checked{
+    background-color: #348be1!important;
+}

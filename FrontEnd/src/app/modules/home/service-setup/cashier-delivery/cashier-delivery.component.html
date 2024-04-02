@@ -1,0 +1,301 @@
+<ngb-accordion #ngbOfferDetails="ngbAccordion" activeIds="ngb-panel-1" opened="true">
+    <ngb-panel id="ngb-panel-1">
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA"> {{ lang == 'en' ?
+                formBodyLabels[0].CashierDeliveryPreparationScreen.title:
+                formBodyLabels[1].CashierDeliveryPreparationScreen.title}}
+            </h3>
+        </ng-template>
+        <ng-template ngbPanelContent><!--cashierDeliveryForm-->
+            <form [formGroup]="cashierDeliveryForm">
+                <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mb-3">
+                    <div class=" flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels[0].EmployeeName.title:
+                                    formBodyLabels[1].EmployeeName.title}}</label>
+                                <input type="text" class="form-control" formControlName="englishName" readonly
+                                    style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels[0].EmployeeID.title:
+                                    formBodyLabels[1].EmployeeID.title}} </label>
+                                <input type="text" class="form-control" formControlName="employeeId" readonly
+                                    style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">{{ lang
+                                    == 'en' ? formBodyLabels[0].CId.title: formBodyLabels[1].CId.title}}</label>
+                                <input type="text" class="form-control" formControlName="empCidNum" readonly
+                                    style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels[0].PFId.title:
+                                    formBodyLabels[1].PFId.title}}</label>
+                                <input type="text" class="form-control" formControlName="pfid" readonly
+                                    style="background-color: #e9e9e9;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].TotalAmount.title:
+                                formBodyLabels[1].TotalAmount.title}}</label>
+                        </div>
+                        <input type="number" class="form-control" formControlName="totalAmount" readonly
+                            style="background-color: #e9e9e9;" />
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].BankDetails.title:
+                                formBodyLabels[1].BankDetails.title}}
+                            </label>
+                        </div>
+                        <ng-select [items]="selectBankAccount$ | async" bindLabel="accountName"
+                            formControlName="bankAccount1" bindValue="accountNumber" lang="AR-SA"
+                            (change)="onSearchChange()">
+                        </ng-select>
+                        <span class="text-danger"
+                            *ngIf="isFormSubmitted && cashierDeliveryFrm.bankAccount1.errors?.required">
+                            Bank is required
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].DraftNumber.title:
+                                formBodyLabels[1].DraftNumber.title}}
+                            </label>
+                        </div>
+                        <input type="number" class="form-control" formControlName="draftNumber1" />
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].DraftDate.title: formBodyLabels[1].DraftDate.title}}
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="draftDate1"
+                                lang="AR-SA" />
+                        </div>
+                        <span class="text-danger"
+                            *ngIf="isFormSubmitted && cashierDeliveryFrm.bankAccount1.errors?.required">
+                            Service Sub Type is required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].ReceivedBy.title:
+                                formBodyLabels[1].ReceivedBy.title}}
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" formControlName="receivedBy1" />
+                        <span class="text-danger"
+                            *ngIf="isFormSubmitted && cashierDeliveryFrm.receivedBy1.errors?.required">
+                            Received by is required
+                        </span>
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].ReceivedDate.title:
+                                formBodyLabels[1].ReceivedDate.title}}
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="receivedDate1"
+                                name="receivedDate1" lang="AR-SA" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].PreparedDeliveredby.title:
+                                formBodyLabels[1].PreparedDeliveredby.title}}
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" formControlName="deliveredBy1" readonly
+                            style="background-color: #e9e9e9;" />
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].PreparedDeliveredDate.title:
+                                formBodyLabels[1].PreparedDeliveredDate.title}}
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="deliveryDate1"
+                                lang="AR-SA" readonly style="background-color: #e9e9e9;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].CollectedBy.title:
+                                formBodyLabels[1].CollectedBy.title}}
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" formControlName="collectedBy" />
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].RelationShip.title:
+                                formBodyLabels[1].RelationShip.title}}
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" formControlName="relationship" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].ChequeNumber.title:
+                                formBodyLabels[1].ChequeNumber.title}}</label>
+                        </div>
+                        <input type="number" class="form-control" formControlName="chequeNumber" />
+                        <span class="text-danger"
+                            *ngIf="isFormSubmitted && cashierDeliveryFrm.chequeNumber.errors?.required">
+                            Cheque number is required
+                        </span>
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <div class="d-flex justify-content-between">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                {{ lang == 'en' ? formBodyLabels[0].CollectedPersonCID.title:
+                                formBodyLabels[1].CollectedPersonCID.title}}
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" formControlName="collectedPersonCID" />
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="text-right">
+                        <button mat-raised-button color="primary" (click)="onSaveClick()" [disabled]="idDisabled">{{
+                            lang == 'en' ?
+                            formBodyLabels[0].Save.title: formBodyLabels[1].Save.title}}</button>&nbsp;
+                        <button mat-raised-button color="accent" routerLink="/service-setup/cashier-approval">{{ lang ==
+                            'en' ? formBodyLabels[0].Back.title: formBodyLabels[1].Back.title}}</button>&nbsp;
+                        <button mat-raised-button color="primary" [disabled]="!idDisabled" (click)="onPrintClick()">{{
+                            lang ==
+                            'en' ? formBodyLabels[0].btnPrint.title: formBodyLabels[1].btnPrint.title}}</button>
+                    </div>
+                </div>
+
+            </form>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+
+<div style="display: none; print-color-adjust: exact; -webkit-print-color-adjust: exact;" #pdfConvert
+    id="print-index-invoice">
+    <div style="font-family: sans-serif;  print-color-adjust: exact; -webkit-print-color-adjust: exact;">
+        <h4 style="text-align: center; margin:6px">صندوق الضمان الاجتماعي - جامعة الكويت</h4>
+        <h4 style="text-align: center; margin:6px">Social security Fund - Kuwait University</h4>
+        <h4 style="text-align: center; margin:6px"> {{formBodyLabels[0].CashierDeliveryPreparationScreen.title}}</h4>
+        <h4 style="text-align: center; margin:6px"> {{formBodyLabels[1].CashierDeliveryPreparationScreen.title}}</h4>
+        <div
+            style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9; background-color: #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px">Service Name / اسم الخدمة- </p>&nbsp;
+                <p style="width: 60%; margin: 0px"><b> {{deliveryInformation?.serviceName}}</b></p>
+            </div>
+        </div>
+        <div style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px">{{formBodyLabels[0].EmployeeName.title}}/
+                    {{formBodyLabels[1].EmployeeName.title}}</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['englishName'].value}} /
+                        {{cashierDeliveryForm.controls['arabicName'].value}}</b></p>
+            </div>
+        </div>
+        <div
+            style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9; background-color: #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px"> {{formBodyLabels[0].EmployeeID.title}} /
+                    {{formBodyLabels[1].EmployeeID.title}}</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['employeeId'].value}}</b></p>
+            </div>
+        </div>
+        <div style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px"> {{formBodyLabels[0].DraftNumber.title}} /
+                    {{formBodyLabels[1].DraftNumber.title}}</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['draftNumber1'].value}}</b></p>
+            </div>
+        </div>
+        <div
+            style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9; background-color: #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px">Draft Amount / مبلغ المسودة</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['totalAmount'].value}}</b></p>
+            </div>
+        </div>
+
+        <div style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px">{{formBodyLabels[0].BankDetails.title}} /
+                    {{formBodyLabels[1].BankDetails.title}}</p>
+                <p style="width: 60%; margin: 0px"><b>{{accountName}}</b></p>
+            </div>
+        </div>
+        <div
+            style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9; background-color: #e9e9e9;">
+
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px"> Delivered by / سلمت بواسطة</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['deliveredBy1'].value}}</b></p>
+            </div>
+        </div>
+        <div style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px">{{formBodyLabels[0].ReceivedBy.title}} /
+                    {{formBodyLabels[1].ReceivedBy.title}}</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['receivedBy1'].value}}</b></p>
+            </div>
+        </div>
+        <div
+            style="justify-items: stretch; padding: 10px; border-bottom: 1px solid #e9e9e9; background-color: #e9e9e9;">
+            <div style="display: flex;">
+                <p style="width: 40%; margin: 0px"> {{formBodyLabels[0].ReceivedDate.title}} /
+                    {{formBodyLabels[1].ReceivedDate.title}}</p>
+                <p style="width: 60%; margin: 0px"><b>{{cashierDeliveryForm.controls['receivedDate1'].value |
+                        date:"dd/MM/yyyy"}}</b></p>
+            </div>
+        </div>
+    </div>
+</div>

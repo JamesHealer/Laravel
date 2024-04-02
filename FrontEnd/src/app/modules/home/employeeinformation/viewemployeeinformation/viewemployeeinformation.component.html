@@ -1,0 +1,342 @@
+<input type="hidden" #EmployeeGrid name="EmployeeGrid" value="EmployeeGrid" />
+<div class="card mb-5 mb-xl-8">
+  <div class="card-header border-0 pt-5 panelBgColor">
+    <div class="card-toolbar">
+      <h3 class="m-0 ArFontStyle header_color" lang="AR-SA">
+        {{
+          lang === "en"
+            ? formBodyLabels[0].hdrEmployeeDetails.title
+            : formBodyLabels[0].arabicTitle
+        }}
+      </h3>
+    </div>
+    <h3 class="card-title align-items-start flex-column viewEmployee">
+      <a
+        routerLink="/employee/add-employee"
+        class="btn btn-primary w-100 ArFontStyle viewEmployeeBtn"
+        lang="AR-SA"
+      >
+        <span class="svg-icon svg-icon-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z"
+              fill="currentColor"
+            ></path>
+            <path
+              opacity="0.3"
+              d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </span>
+        {{
+          lang === "en"
+            ? formBodyLabels[0].btnAddEmployee.title
+            : formBodyLabels[0].btnAddEmployee.arabicTitle
+        }}
+      </a>
+    </h3>
+  </div>
+  <div class="card-body py-3">
+    <div class="row mb-4">
+      <div class="col-lg-8 fv-row"></div>
+      <div class="col-lg-4 fv-row">
+        <ng-select (change)="onFilterItemSelect($event)">
+          <ng-option *ngFor="let item of FilterArray" [value]="item.id">{{
+            lang === "en" ? item.name : item.arabicName
+          }}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+    <div class="row gx-9 gy-6">
+      <form [formGroup]="formGroup">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+          <mat-label>Search</mat-label>
+          <input
+            type="search"
+            matInput
+            formControlName="searchTerm"
+            (keyup.enter)="filterRecords(0)"
+            class="ArFontStyle"
+          />
+          <mat-icon matPrefix class="material-icons">search</mat-icon>
+          <mat-icon matSuffix (click)="clearFilter()" class="material-icons"
+            >close</mat-icon
+          >
+        </mat-form-field>
+      </form>
+      <div class="table-container">
+        <table mat-table class="w-100" [dataSource]="detailedEmployee" matSort>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="ArFontStyle">
+              {{
+                lang === "en"
+                  ? formBodyLabels[0].lblAction.title
+                  : formBodyLabels[0].lblAction.arabicTitle
+              }}
+            </th>
+            <td mat-cell *matCellDef="let item" class="text-center">
+              <a href="javascript:void(0)">
+                <i
+                  class="bi fs-2 bi-card-list text-warning"
+                  [matMenuTriggerFor]="menu"
+                ></i
+              ></a>
+              &nbsp;
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  class="ArFontStyle"
+                  (click)="actionBtnSelect('edit', item.employeeId)"
+                  routerLink="/employee/add-employee/{{ item.employeeId }}"
+                >
+                  <i class="bi bi-pencil-square fs-2 text-success"></i>
+                  {{
+                    lang === "en"
+                      ? formBodyLabels[0].btnEdit.title
+                      : formBodyLabels[0].btnEdit.arabicTitle
+                  }}
+                </button>
+                <!-- [hidden]="!showHide" -->
+                <div [hidden]="false">
+                  <button
+                    mat-menu-item
+                    class="ArFontStyle"
+                    (click)="actionBtnSelect('delete', item.employeeId)"
+                    (click)="open(content, item)"
+                  >
+                    <i class="bi bi-trash fs-2 text-danger"></i>
+                    {{
+                      lang === "en"
+                        ? formBodyLabels[0].btnDelete.title
+                        : formBodyLabels[0].btnDelete.arabicTitle
+                    }}
+                  </button>
+                </div>
+                <button
+                  mat-menu-item
+                  class="ArFontStyle"
+                  (click)="actionBtnSelect('details', item.employeeId)"
+                  (click)="openDetailsModal(item.employeeId, item)"
+                >
+                  <i class="bi bi-ticket-detailed fs-2 text-primary"></i>
+                  Details
+                </button>
+                <button
+                  mat-menu-item
+                  class="ArFontStyle"
+                  (click)="actionBtnSelect('password', item.employeeId)"
+                  (click)="navigateToResetPage(item)"
+                >
+                  <i class="bi bi-arrow-clockwise fs-2 text-primary"></i
+                  >{{
+                    lang === "en"
+                      ? formBodyLabels[0].btnResetPassword.title
+                      : formBodyLabels[0].btnResetPassword.arabicTitle
+                  }}
+                </button>
+              </mat-menu>
+              <a
+                *ngIf="
+                  selectedBtn === 'delete' && selectedId === item.employeeId
+                "
+                href="javascript:void(0)"
+                (click)="open(content, item)"
+                ><i class="bi bi-trash fs-2 text-danger"></i
+              ></a>
+              <a
+                *ngIf="selectedId !== item.employeeId || selectedBtn === 'edit'"
+                routerLink="/employee/add-employee/{{ item.employeeId }}"
+                id="{{ item.employeeId }}"
+                ><i class="bi bi-pencil-square fs-2 text-success"></i
+              ></a>
+              <a
+                *ngIf="
+                  selectedBtn === 'details' && selectedId === item.employeeId
+                "
+                href="javascript:void(0)"
+                (click)="openDetailsModal(item.employeeId, item)"
+                ><i class="bi bi-ticket-detailed fs-2 text-primary"></i
+              ></a>
+              <a
+                *ngIf="
+                  selectedBtn === 'password' && selectedId === item.employeeId
+                "
+                (click)="navigateToResetPage(item)"
+                ><i class="bi bi-arrow-clockwise fs-2 text-primary"></i
+              ></a>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="IdPfIdCivilId">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="w-25 ArFontStyle"
+            >
+              {{
+                lang === "en"
+                  ? formBodyLabels[0].lblPFId.title
+                  : formBodyLabels[0].lblPFId.arabicTitle
+              }}
+            </th>
+            <td mat-cell *matCellDef="let item" class="w-10 ArFontStyle">
+              {{ item.pfid }} {{ item.employeeId }} {{ item.empCidNum }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="mobileNo">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="ArFontStyle"
+            >
+              {{
+                lang === "en"
+                  ? formBodyLabels[0].lblMobile.title
+                  : formBodyLabels[0].lblMobile.arabicTitle
+              }}
+            </th>
+            <td mat-cell *matCellDef="let item" class="w-10 ArFontStyle">
+              {{ item.mobileNumber }}
+            </td>
+          </ng-container>
+          <div>
+            <ng-container matColumnDef="employeeName">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="ArFontStyle"
+              >
+                {{
+                  lang === "en"
+                    ? formBodyLabels[0].lblEmployeeName.title
+                    : formBodyLabels[0].lblEmployeeName.arabicTitle
+                }}
+              </th>
+              <td mat-cell *matCellDef="let item" class="w-25 ArFontStyle">
+                {{ lang === "en" ? item.englishName : item.arabicName }}
+              </td>
+            </ng-container>
+          </div>
+          <ng-container matColumnDef="source">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="ArFontStyle"
+            >
+              {{
+                lang === "en"
+                  ? formBodyLabels[0].lblSource.title
+                  : formBodyLabels[0].lblSource.arabicTitle
+              }}
+            </th>
+            <td mat-cell *matCellDef="let item" class="w-01 ArFontStyle">
+              Online
+            </td>
+          </ng-container>
+          <div>
+            <ng-container matColumnDef="department">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="ArFontStyle"
+              >
+                {{
+                  lang === "en"
+                    ? formBodyLabels[0].lblDepartment.title
+                    : formBodyLabels[0].lblDepartment.arabicTitle
+                }}
+              </th>
+              <td mat-cell *matCellDef="let item" class="w-25 ArFontStyle">
+                {{ item.refName1 }}
+              </td>
+            </ng-container>
+          </div>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="columnsToDisplay; sticky: true"
+            [ngClass]="{ hidden: !isLoadingCompleted }"
+            class="viewEmployee_thead"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let formTitleHd; columns: columnsToDisplay"
+          ></tr>
+        </table>
+      </div>
+      <div [ngClass]="{ hidden: !isLoadingCompleted }">
+        <mat-paginator
+          [length]="totalRows"
+          [pageIndex]="pageNumber"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChanged($event)"
+          showFirstLastButtons
+        >
+        </mat-paginator>
+        <!-- <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+                  </mat-paginator> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Delete Modal-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      {{
+        lang === "en"
+          ? modalLabels[0].Delete.title
+          : modalLabels[0].Delete.arabicTitle
+      }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <span>{{
+          lang === "en"
+            ? modalLabels[0].Doyouwanttodeletethisrecord.title
+            : modalLabels[0].Doyouwanttodeletethisrecord.arabicTitle
+        }}</span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer text-right">
+    <button mat-raised-button color="warn" (click)="modal.close('yes')">
+      {{
+        lang === "en"
+          ? modalLabels[0].Yes.title
+          : modalLabels[0].Yes.arabicTitle
+      }}
+    </button>
+    &nbsp;&nbsp;
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="modal.close('Save click')"
+    >
+      {{
+        lang === "en" ? modalLabels[0].No.title : modalLabels[0].No.arabicTitle
+      }}
+    </button>
+  </div>
+</ng-template>

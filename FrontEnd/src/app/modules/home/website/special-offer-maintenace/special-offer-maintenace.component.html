@@ -1,0 +1,240 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. [disabled]="!offerForm.valid"-->
+<input type="hidden" #OfferDetails name="OfferDetails" value="OfferDetails">
+      
+
+<ngb-accordion #ngbAddOffer="ngbAccordion">
+    <ngb-panel>
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA">{{lang == 'en' ? "Add Offer" : "أضف عرض"}}</h3>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <div class="row">
+                <div class="col-lg-6 fv-row">
+                </div>
+                <div class="col-lg-6 fv-row text-left">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button mat-raised-button color="primary" class="float-left" (click)="onOfferFormSubmit()"
+                            form="userForm" [disabled]="!offerForm.valid">{{lang == 'en' ? formBodyLabels[0].btnSave.title : formBodyLabels[0].btnSave.arabicTitle}}</button> &nbsp;&nbsp;
+                        <button mat-raised-button color="accent" class="float-left"
+                            (click)="resetForm()">{{lang == 'en' ? formBodyLabels[0].btnCancle.title : formBodyLabels[0].btnCancle.arabicTitle}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row gx-9 gy-6">
+                <div class="row gx-9 gy-6">
+                    <form autocomplete="off" [formGroup]="offerForm" id="offerForm">
+                        <div class="row">
+                            <div class="col-lg-6 fv-row">
+                                <div class="mt-4">
+                                    <input type="hidden" formControlName="serviceId" />
+                                    <label for="formFile" class="form-label ArFontStyle"
+                                        lang="AR-SA">{{lang == 'en' ? formBodyLabels[0].lblUploadImage.title : formBodyLabels[0].lblUploadImage.arabicTitle}}</label><br>
+                                    <input #file type="file" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                        [hidden]="true" formControlName="offerImage" 
+                                        (change)="onOfferFileSelectChange($event)" title="testing" />
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-upload" (mousedown)="file.click()">Choose
+                                            file</button>
+                                        <div class="border border-secondary rounded p-3 w-100" style="height: 43px;">
+                                            {{!offerFile? "No file choosen":offerFile}}
+                                        </div>
+                                    </div>
+                                    <span class="text-danger"
+                                    *ngIf="(_offerForm.offerImage.touched || isFormSubmitted) && _offerForm.offerImage.errors?.required">
+                                    Offer image is required
+                                </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{lang == 'en' ? formBodyLabels[0].OfferType.title : formBodyLabels[0].OfferType.arabicTitle}}</label>
+                                <ng-select [items]="offerType$ | async" bindValue="refId" bindLabel="shortname"
+                                    formControlName="offerType" (change)="onOfferTypeChange($event)" lang="AR-SA">
+                                </ng-select>
+                                <span class="text-danger"
+                                    *ngIf="(_offerForm.offerType.touched || isFormSubmitted) && _offerForm.offerType.errors?.required">
+                                    Offer is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">ServiceType</label>
+                                <ng-select [items]="selectServiceType" bindLabel="shortname"
+                                    formControlName="serviceType" bindValue="refId" lang="AR-SA"
+                                    (change)="onServiceTypeChange($event)" [(ngModel)]="serviceTypeSelected">
+                                </ng-select>
+                                <span class="text-danger"
+                                *ngIf="(_offerForm.serviceType.touched || isFormSubmitted) && _offerForm.serviceType.errors?.required">
+                                    Service Type is required
+                                </span>
+                            </div>
+                            <div class="col-lg-6 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">SubServiceType</label>
+                                <ng-select [items]="selectServiceSubType" bindLabel="shortName"
+                                    formControlName="serviceSubType" bindValue="refId" lang="AR-SA"
+                                    (change)="onServiceSubTypeChange($event)">
+                                </ng-select>
+                                <span class="text-danger"
+                                *ngIf="(_offerForm.serviceSubType.touched || isFormSubmitted) && _offerForm.serviceSubType.errors?.required">
+                                    Service Sub Type is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-4 fv-row">
+                                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{lang == 'en' ? formBodyLabels[0].OfferStart.title : formBodyLabels[0].OfferStart.arabicTitle}}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control" bsDatepicker
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                        formControlName="offerStartDate" />
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="(_offerForm.offerStartDate.touched || isFormSubmitted) && _offerForm.offerStartDate.errors?.required">
+                                    Start date is required
+                                </span>
+                            </div>
+                            <div class="col-lg-4 fv-row">
+                                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{lang == 'en' ? formBodyLabels[0].OfferEnd.title : formBodyLabels[0].OfferEnd.arabicTitle}}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control" bsDatepicker
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="offerEndDate" />
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="(_offerForm.offerEndDate.touched || isFormSubmitted) && _offerForm.offerEndDate.errors?.required">
+                                    End date is required
+                                </span>
+                            </div>
+                                <div class="col-lg-4 fv-row">
+                                    <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                        lang="AR-SA">{{lang == 'en' ? formBodyLabels[0].OfferAmount.title : formBodyLabels[0].OfferAmount.arabicTitle}}</label>
+                                    <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                        formControlName="offerAmount" name="offerAmount" id="offerAmount" />
+                                        <span class="text-danger"
+                                        *ngIf="(_offerForm.offerAmount.touched || isFormSubmitted) && _offerForm.offerAmount.errors?.required">
+                                        Amount is required
+                                </span>
+                                </div>
+                                
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br />
+<app-html-forms [parentFormGroup]="parentForm">
+</app-html-forms>
+<br/>
+
+
+
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panel3bgColor">
+        <div class="card-toolbar">
+            <h3 class="text-dark ArFontStyle" lang="AR-SA">{{lang == 'en' ? "Offer Details" : "أضف عرض"}}</h3>
+        </div>
+    </div>
+    <div class="card-body py-3">
+        <div class="row mb-4">
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                    <mat-label>Search</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                        class="ArFontStyle" />
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form>
+            <div class="table-container">
+                <table mat-table class="w-100" [dataSource]="offers" matSort>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="ArFontStyle"></th>
+                        <td mat-cell *matCellDef="let item" class="w-20 text-right">
+                            <a href="javascript:void(0)"> <i class="bi fs-2 bi-card-list text-warning"
+                                [matMenuTriggerFor]="menu"></i></a>
+                        &nbsp;
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item class="ArFontStyle"
+                                (click)="actionBtnSelect('delete', item.serviceId)"
+                                (click)="open(deleteModal,item.serviceId)"><i class="bi bi-trash3 fs-2 text-danger"></i>
+                                {{lang == 'en' ? formBodyLabels[0].Delete.title : formBodyLabels[0].Delete.arabicTitle}} </button>
+                            <button mat-menu-item class="ArFontStyle"
+                                (click)="actionBtnSelect('edit', item.serviceId)"
+                                (click)="editData(item.serviceId)"><i
+                                    class="bi bi-pencil-square fs-2 text-success"></i> 
+                                    {{lang == 'en' ? formBodyLabels[0].Edit.title : formBodyLabels[0].Edit.arabicTitle}}</button>
+                        </mat-menu>
+                        <a *ngIf="selectedBtn =='delete' && selectedId==item.serviceId" href="javascript:void(0)"
+                                (click)="open(deleteModal,item.serviceId)"><i class="bi bi-trash3 fs-2 text-danger"></i></a>
+                        <a *ngIf="selectedBtn =='edit' || selectedId!=item.serviceId " href="javascript:void(0)"
+                            (click)="editData(item.serviceId)"><i
+                                class="bi bi-pencil-square fs-2 text-success"></i></a>
+
+                            <!-- <button mat-raised-button color="warn"
+                                (click)="open(deleteModal,item.serviceId)">{{lang == 'en' ? formBodyLabels[0].Delete.title : formBodyLabels[0].Delete.arabicTitle}}</button> |
+                            <button mat-raised-button color="accent"
+                                (click)="editData(item.serviceId)">{{lang == 'en' ? formBodyLabels[0].Edit.title : formBodyLabels[0].Edit.arabicTitle}}</button> -->
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="offerTypeName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang == 'en' ? formBodyLabels[0].OfferType.title : formBodyLabels[0].OfferType.arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.offerTypeName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="offerStart">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang == 'en' ? formBodyLabels[0].OfferStart.title : formBodyLabels[0].OfferStart.arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.offerStartDate | date:'dd/MM/yyyy'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="offerEnd" class="w-30">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang == 'en' ? formBodyLabels[0].OfferEnd.title : formBodyLabels[0].OfferEnd.arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.offerEndDate | date:'dd/MM/yyyy'}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="offerAmount" class="w-20">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang == 'en' ? formBodyLabels[0].OfferAmount.title : formBodyLabels[0].OfferAmount.arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.offerAmount }}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                        [ngClass]="{'hidden':!isLoadingCompleted}" class="som_t_header"></tr>
+                    <tr mat-row *matRowDef="let offers; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="onPaginationChange($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{lang == 'en' ? modalLabels[0].Delete.title : modalLabels[0].Delete.arabicTitle}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <span>{{lang == 'en' ? modalLabels[0].Doyouwanttodeletethisrecord.title : modalLabels[0].Doyouwanttodeletethisrecord.arabicTitle}}</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="warn" (click)="modal.close('yes')">{{lang == 'en' ? modalLabels[0].Yes.title : modalLabels[0].Yes.arabicTitle}}</button> &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="modal.close('Save click')">{{lang == 'en' ? modalLabels[0].No.title : modalLabels[0].No.arabicTitle}}</button>
+    </div>
+</ng-template>

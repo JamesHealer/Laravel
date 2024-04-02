@@ -1,0 +1,22 @@
+.panel1bgColor{
+    background-color: #989898;
+}
+table {
+    width: 100%;
+  }
+  .ArFontStyle{
+    font-family: Cairo;
+}
+input:focus {
+  background-color: #E9E9E9;
+}
+.fontSizeHeader{
+  font-size: 13px;
+  }
+
+.functionMstHeader{
+  background-color: var(--venitan-red);
+  th {
+    color: #fff !important;
+  }
+}

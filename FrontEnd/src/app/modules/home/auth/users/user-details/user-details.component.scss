@@ -1,0 +1,22 @@
+.panel1bgColor{
+    background-color: var(--sweet-brown);
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.ad-user-style{
+    background-color: var(--english-vermillion) ;
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--setup-btn-hover) !important; 
+        }
+    }
+}
+
+.ud_thead{
+    background-color: var(--english-vermillion) !important;
+    th {
+        color: #fff !important;
+    }
+}

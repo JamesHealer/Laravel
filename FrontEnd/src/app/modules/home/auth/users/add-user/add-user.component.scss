@@ -1,0 +1,34 @@
+.panel1bgColor{
+    background-color: var(--sweet-brown);
+}
+
+.panel1bgColorRights{
+    background-color: var(--english-vermillion);
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.english-vermillion{
+    background-color: var(--english-vermillion);
+  }
+  
+  .candy-pink{
+    background-color: var(--candy-pink);
+  }
+  
+  .ruddy-pink {
+    background-color: var(--ruddy-pink);
+  }
+  
+  .english-vermillion, .candy-pink, .ruddy-pink{
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--setup-btn-hover) !important; 
+        }
+    }
+  }
+  
+  .btn-group{
+      column-gap: 20px;
+  }

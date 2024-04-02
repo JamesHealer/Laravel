@@ -1,0 +1,34 @@
+.panelBgColor{
+    background-color: var(--fringy_flower);
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.dark-sea-green{
+    background-color: var(--dark-sea-green);
+    color: #000;
+}
+
+.caledon{
+    background-color: var(--caledon);
+    color: #000;
+  
+}
+
+.tea-green{
+    background-color: var(--tea-green);
+    color: #000;
+}
+
+.dark-sea-green, .tea-green, .caledon {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--light-moss-green) !important; 
+        }
+    }
+}
+
+.btn-group{
+    column-gap: 12px;
+}

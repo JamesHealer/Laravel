@@ -1,0 +1,72 @@
+[
+    {
+        "id": 2165,
+        "tenentId": 21,
+        "formTitleHDLanguageId": "9341d30e-28ff-46f3-9ed8-f1f95b188b91",
+        "formID": "PrintLabels",
+        "language": 1,
+        "labelId": "lblPrintLables",
+        "title": "Print Lables",
+        "arabicTitle": "طباعة ابليس",
+        "rl": "",
+        "attiribute": "",
+        "remarks": "",
+        "status": "Active"
+    },
+    {
+        "id": 2166,
+        "tenentId": 21,
+        "formTitleHDLanguageId": "9341d30e-28ff-46f3-9ed8-f1f95b188b91",
+        "formID": "PrintLabels",
+        "language": 1,
+        "labelId": "lblSelectLetter",
+        "title": "Select Letter",
+        "arabicTitle": "حدد رسالة",
+        "rl": "",
+        "attiribute": "",
+        "remarks": "",
+        "status": "Active"
+    },
+    {
+        "id": 2167,
+        "tenentId": 21,
+        "formTitleHDLanguageId": "9341d30e-28ff-46f3-9ed8-f1f95b188b91",
+        "formID": "PrintLabels",
+        "language": 1,
+        "labelId": "lblLabelTemplate",
+        "title": "Label Template",
+        "arabicTitle": "قالب التسمية",
+        "rl": "",
+        "attiribute": "",
+        "remarks": "",
+        "status": "Active"
+    },
+    {
+        "id": 2168,
+        "tenentId": 21,
+        "formTitleHDLanguageId": "9341d30e-28ff-46f3-9ed8-f1f95b188b91",
+        "formID": "PrintLabels",
+        "language": 1,
+        "labelId": "lblCopies",
+        "title": "Copies",
+        "arabicTitle": "نسخ",
+        "rl": "",
+        "attiribute": "",
+        "remarks": "",
+        "status": "Active"
+    },
+    {
+        "id": 2169,
+        "tenentId": 21,
+        "formTitleHDLanguageId": "9341d30e-28ff-46f3-9ed8-f1f95b188b91",
+        "formID": "PrintLabels",
+        "language": 1,
+        "labelId": "btnPrint",
+        "title": "Print",
+        "arabicTitle": "مطبعة",
+        "rl": "",
+        "attiribute": "",
+        "remarks": "",
+        "status": "Active"
+    }
+]

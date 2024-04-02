@@ -1,0 +1,295 @@
+<div style="background-image: url('assets/media/loginpage.jpg'); height: 100vh; width: 100vw;">
+  <div class="" style="position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);">
+    <div class="w-lg-800px bg-white rounded shadow-sm p-10 mx-auto">
+      <div class="d-flex mainDiv">
+        <div>
+          <div>
+            <a routerLink="/" class="mb-2">
+              <img alt="Logo" src="assets/media/logos/SSF logo.png" class="logoImg" />
+            </a>
+          </div>
+          <div class="text-center">
+            <img alt="Logo" src="assets/media/loginicon.jpg" class="rounded mx-auto d-block optionalLogo" />
+          </div>
+        </div>
+        <div>
+          <form class="form w-100 loginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm)"
+            style="direction: ltr !important;">
+            <div class="text-center mb-2">
+              <h1 class="fs-1 m-0 signIn">Sign In / <span class="ArFontStyle"> تسجيل الدخول</span></h1>
+            </div>
+            <div class="text-center mb-4">
+              <h3 class="m-0 ArFontStyle loginHeader">Enter your details to login to your account</h3>
+              <h3 class="m-0 ArFontStyle loginHeader">أدخل التفاصيل الخاصة بك لتسجيل الدخول إلى حسابك</h3>
+            </div>
+
+            <div class="row mb-6">
+              <div>
+                <i class="bi bi-person fs-2 text-gray"></i>
+                <input type="email" class="form-control form-control-lg pl-4 form-control-solid"
+                  formControlName="username" required placeholder="Username / اسم المستخدم" />
+                <div *ngIf="(username?.invalid && username?.touched) || username?.dirty">
+                  <span *ngIf="username.errors?.required" class="text-danger">Please enter username</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-6">
+              <div>
+                <i class="bi bi-key fs-2 text-gray"></i>
+                <input type="password" class="form-control form-control-lg pl-4 form-control-solid"
+                  formControlName="password" required placeholder="Password / كلمه المرور" />
+                <div *ngIf="(loginForm.controls['password'].touched) || loginForm.controls['password'].dirty">
+                  <span class="text-danger" *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty 
+                      || loginForm.controls['password'].touched)">
+                    Please enter password
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-6">
+              <div>
+                <i class="bi bi-plus-circle fs-2 text-gray"></i>
+                <input type="text" style="height: 30px;" type="text"
+                  class="form-control form-control-lg form-control-solid" formControlName="tenentId" required
+                  placeholder="Tenant Id / معرف المستأجر" />
+                <div *ngIf="(tenentId?.invalid && tenentId?.touched) || tenentId?.dirty">
+                  <span *ngIf="tenentId.errors?.required" class="text-danger">Please enter tenent Id</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6 text-left">
+                <a routerLink="/auth/forgot-password" class="link-primary forgotPass fs-6">
+                  Forgot Password ?
+                </a>
+              </div>
+              <div class="col-md-6 text-right">
+                <a routerLink="/auth/forgot-password" class="link-primary forgotPass fs-6 ArFontStyle">
+                  ? سيت كلمة المرور
+                </a>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="loginBtn">
+                <ng-container *ngIf="isLoading$ | async">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    <span class="spinner-border spinner-border-lg align-middle ms-2"></span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="!(isLoading$ | async)">
+                  Login
+                </ng-container>
+
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 
+<div class="
+d-flex
+flex-column flex-column-fluid
+bgi-position-y-bottom
+position-x-center
+bgi-no-repeat bgi-size-contain 
+" style="background-image: url('assets/media/illustrations/sketchy-1/14.png');">
+<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+<a routerLink="/" class="mb-6">
+  <img alt="Logo" src="assets/media/logos/SSF logo.png" style="width: 500px;height: 80px;" />
+</a>
+<div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">      
+  <form class="form w-100 loginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm)" style="direction: ltr !important;">
+
+    <div class="text-center mb-7">
+      <h1 class="text-dark mb-3">Sign In</h1>
+      <h1 class="text-dark mb-3">تسجيل الدخول</h1>
+    </div>
+    <div class="text-center mb-7">
+      <h3 class="text-gray-400 mb-3 fw-bolder">Enter your details to login to your account</h3>
+      <h3 class="text-gray-400 mb-3 fw-bolder">أدخل التفاصيل الخاصة بك لتسجيل الدخول إلى حسابك</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <label class="form-label fs-6 fw-bolder text-dark">Tenant Id</label>
+      </div>          
+      <div class="col-md-6 text-right">
+        <label class="form-label fs-6 fw-bolder text-dark ArFontStyle" lang="AR-SA">معرف المستأجر</label>
+      </div>
+    </div>
+    <div class="row mb-10">
+      <input type="text" class="form-control form-control-lg form-control-solid" formControlName="tenentId"
+        required placeholder="Tenant Id"/>
+      <div *ngIf="(tenentId?.invalid && tenentId?.touched) || tenentId?.dirty">
+        <span *ngIf="tenentId.errors?.required" class="text-danger">Please enter tenent Id</span>
+      </div>
+    </div>
+    
+    <div class="row">
+      
+      <div class="col-md-6 text-left">
+        <label class="form-label fs-6 fw-bolder text-dark ">Username</label>
+      </div>
+      <div class="col-md-6 text-right">
+        <label class="form-label fs-6 fw-bolder text-dark ArFontStyle" lang="AR-SA">اسم المستخدم
+        </label>
+      </div>
+    </div>
+    <div class="row mb-10">
+      <input type="email" class="form-control form-control-lg form-control-solid" formControlName="username"
+        required placeholder="Username"/>
+      <div *ngIf="(username?.invalid && username?.touched) || username?.dirty">
+        <span *ngIf="username.errors?.required" class="text-danger">Please enter username</span>
+      </div>
+    </div>
+    <div class="row">
+      
+      <div class="col-md-6 text-left">
+        <label class="form-label fw-bolder text-dark fs-6 mb-0">Password </label>
+      </div>
+      <div class="col-md-6 text-right">
+        <label class="form-label fw-bolder text-dark fs-6 mb-0 ArFontStyle" lang="AR-SA">كلمه المرور</label>
+      </div>
+    </div>
+    <div class="row mb-10">
+      <input type="password" class="form-control form-control-lg form-control-solid" formControlName="password"
+        required placeholder="Password"/>
+      <span class="text-danger" *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty 
+        || loginForm.controls['password'].touched)">
+        Please enter password
+      </span>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-6 text-left">
+        <a routerLink="/auth/forgot-password" class="link-primary fs-6 fw-bolder">
+          ? Forgot Password
+        </a>
+      </div>
+      <div class="col-md-6 text-right">
+        <a routerLink="/auth/forgot-password" class="link-primary fs-6 fw-bolder">
+          ? سيت كلمة المرور
+        </a>
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary mb-5 mt-5">
+          <ng-container *ngIf="isLoading$ | async">
+            <span class="indicator-progress" [style.display]="'block'">
+              <span class="spinner-border spinner-border-lg align-middle ms-2"></span>
+            </span>
+          </ng-container>
+        <ng-container *ngIf="!(isLoading$ | async)">
+          <mat-icon aria-hidden="false">login</mat-icon>
+        </ng-container>
+      </button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+
+
+ -->
+
+<!-- 
+  <div 
+    style="background-image: url('../../../../../assets/media/loginpage.jpg');">
+  <div class="d-flex flex-center flex-column flex-column-fluid p-2">
+    <a routerLink="/" class="mb-2">
+      <img alt="Logo" src="assets/media/logos/SSF logo.png" style="width: 500px;height: 80px;" />
+    </a>
+    <div class="w-lg-500px bg-white rounded shadow-sm p-10 mx-auto">      
+      <form class="form w-100 loginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm)" style="direction: ltr !important;">
+        <div class="text-center mb-2">
+          <h1 class="text-dark fs-1 m-0">Sign In / <span class="ArFontStyle"> تسجيل الدخول</span></h1>
+        </div>
+        <div class="text-center mb-4">
+          <h3 class="text-gray-400 m-0 fw-bolder">Enter your details to login to your account</h3>
+          <h3 class="text-gray-400 m-0 fw-bolder ArFontStyle">أدخل التفاصيل الخاصة بك لتسجيل الدخول إلى حسابك</h3>
+        </div>
+        <div class="row">          
+          <div class="col-md-6 text-left">
+            <label class="form-label fs-6 fw-bolder text-dark ">Username</label>
+          </div>
+          <div class="col-md-6 text-right">
+            <label class="form-label fs-6 fw-bolder text-dark ArFontStyle" lang="AR-SA">اسم المستخدم
+            </label>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <input type="email" class="form-control form-control-lg form-control-solid" formControlName="username"
+            required placeholder="Username"/>
+          <div *ngIf="(username?.invalid && username?.touched) || username?.dirty">
+            <span *ngIf="username.errors?.required" class="text-danger">Please enter username</span>
+          </div>
+        </div>
+        <div class="row">          
+          <div class="col-md-6 text-left">
+            <label class="form-label fw-bolder text-dark fs-6 mb-0">Password </label>
+          </div>
+          <div class="col-md-6 text-right">
+            <label class="form-label fw-bolder text-dark fs-6 mb-0 ArFontStyle" lang="AR-SA">كلمه المرور</label>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <input type="password" class="form-control form-control-lg form-control-solid" formControlName="password"
+            required placeholder="Password"/>
+            <div *ngIf="(loginForm.controls['password'].touched) || loginForm.controls['password'].dirty">
+              <span class="text-danger" *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty 
+            || loginForm.controls['password'].touched)">
+            Please enter password
+          </span>
+            </div>          
+        </div>
+
+        <div class="row mb-6">
+          <div class="col d-flex justify-content-between">
+            <label style="padding:4px 0px;" class="form-label fs-6 fw-bolder text-dark">Tenant Id</label>
+            <input type="text" style="height: 30px;" type="text" class="form-control form-control-solid pl-3 w-50" formControlName="tenentId"
+            required placeholder="Tenant Id"/>
+            <label style="padding:4px 0px;" class="form-label fs-6 fw-bolder text-dark ArFontStyle">معرف المستأجر </label>            
+          </div>       
+          <div *ngIf="(tenentId?.invalid && tenentId?.touched) || tenentId?.dirty">
+            <span *ngIf="tenentId.errors?.required" class="text-danger">Please enter tenent Id</span>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-6 text-left">
+            <a routerLink="/auth/forgot-password" class="link-primary fs-6 fw-bolder">
+              ? Forgot Password
+            </a>
+          </div>
+          <div class="col-md-6 text-right">
+            <a routerLink="/auth/forgot-password" class="link-primary fs-6 fw-bolder ArFontStyle">
+              ? سيت كلمة المرور
+            </a>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">
+              <ng-container *ngIf="isLoading$ | async">
+                <span class="indicator-progress" [style.display]="'block'">
+                  <span class="spinner-border spinner-border-lg align-middle ms-2"></span>
+                </span>
+              </ng-container>
+            <ng-container *ngIf="!(isLoading$ | async)">
+              <mat-icon aria-hidden="false">login</mat-icon>
+            </ng-container>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  -->

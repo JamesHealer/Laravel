@@ -1,0 +1,41 @@
+.ArFontStyle{
+    font-family: Cairo;
+}
+.som_t_header{
+    background-color: var(--fluroscent-green-v2);
+}
+
+.t_header_orm1{
+    background-color: var(--fluroscent-green);
+}
+
+.t_header_orm2 {
+    background-color: var(--fluroscent-green-v2);
+}
+
+.btn-group{
+    column-gap: 20px;
+}
+
+.orm_subt_header{
+    background-color: var(--fluroscent-green-v3);
+}
+
+
+
+.btn-website{
+    background-color: #127000;
+}
+
+.btn-website_cancel{
+    background-color: #317c23;
+
+}
+
+.btn-website, .btn-website_cancel {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: #1f4c17 !important; 
+        }
+    }
+}

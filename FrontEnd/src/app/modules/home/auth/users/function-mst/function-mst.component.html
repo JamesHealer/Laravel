@@ -1,0 +1,305 @@
+<!-- added in sheet -->
+<ngb-accordion #ngbListUsers="ngbAccordion" activeIds="ngb-panel-0" class="searchUsermst">
+    <ngb-panel title="{{lang=='en' ? formBodyLabels[0].FunctionMSTDetails.title : formBodyLabels[0].FunctionMSTDetails.arabicTitle}}" id="ngb-panel-0">
+        <ng-template ngbPanelContent>
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never" >
+                    <mat-label>{{lang=='en' ? formBodyLabels[0].Search.title : formBodyLabels[0].Search.arabicTitle}}</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)" class="ArFontStyle"/>
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>                        
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form>
+            <div class="table-container">
+                <table mat-table [dataSource]="functionMst" matSort>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="text-center">{{lang=='en' ? formBodyLabels[0].Action.title : formBodyLabels[0].Action.arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let element" class="text-center">
+                            <a href="javascript:void(0)"> <i class="bi fs-2 bi-card-list text-warning" [matMenuTriggerFor]="menu"></i></a> &nbsp;
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('edit', element.menU_ID)" (click)="GetFunctionMstById(element.menU_ID)"><i
+                                        class="bi bi-pencil-square fs-2 text-success"></i> {{lang=='en' ? formBodyLabels[0].Edit.title : formBodyLabels[0].Edit.arabicTitle}}</button>
+                                <!-- <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('delete', element.menU_ID)" (click)="open(content,element.menU_ID)"><i
+                                        class="bi bi-trash fs-2 text-danger"></i> {{lang=='en' ? formBodyLabels[0].Delete.title : formBodyLabels[0].Delete.arabicTitle}}</button> -->
+                            </mat-menu>
+                            <!-- <a  *ngIf="selectedBtn =='delete' && selectedId==element.menU_ID " href="javascript:void(0)"
+                            (click)="open(content,element.menU_ID)"><i
+                                class="bi bi-trash fs-2 text-danger"></i></a> -->
+                            <a *ngIf="selectedId!=element.menU_ID || selectedBtn =='edit'" href="javascript:void(0)"
+                            (click)="GetFunctionMstById(element.menU_ID)"><i
+                                class="bi bi-pencil-square fs-2 text-success"></i></a> 
+
+                            <!-- <button mat-raised-button class=" ArFontStyle" color="warn"(click)="open(content,element.menU_ID)">{{lang=='en' ? formBodyLabels[0].Delete.title : formBodyLabels[0].Delete.arabicTitle}}</button> |
+                            <button mat-raised-button class=" ArFontStyle" color="accent" (click)="GetFunctionMstById(element.menU_ID)">{{lang=='en' ? formBodyLabels[0].Edit.title : formBodyLabels[0].Edit.arabicTitle}}</button>                             -->
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ModuleId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header > {{lang=='en' ? formBodyLabels[0].MenuId.title : formBodyLabels[0].MenuId.arabicTitle}} </th>
+                        <td mat-cell *matCellDef="let element" class=" ArFontStyle"> {{element.modulE_ID}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="MenuName1">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header > {{lang=='en' ? formBodyLabels[0].MenuName.title : formBodyLabels[0].MenuName.arabicTitle}} 1 </th>
+                        <td mat-cell *matCellDef="let element" class=" ArFontStyle"> {{element.menU_NAMEEnglish}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="MenuName2">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header > {{lang=='en' ? formBodyLabels[0].MenuName.title : formBodyLabels[0].MenuName.arabicTitle}} 2 </th>
+                        <td mat-cell *matCellDef="let element" class=" ArFontStyle"> {{element.menU_NAMEArabic}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="menuid">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header > Menu Id </th>
+                        <td mat-cell *matCellDef="let element" class=" ArFontStyle"> {{element.menU_ID}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Link">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header > {{lang=='en' ? formBodyLabels[0].Link.title : formBodyLabels[0].Link.arabicTitle}} </th>
+                        <td mat-cell *matCellDef="let element" class=" ArFontStyle"> {{element.link}}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                            [ngClass]="{'hidden':!isLoadingCompleted}" class="functionMstHeader"></tr>
+                        <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="pageChanged($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br />
+<ngb-accordion #ngbListUsers="ngbAccordion" activeIds="ngb-panel-1" class="addUsermst">
+    <ngb-panel title="{{lang=='en' ? formBodyLabels[0].AddEdit.title : formBodyLabels[0].AddEdit.arabicTitle}}" class=" ArFontStyle" [id]="ngbId">
+        <ng-template ngbPanelContent>
+            <mat-stepper [linear]="isLinear" #stepper>
+                <mat-step  stepControlName="menuFormGroup">
+                    <form [formGroup]="mainFormGroup" class=" ArFontStyle">
+                        <ng-template matStepLabel>{{lang=='en' ? formBodyLabels[0].Menu.title : formBodyLabels[0].Menu.arabicTitle}}</ng-template>
+                        <div formGroupName="menuFormGroup">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuId.title : formBodyLabels[0].MenuId.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control" formControlName="menU_ID"
+                                        required />
+                                    <div *ngIf="(menU_ID?.invalid && menU_ID?.touched) || menU_ID?.dirty">
+                                        <span *ngIf="menU_ID.errors?.required" class="text-danger">Menu Id is required</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MasterId.title : formBodyLabels[0].MasterId.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control"
+                                        formControlName="masteR_ID" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].ModuleId.title : formBodyLabels[0].ModuleId.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control"
+                                        formControlName="modulE_ID" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuType.title : formBodyLabels[0].MenuType.arabicTitle}}</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="menU_TYPE" />
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuName.title : formBodyLabels[0].MenuName.arabicTitle}} 1</label>
+                                    <input type="text" id="form3Example1" class="form-control " lang="AR-SA"
+                                        formControlName="MENU_NAMEEnglish" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuName.title : formBodyLabels[0].MenuName.arabicTitle}} 2</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="menU_NAMEArabic" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuName.title : formBodyLabels[0].MenuName.arabicTitle}} 3</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="menU_NAME3" />
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-raised-button class=" ArFontStyle" color="primary" matStepperNext>{{lang=='en' ? formBodyLabels[0].Next.title : formBodyLabels[0].Next.arabicTitle}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step  stepControl="managementFormGroup" label="{{lang=='en' ? formBodyLabels[0].Management.title : formBodyLabels[0].Management.arabicTitle}}">
+                    <form [formGroup]="mainFormGroup" class=" ArFontStyle">
+                        <div formGroupName="managementFormGroup">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].Link.title : formBodyLabels[0].Link.arabicTitle}}</label>
+                                    <input type="text" id="form3Example1" class="form-control " lang="AR-SA"
+                                        formControlName="link" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].UrlOption.title : formBodyLabels[0].UrlOption.arabicTitle}}</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="urloption" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].UrlRewrite.title : formBodyLabels[0].UrlRewrite.arabicTitle}}</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="urlrewrite" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuLocation.title : formBodyLabels[0].MenuLocation.arabicTitle}}</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="menU_LOCATION" />
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MenuOrder.title : formBodyLabels[0].MenuOrder.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control " lang="AR-SA"
+                                        formControlName="menU_ORDER" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].DocParent.title : formBodyLabels[0].DocParent.arabicTitle}}</label>
+                                    <input type="text" id="form3Example1" class="form-control"
+                                        formControlName="doC_PARENT" />
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-raised-button class=" ArFontStyle" color="primary" style="margin-right: 4px" matStepperNext>{{lang=='en' ? formBodyLabels[0].Next.title : formBodyLabels[0].Next.arabicTitle}}</button>
+                                <button mat-raised-button class=" ArFontStyle" color="accent" style="margin-right: 4px"
+                                    matStepperPrevious>{{lang=='en' ? formBodyLabels[0].Back.title : formBodyLabels[0].Back.arabicTitle}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step  [stepControl]="activeMenuFormGroup" label="{{lang=='en' ? formBodyLabels[0].ActiveMenu.title : formBodyLabels[0].ActiveMenu.arabicTitle}}">
+                    <form [formGroup]="mainFormGroup" class=" ArFontStyle">
+                        <div formGroupName="activeMenuFormGroup">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].ActiveMenu.title : formBodyLabels[0].ActiveMenu.arabicTitle}}</label>                                    
+                                        <ng-select [(ngModel)]="activeMenuStatus" formControlName="activemenu">
+                                            <ng-option *ngFor="let item of activeMenuStatusArray" [value]="item.id">{{item.name}}</ng-option>
+                                         </ng-select>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].ActiveTillDate.title : formBodyLabels[0].ActiveTillDate.arabicTitle}}</label>
+                                    <input type="text" class="form-control" bsDatepicker
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'  }"
+                                        formControlName="activetilldate" />
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-raised-button class=" ArFontStyle" color="primary" style="margin-right: 4px" matStepperNext>{{lang=='en' ? formBodyLabels[0].Next.title : formBodyLabels[0].Next.arabicTitle}}</button>
+                                <button mat-raised-button class=" ArFontStyle" color="accent" style="margin-right: 4px"
+                                    matStepperPrevious>{{lang=='en' ? formBodyLabels[0].Back.title : formBodyLabels[0].Back.arabicTitle}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step  [stepControl]="basicFlagsFormGroup" label="{{lang=='en' ? formBodyLabels[0].BasicFlags.title : formBodyLabels[0].BasicFlags.arabicTitle}}">
+                    <form [formGroup]="mainFormGroup" class=" ArFontStyle">
+                        <div formGroupName="basicFlagsFormGroup">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].AddFlage.title : formBodyLabels[0].AddFlage.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control " lang="AR-SA"
+                                        formControlName="addflage" id="addflage" name="addflage"/>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].EditFlage.title : formBodyLabels[0].EditFlage.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control"
+                                        formControlName="editflage" id="editflage" name="editflage"/>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].DeleteFlage.title : formBodyLabels[0].DeleteFlage.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control"
+                                        formControlName="delflage" id="delflage" name="delflage"/>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].MyPersonal.title : formBodyLabels[0].MyPersonal.arabicTitle}}</label>
+                                    <input type="number" id="form3Example1" class="form-control"
+                                        formControlName="mypersonal" id="mypersonal" name="mypersonal"/>
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-raised-button class=" ArFontStyle" color="primary" style="margin-right: 4px" matStepperNext>{{lang=='en' ? formBodyLabels[0].Next.title : formBodyLabels[0].Next.arabicTitle}}</button>
+                                <button mat-raised-button class=" ArFontStyle" color="accent" style="margin-right: 4px"
+                                    matStepperPrevious>{{lang=='en' ? formBodyLabels[0].Back.title : formBodyLabels[0].Back.arabicTitle}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step  [stepControl]="extendedFlagsFormGroup" label="{{lang=='en' ? formBodyLabels[0].ExtendedFlags.title : formBodyLabels[0].ExtendedFlags.arabicTitle}}">
+                    <form [formGroup]="mainFormGroup" class=" ArFontStyle">
+                        <div formGroupName="extendedFlagsFormGroup">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].Sp.title : formBodyLabels[0].Sp.arabicTitle}}1</label>
+                                    <input type="number" id="form3Example1" class="form-control " lang="AR-SA"
+                                        formControlName="sP1" id="sP1" name="sP1">
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].Sp.title : formBodyLabels[0].Sp.arabicTitle}}2</label>
+                                    <input type="number" id="form3Example1" class="form-control" 
+                                    formControlName="sP2" id="sP2" name="sP2"/>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].Sp.title : formBodyLabels[0].Sp.arabicTitle}}3</label>
+                                    <input type="number" id="form3Example1" class="form-control" 
+                                    formControlName="sP3" id="sP3" name="sP3"/>
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].Sp.title : formBodyLabels[0].Sp.arabicTitle}}4</label>
+                                    <input type="number" id="form3Example1" class="form-control" 
+                                    formControlName="sP4" id="sP4" name="sP4"/>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label" for="form3Example1 " lang="AR-SA">{{lang=='en' ? formBodyLabels[0].Sp.title : formBodyLabels[0].Sp.arabicTitle}}5</label>
+                                    <input type="number" id="form3Example1" class="form-control " lang="AR-SA"
+                                        formControlName="sP5" id="sP5" name="sP5"/>
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-raised-button class=" ArFontStyle" color="primary" style="margin-right: 4px"
+                                    matStepperPrevious>{{lang=='en' ? formBodyLabels[0].Back.title : formBodyLabels[0].Back.arabicTitle}}</button>
+                                <button *ngIf="!editButton" mat-raised-button class=" ArFontStyle" color="accent" style="margin-right: 4px"
+                                    (click)="AddNewFunctionMst()">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-stepper>
+            <div [class]="lang=='en' ? 'text-right' : 'text-left'">
+                <button *ngIf="editButton" mat-raised-button class=" ArFontStyle" color="primary" style="margin-right: 4px" (click)="updateFunctionMst()">Update</button>
+            </div>
+           
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+
+<!--Delete Modal-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ lang == 'en' ? modalLabels[0].lblDeleteThisRecord.title: modalLabels[1].lblDeleteThisRecord.title}}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+            <span>{{ lang == 'en' ? modalLabels[0].lblDeleteThisRecord.title: modalLabels[1].lblDeleteThisRecord.title}}</span> 
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer text-right">
+      <button mat-raised-button class=" ArFontStyle" color="warn" (click)="modal.close('yes')">{{ lang == 'en' ? modalLabels[0].lblYes.title: modalLabels[1].lblYes.title}}</button> &nbsp;&nbsp; 
+      <button mat-raised-button class=" ArFontStyle" color="accent" (click)="modal.close('Save click')">{{ lang == 'en' ? modalLabels[0].lblNo.title: modalLabels[1].lblNo.title}}</button>
+    </div>
+</ng-template>

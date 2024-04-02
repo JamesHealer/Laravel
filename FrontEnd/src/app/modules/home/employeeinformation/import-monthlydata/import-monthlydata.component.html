@@ -1,0 +1,339 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input
+  type="hidden"
+  #ImportEmployeeMaster
+  name="ImportEmployeeMaster"
+  value="ImportEmployeeMaster"
+/>
+<div class="card mb-5 mb-xl-10">
+  <!--begin::Card header-->
+  <div class="card-header card-header-stretch pb-0 header_bg">
+    <!--begin::Title-->
+    <div class="card-title">
+      <h3 class="m-0 text-white ArFontStyle" lang="AR-SA">
+        {{ title }}
+      </h3>
+    </div>
+    <!--end::Title-->
+  </div>
+  
+  <!--end::Card header-->
+  <!--begin::Tab content-->
+  <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+    <!--begin::Tab panel-->
+    <div
+      id="kt_billing_creditcard"
+      class="tab-pane fade show active"
+      role="tabpanel"
+    >
+      <div class="row gx-9 gy-6">
+        <form autocomplete="off">
+          <div class="row mb-4">
+            <div class="col-lg-4 fv-row">
+              <label
+                class="form-label ArFontStyle"
+                lang="AR-SA"
+                >{{
+                  lang == "en"
+                    ? formBodyLabels[0].lblSelectFile.title
+                    : formBodyLabels[0].lblSelectFile.arabicTitle
+                }}</label>
+              <input
+                #fileInput
+                class="form-control"
+                type="file"
+                id="formFile"
+                accept=".xls,.xlsx"
+                (change)="onFileChange($event)"
+              />
+              <span
+                ><small class="text-danger ArFontStyle" lang="AR-SA"></small
+              ></span>
+            </div>
+            <div class="col-lg-2 fv-row">
+              <label
+                class="form-label ArFontStyle"
+                lang="AR-SA"
+                >{{
+                  lang == "en"
+                    ? formBodyLabels[0].lblPeriod.title
+                    : formBodyLabels[0].lblPeriod.arabicTitle
+                }}</label>
+              <ng-select [(ngModel)]="periodCode" name="periodcode" disabled>
+                <ng-option *ngFor="let p of periodCodes" [value]="p" >{{ p }}</ng-option>
+              </ng-select>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <div class="">
+                <label
+                  for="formFile"
+                  class="form-label ArFontStyle"
+                  lang="AR-SA"
+                  >{{
+                    lang == "en"
+                      ? formBodyLabels[0].lblUploaderType.title
+                      : formBodyLabels[0].lblUploaderType.arabicTitle
+                  }}</label>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <ng-select [(ngModel)]="selectedSampleFile" name="uploaderType" disabled>
+                      <ng-option
+                        *ngFor="let sampleFileType of sampleFileTypes"
+                        [value]="sampleFileType.shortname"
+                        >{{
+                          lang == "en"
+                            ? sampleFileType.refnamE1
+                            : sampleFileType.refnamE2
+                        }}</ng-option
+                      >
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4 d-flex flex-column">
+                    <span class="text-right">
+                      <span class="btn btn-success" (click)="downloadFile()">
+                        <i class="fa fa-download"></i>
+                        {{
+                          lang == "en"
+                            ? formBodyLabels[0].lblDownloadUploaderSample.title
+                            : formBodyLabels[0].lblDownloadUploaderSample.arabicTitle
+                        }}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <span class="text-success">
+              ( {{ getComment() }} )
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="card-footer d-flex justify-content-end py-6 px-9"
+    *ngFor="let bodyLabel of formBodyLabels; let i = index"
+  >
+    <button
+      type="button"
+      class="btn btn-primary float-right ArFontStyle btn-bg"
+      lang="AR-SA"
+      (click)="importData()"
+    >
+      {{
+        lang == "en"
+          ? formBodyLabels[0].btnDataImport.title
+          : formBodyLabels[0].btnDataImport.arabicTitle
+      }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="filteredData?.data?.length > 0" class="card mb-5 mb-xl-10">
+  <div class="table-container">
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+        <mat-label>Search</mat-label>
+        <input
+          type="search"
+          matInput
+          formControlName="searchTerm"
+          class="ArFontStyle"
+        />
+        <mat-icon matPrefix class="material-icons">search</mat-icon>
+        <mat-icon matSuffix (click)="clearFilter()" class="material-icons"
+          >close</mat-icon
+        >
+      </mat-form-field>
+    </form>
+    <table mat-table class="w-100" [dataSource]="filteredData" matSort>
+      <!-- <ng-container matColumnDef="Action">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+        >
+          Action
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            <div class="d-flex">
+              <span class="ArFontStyle cursor-pointer"
+                (click)="editRow(item)" title="Edit">
+                <i class="bi bi-pencil-square fs-2"></i> 
+              </span>
+              <span class="ArFontStyle cursor-pointer mx-1"
+                (click)="removeRow(item)" title="Remove">
+                <i class="bi bi-trash fs-2 text-danger"></i> 
+              </span>
+            </div>
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <div class="d-flex">
+              <span class="ArFontStyle cursor-pointer"
+                (click)="applyRow()" title="Apply">
+                <i class="bi bi-save fs-2 text-success"></i> 
+              </span>
+              <span class="ArFontStyle cursor-pointer mx-1"
+                (click)="cancelEdit()" title="Cancel">
+                <i class="bi bi-x-square fs-2 text-danger"></i> 
+              </span>
+            </div>
+          </ng-template>
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="Exception">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+        >
+          Exception
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <ng-template [ngIf]="!isCheckingData">
+            <ng-template [ngIf]="item.exceptions?.length > 0">
+              <div *ngFor="let except of item.exceptions; index as i" class="text-danger">
+                {{ i+1 }}.{{ except }}
+              </div>
+            </ng-template>
+            <ng-template [ngIf]="item.exceptions.length == 0">
+              <div class="text-success">Accepted</div>
+              <div *ngFor="let warning of item.warnings; index as i" class="text-warning">
+                {{ i+1 }}.{{ warning }}
+              </div>
+            </ng-template>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="YearMonth">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1 text-center"
+          mat-sort-header
+        >
+          YearMonth
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            {{ item.YearMonth }}
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <input class="form-control " [(ngModel)]="editingData.YearMonth" />
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="EmployeeId">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+          mat-sort-header
+        >
+          EmployeeId
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            {{ item.EmployeeId }}
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <input type="number" class="form-control m-1" [(ngModel)]="editingData.EmployeeId" />
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="EmployeeName">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+          mat-sort-header
+        >
+          EmployeeName
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle p-1">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            {{ item.EmployeeName }}
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <input class="form-control m-1" [(ngModel)]="editingData.EmployeeName" />
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Reference">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white p-1"
+          mat-sort-header
+        >
+          Reference
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            {{ item.Reference }}
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <input class="form-control m-1" [(ngModel)]="editingData.Reference" />
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Salary">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+            Salary
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle text-center">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            {{ item.Salary }}
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <input type="number" class="form-control m-1" [(ngModel)]="editingData.Salary" />
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Amount">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white"
+          mat-sort-header
+        >
+            Amount
+        </th>
+        <td mat-cell *matCellDef="let item" class="ArFontStyle">
+          <ng-template [ngIf]="editingId != item.EmployeeId">
+            {{ item.Amount }}
+          </ng-template>
+          <ng-template [ngIf]="editingId == item.EmployeeId">
+            <input type="number" class="form-control m-1" [(ngModel)]="editingData.Amount" />
+          </ng-template>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+        class="importTableHeader"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let item; columns: displayedColumns"
+        [class]="item.previous_Amount == item.amount ? '' : 'highlightRow'"
+      ></tr>
+    </table>
+  </div>
+</div>

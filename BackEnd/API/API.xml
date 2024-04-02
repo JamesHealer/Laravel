@@ -1,0 +1,933 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.Controllers.CommonController.GetOccupations">
+            <summary>
+            This api will get all Occupations from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetDepartments">
+            <summary>
+            This api will get all Departments from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetTerminations">
+            <summary>
+            This api will get termination list from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetHajjLoans">
+            <summary>
+            This api will get Hajj Loan Account from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetConsumerLoanAct">
+            <summary>
+            This api will get Consumer Loan Account from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetLoanAct">
+            <summary>
+            This api will get Loan Account from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetPerLoanAct">
+            <summary>
+            This api will get Personal Loan Account from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetOtherAcc1">
+            <summary>
+            This api will get Other Loan Account 1 from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetOtherAcc2">
+            <summary>
+            This api will get Other Loan Account 2 from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetOtherAcc3">
+            <summary>
+            This api will get Other Loan Account 3 from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetOtherAcc4">
+            <summary>
+            This api will get Other Loan Account 4 from ServiceSetup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.VerifyAccount(System.Int64)">
+            <summary>
+            Api to Verify Account Employee/Client Account.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetUsers">
+            <summary>
+            Api to get all Users from UserMst
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetMasterId">
+            <summary>
+            Api to get master Id from FUNCTION_USER
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetRefType">
+            <summary>
+            Api to get RefType from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetRefSubType">
+            <summary>
+            Api to get RefSubType from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetRefSubTypeByRefType(System.String)">
+            <summary>
+            Api to get RefSubType by RefType from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetServiceTypeByMasterIds(System.Int32[])">
+            <summary>
+            Api to get service by Master Ids. This will get array of master Ids
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetServiceSubType(System.String)">
+            <summary>
+            Api to get service sub type.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetMasterServiceType">
+            <summary>
+            Api to get master service type.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetMinMonthOfServices">
+            <summary>
+            Api to get Min Month Of Services from service setups
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetMinInstallments">
+            <summary>
+            Api to get Min Installments from service setups
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetMaxInstallments">
+            <summary>
+            Api to get Max Installments from service setups
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetApprovalRoles">
+            <summary>
+            Api to get Approval Roles.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.SearchEmployee(API.DTOs.SearchEmployeeDto)">
+            <summary>
+            Api to search employee by EmployyeId,PFId,CId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetSelectedServiceType(System.Int32)">
+            <summary>
+            Api to get selected service type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetSelectedServiceSubType(System.Int32)">
+            <summary>
+            Api to get selected service sub type...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetServiceType(System.Int32)">
+            <summary>
+            Api to get service type...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetSubServiceTypeByServiceType(System.Int32,System.Int32)">
+            <summary>
+            Api to get sub service type by service type 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetDocTypes(System.Int32)">
+            <summary>
+            Api to get doc types
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetContractType">
+            <summary>
+            This api will get all Contract Types from RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetServicesForWebMenu">
+            <summary>
+            This api will get all active services from service setup for web menu...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetOffers">
+            <summary>
+            This api will get all active services from service setup for web menu...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetFinancialCalculationByEmployeeId(System.Int32,System.Int32,System.Int32,System.DateTime)">
+            <summary>
+            To Get No Of Transactions By EmployeeId
+            </summary>
+            <param name="employeeId"></param>
+            <param name="tenentId"></param>
+            <param name="locationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetCashierInformationByEmployeeId(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="employeeId"></param>
+            <param name="tenentId"></param>
+            <param name="locationId"></param>
+            <param name="transactionDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommonController.GetDraftInformationByEmployeeId(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Api to search employee by EmployyeId,PFId,CId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.#ctor(API.Servivces.Interfaces.ICrupAuditService)">
+            <summary>
+            
+            </summary>
+            <param name="crupAuditService"></param>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.AddCrupAudit(API.DTOs.CrupAuditDto)">
+            <summary>
+            Api to Add new CrupAudit  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.UpdateCrupAudit(API.DTOs.CrupAuditDto)">
+            <summary>
+            Api to UPdate existing CrupAudit   
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.DeleteCrupAudit(System.Int32,System.Int32,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Api to Delete CrupAudit  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.SelectCrupAudit(System.Int32,System.Int32,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Api to select CrupAudit  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.CrupSetCellMaxAudit(System.Int64,System.Int32,System.Int64,System.Int32)">
+            <summary>
+            Api to Crup Set Cell Max Audit 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupAuditController.CrupSetCellMaxSerial(System.Int64,System.Int32,System.Int64)">
+            <summary>
+            Api to Crup Set Cell Max Serial
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupMstController.AddCrupMst(API.DTOs.CrupMstDto)">
+            <summary>
+            Api to add Crup master
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupMstController.UpdateCrupMst(API.DTOs.CrupMstDto)">
+            <summary>
+            Api to update existing Crup master
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupMstController.DeleteCrupMst(System.Int32,System.Int32,System.Int64)">
+            <summary>
+            Api to delete existing Crup master
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupMstController.SelectCrupMst(System.Int32,System.Int32,System.Int64)">
+            <summary>
+            Api to Select Crup Mst
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CrupMstController.MstSetCellMax(System.Int32,System.Int32)">
+            <summary>
+            Api to Mst Set Cell Max
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.EmployeeController.AddEmployee(API.DTOs.EmployeeDto.DetailedEmployeeDto)">
+            <summary>
+            Api to add new employee
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.EmployeeController.UpdateEmployee(API.DTOs.EmployeeDto.DetailedEmployeeDto)">
+            <summary>
+            Api to update existing employee
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.EmployeeController.GetEmployeeById(System.Int32)">
+            <summary>
+            Api to Get existing employee By Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.EmployeeController.GetEmployees(API.Helpers.PaginationParams)">
+            <summary>
+            Api to Get existing employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.EmployeeController.DeleteEmployee(API.DTOs.EmployeeDto.DetailedEmployeeDto)">
+            <summary>
+            Api to deleted employee By Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.EmployeeController.ValidateEmployeeData(API.DTOs.EmployeeDto.DetailedEmployeeDto)">
+            <summary>
+            Validate new employee data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.AddFinancialService(API.DTOs.TransactionHdDto)">
+            <summary>
+            Api to add new record(s) in TransactionHd and TransactionDt
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.UpdateFinancialService(API.DTOs.TransactionHdDto)">
+            <summary>
+            Api to update existing record(s) in TransactionHd and TransactionDt
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetFinancialServiceById(System.Int64)">
+            <summary>
+            Api to get existing record(s) in TransactionHd
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetEmployees">
+            <summary>
+            Api to Get All Financial Services.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.DeleteFinancialService(System.Int64)">
+            <summary>
+            Api to Delete Financial Service by Tranaction Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceTypeAndSubType(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Api to Get service type and service sub types for Transactions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceApprovalsAsync(System.Int64,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Api to Get service approvals
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.ManagerApproveServiceAsync(API.DTOs.ApproveRejectServiceDto)">
+            <summary>
+            Api to approve service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetRejectionType">
+            <summary>
+            Api to get rejection type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.ManagerRejectServiceAsync(API.DTOs.ApproveRejectServiceDto)">
+            <summary>
+            Api to reject service.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceApprovalsByEmployeeId(System.Int32)">
+            <summary>
+            Api to Get service approvals by employee Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceApprovalDetailByTransId(System.Int32)">
+            <summary>
+            Api to get service approval details by transaction Id...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceType(System.Int32)">
+            <summary>
+            Api to Get service type.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.MakeFinancialTransactionAsync(API.DTOs.CostCenterDto)">
+            <summary>
+            Api to make final tranaction...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetSubServiceTypeByServiceType(System.Int32,System.Int32)">
+            <summary>
+            Api to get sub service type by service type 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceApprovalsByTransIdAsync(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Api to get Get Service Approvals By Transation Id 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.SearchEmployee(API.DTOs.SearchEmployeeDto)">
+            <summary>
+            Api to search employee by EmployyeId,PFId,CId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetCashierApprovals(System.Int64,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Api to search employee by EmployyeId,PFId,CId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.CreateCahierDelivery(API.DTOs.CashierApprovalDto)">
+            <summary>
+            Create Cahier Delivery
+            </summary>
+            <param name="cashierApprovalDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.CreateCahierDraft(API.DTOs.CashierApprovalDto)">
+            <summary>
+            Create Cahie rDraft
+            </summary>
+            <param name="cashierApprovalDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GenerateFinancialServiceSerialNo">
+            <summary>
+            Generate Financial Service Serial No (Max + 1)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.SearchSponsor(API.DTOs.SearchEmployeeDto)">
+            <summary>
+            Search Sponsor
+            </summary>
+            <param name="searchEmployeeDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.SearchNewSubscriber(API.DTOs.SearchEmployeeDto)">
+            <summary>
+            Search New Subscriber...
+            </summary>
+            <param name="searchEmployeeDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FinancialServiceController.GetServiceApprovalsByEmployeeIdForManager(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Api to Get service approvals for Employee
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetFormHeaderLabels(System.String,System.Int32)">
+            <summary>
+            Api to Get Form Header Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetFormBodyLabels(System.String,System.Int32)">
+            <summary>
+            Api to Get Form Body Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetAllFormBodyLabels(System.String,System.Int32)">
+            <summary>
+            Api to Get All Form Body Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetCompanyAndEmployees">
+            <summary>
+            Api to Get Company And Employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetAllAppLabels">
+            <summary>
+            Api to Get All App Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetAllFormHeaderLabels">
+            <summary>
+            Api to Get All Form Header Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetFormHeaderLabelsByFormId(System.String)">
+            <summary>
+            Api to Get Form Header Labels By Form Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.GetFormBodyLabelsByFormId(System.String)">
+            <summary>
+            Api to Get Form Body Labels By FormId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.EditFormHeaderLabels(API.DTOs.LocalizationDto.FormTitleHDLanguageDto)">
+            <summary>
+            Api to Edit Form Header Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormLabelsController.EditFormBodyLabels(API.DTOs.LocalizationDto.FormTitleDTLanguageDto)">
+            <summary>
+            Api to Edit Form Body Labels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionMstController.AddFunctionMst(API.DTOs.FunctionMstDto)">
+            <summary>
+            Api to Add Function Mst
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionMstController.UpdateFunctionMst(API.DTOs.FunctionMstDto)">
+            <summary>
+            Api to Update Function Mst
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionMstController.DeleteFunctionMst(System.Int32)">
+            <summary>
+            Api to Delete Function Mst
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionMstController.GetFunctionMstByIdAsync(System.Int32)">
+            <summary>
+            Api to Get Function Mst By Id Async
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionMstController.GetFunctionMst">
+            <summary>
+            Api to Get Function Mst
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.AddFunctionUser(API.DTOs.FunctionUserDto)">
+            <summary>
+            Api to Add Function User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.UpdateFunctionUser(API.DTOs.FunctionUserDto)">
+            <summary>
+            Api to Update Function User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.DeleteFunctionUser(System.Int32)">
+            <summary>
+            Api to Delete Function User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.GetFunctionUserByMasterIdAsync(System.Int32)">
+            <summary>
+            Api to Get Function User By Master Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.GetFunctionUser">
+            <summary>
+            Api to Get Function User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.AddFunctionForUser(API.DTOs.FunctionForUserDto[])">
+            <summary>
+            Api to Add Function For User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.GetFunctionUserByUserIdAsync(System.Int32)">
+            <summary>
+            Api to Get Function User By User Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FunctionUserController.GetModuleWiseMenuItems">
+            <summary>
+            Api to Get Module Wise Menu Items
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoginController.EmployeeLogin(API.DTOs.LoginDto)">
+            <summary>
+            Api to Employee Login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoginController.GetUserFunctionsByUserId(System.Int32)">
+            <summary>
+            Api to Get User Functions By User Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoginController.MobileLogin(API.DTOs.MobileLoginDto)">
+            <summary>
+            Api to Employee Login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.OffersController.AddOffer(API.DTOs.OffersDto)">
+            <summary>
+            Add new offer
+            </summary>
+            <param name="serviceSetupDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.OffersController.EditOffer(API.DTOs.OffersDto)">
+            <summary>
+            Update existing offers
+            </summary>
+            <param name="serviceSetupDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.OffersController.DeleteOffer(System.Int32)">
+            <summary>
+            Delete offer
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.OffersController.GetOfferById(System.Int32)">
+            <summary>
+            Get offer by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.OffersController.GetOffers">
+            <summary>
+            Get all offers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.RefTableController.AddRefTable(API.DTOs.RefTable.RefTableDto)">
+            <summary>
+            Api to Add RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.RefTableController.UpdateRefTable(API.DTOs.RefTable.RefTableDto)">
+            <summary>
+            Api to Update RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.RefTableController.DeleteRefTable(System.Int32)">
+            <summary>
+            Api to Delete RefTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.RefTableController.GetRefTableByIdRefTypeAndSubType(System.Int32,System.String,System.String)">
+            <summary>
+            Api to Get RefTable By Id RefType AndSubType
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.RefTableController.GetRefTableData">
+            <summary>
+            Api to Get RefTable Data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.RefTableController.GetRefTableByRefTypeAndSubType(System.String,System.String)">
+            <summary>
+            Api to Get RefTable By RefType And SubType
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.AddServiceSetup(API.DTOs.ServiceSetupDto)">
+            <summary>
+            Api to Add Service Setup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.EditServiceSetup(API.DTOs.ServiceSetupDto)">
+            <summary>
+            Api to Update Service Setup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.DeleteRefTable(System.Int32)">
+            <summary>
+            Api to delete Service Setup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.GetServiceSetupById(System.Int32)">
+            <summary>
+            Api to Get Service Setup By Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.GetServiceSetup">
+            <summary>
+            Api to Get Service Setup
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.GetWebContentByPageNameAsync(System.String)">
+            <summary>
+            Api to Get Web Conten tByPageName for website.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ServiceSetupController.AddSubscription(API.DTOs.ServiceSubscriptionDto)">
+            <summary>
+            Api to Add Subscription
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserMstController.AddUserMst(API.DTOs.UserMstDto)">
+            <summary>
+            Api to add new user master
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserMstController.UpdateUserMst(API.DTOs.UserMstDto)">
+            <summary>
+            Api to update user master by Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserMstController.DeleteUserMst(System.Int32)">
+            <summary>
+            Api to delete user master by UserId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserMstController.GetUserMstByIdAsync(System.Int32)">
+            <summary>
+            Api to Get User Master By Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserMstController.GetUserMst">
+            <summary>
+            Api to Get All Users 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserMstController.UpatePassword(API.DTOs.UpdatePasswordDto)">
+            <summary>
+            Api to Update user password...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Common.CommonMethods.CalculateMembershipDuration(System.DateTime)">
+            <summary>
+            To calculate subscription duration...
+            </summary>
+            <param name="subscribeDate">Get total months</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Common.CommonMethods.GetDbConnection">
+            <summary>
+            To get db connection string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:API.Servivces.Implementation.CommonService">
+            <summary>
+            This class contains all functions/methods that can be use 
+            anywhere in the project. Like if we want to fillup dropdown 
+            from database. So that dropdown can be used anywhere in entire 
+            project.
+            </summary>
+        </member>
+        <member name="M:API.Servivces.Implementation.CommonService.GetOccupationsAsync">
+            <summary>
+            To Get Occupations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Implementation.CommonService.GetDepartmentsAsync">
+            <summary>
+            To Get Depratments
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Implementation.CommonService.GetTerminationsAsync">
+            <summary>
+            To Get Terminations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Implementation.Localization.LocalizationService.GetAllFormHeaderLabels">
+            <summary>
+            Get all form header labels.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Implementation.Localization.LocalizationService.GetFormHeaderLabelsByFormId(System.String)">
+            <summary>
+            Get form header labels by form Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Implementation.Localization.LocalizationService.GetFormBodyLabelsByFormId(System.String)">
+            <summary>
+            Get form body labels by form Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Implementation.Localization.LocalizationService.EditFormBodyLabels(System.Guid)">
+            <summary>
+            Edit form header labels by Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.FinancialServices.IFinancialService.SearchEmployee(API.DTOs.SearchEmployeeDto)">
+            <summary>
+            Search employee by EmployeeId,PF Id and C Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetRefType">
+            <summary>
+            Get All RefTypes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetRefSubType">
+            <summary>
+            Get All RefSubTypes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetRefSubTypeByRefType(System.String)">
+            <summary>
+            Get RefSubType by RefType....
+            </summary>
+            <param name="refType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetServiceTypeByMasterIds(System.Int32[])">
+            <summary>
+            Get Service Type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetServiceSubType(System.String)">
+            <summary>
+            Get Service Type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetMasterGetServiceType">
+            <summary>
+            Get Master Service Type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetMinMonthOfServices">
+            <summary>
+            GetMinMonthOfServices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetMinInstallments">
+            <summary>
+            GetMinInstallments
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetMaxInstallments">
+            <summary>
+            GetMaxInstallments
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.SearchEmployee(API.DTOs.SearchEmployeeDto)">
+            <summary>
+            Search employee by EmployeeId,PF Id and C Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetSelectedServiceType(System.Int32)">
+            <summary>
+            Get Selected Service Types to display services on add service page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Servivces.Interfaces.ICommonService.GetSelectedServiceSubType(System.Int32)">
+            <summary>
+            Get Selected Service Sub Types to display services on add service page
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

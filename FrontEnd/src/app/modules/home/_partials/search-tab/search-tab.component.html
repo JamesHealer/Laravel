@@ -1,0 +1,168 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #SearchForm name="SearchForm" value="SearchForm">
+
+<div class="card mb-5 mb-xl-10">
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+        data-bs-target="#kt_account_email_preferences" aria-expanded="true"
+        aria-controls="kt_account_email_preferences"
+        [ngClass]="{'panelBgColor_membership': (pageName === 'AddSubscription' || pageName === 'AddEmployeeMovementP'),
+        'panelBgColor_service' : (pageName === 'AddService' || pageName === 'AddEmployeeDiscount'), 
+        'panelBgColor_references' : pageName === 'AddEmployeeCertificate'}">
+        <div class="card-title m-0" *ngFor="let bodyLabel of formBodyLabels let i = index;">
+            <h3 class="fw-bolder m-0 ArFontStyle" lang="AR-SA" id="SearchForm">{{lang == 'en' ? bodyLabel[0].title : bodyLabel[0].arabicTitle}}</h3>
+        </div>
+    </div>
+    <div id="kt_account_email_preferences" class="collapse show"
+        *ngFor="let bodyLabel of formBodyLabels; let i = index">
+        <form class="form">
+            <div class="card-body border-top px-9 py-9">
+                <div class="row mb-4">
+                    <div class="col-lg-6 fv-row"></div>
+                    <div class="col-lg-4 fv-row">
+                        <select class="form-control form-control-solid" (change)="open(sponsorModal)">
+                            <option>-Select-</option>
+                            <option>Sponsor 1</option>
+                            <option>Sponsor 2</option>
+                            <option>Sponsor 3</option>
+                            <option>Sponsor 4</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-sm btn-success" lang="AR-SA" (click)="open(sponsorModal)"
+                        [ngClass]="{'search_sunglow': pageName === 'AddSubscription', 'search_color_service' :pageName === 'AddService' }" [style]='arabicFont' >{{lang == 'en' ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</button>
+                    </div>
+                </div>
+                <div class="notice d-flex search_green_apple rounded border-primary border border-dashed p-6">
+                    <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                        <form [formGroup]="searchForm">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label _title" for="form3Example1 " lang="AR-SA"
+                                        [style]='arabicFont'>{{lang == 'en' ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}</label>
+                                    <input type="text" class="form-control" formControlName="pfId" name="pfId" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label _title" for="form3Example2 " lang="AR-SA"
+                                        [style]='arabicFont'>{{lang == 'en' ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</label>
+                                    <input type="text" class="form-control" formControlName="cId" name="cId" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <label class="form-label _title" for="form3Example2 " lang="AR-SA"
+                                        [style]='arabicFont'>{{lang == 'en' ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</label>
+                                    <input type="text" class="form-control" formControlName="employeeId"
+                                        name="employeeId" />
+                                </div>
+                                <div class="col-lg-3 fv-row">
+                                    <button type="button" class="btn btn-primary mt-8 fringy_flower" lang="AR-SA"
+                                        [style]='arabicFont' (click)="SearchEmployee()">{{lang == 'en' ? bodyLabel[5].title : bodyLabel[5].arabicTitle}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="separator separator-dashed my-6"></div>
+                <form [formGroup]="employeeForm">
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <input type="hidden" class="form-control" formControlName="employeeId" name="employeeId" />
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>English {{lang == 'en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</label>
+                            <input type="text" class="form-control" formControlName="englishName" name="englishName"
+                                lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA" [style]='arabicFont'>Arabic {{lang == 'en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</label>
+                            <input type="text" class="form-control" formControlName="arabicName" name="arabicName"
+                                lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[8].title : bodyLabel[8].arabicTitle}}</label>
+                            <!-- <input type="text" class="form-control" formControlName="empGender" name="empGender"
+                                readonly /> -->
+                            <ng-select formControlName="empGender" [disabled]="true">
+                                <ng-option *ngFor="let item of genderArray" [value]="item.id" [disabled]="true">{{item.name}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[10].title : bodyLabel[10].arabicTitle}}</label>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="empBirthday"
+                                name="empBirthday" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1" lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[9].title : bodyLabel[9].arabicTitle}}</label>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="joinedDate"
+                                name="joinedDate" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[11].title : bodyLabel[11].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control"
+                                formControlName="empMaritalStatus" name="empMaritalStatus" lang="AR-SA" readonly />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[12].title : bodyLabel[12].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control" formControlName="nationName"
+                                name="nationName" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[13].title : bodyLabel[13].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control" formControlName="contractType"
+                                name="contractType" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[14].title : bodyLabel[14].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control" formControlName="occupation"
+                                name="occupation" lang="AR-SA" readonly />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[15].title : bodyLabel[15].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control" formControlName="departmentName"
+                                name="departmentName" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[16].title : bodyLabel[16].arabicTitle}}</label>
+                            <input type="number" id="form3Example1" class="form-control" formControlName="salary"
+                                name="salary" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[17].title : bodyLabel[17].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control" formControlName="mobileNumber"
+                                name="mobileNumber" lang="AR-SA" readonly />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="form3Example1" lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[18].title : bodyLabel[18].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control"
+                                formControlName="empWorkTelephone" name="empWorkTelephone" lang="AR-SA" readonly />
+                        </div>
+                        <div class="col-lg-8 fv-row">
+                            <label class="form-label" for="form3Example1 " lang="AR-SA"
+                                [style]='arabicFont'>{{lang == 'en' ? bodyLabel[19].title : bodyLabel[19].arabicTitle}}</label>
+                            <input type="text" id="form3Example1" class="form-control" formControlName="remarks"
+                                name="remarks" lang="AR-SA" readonly />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>

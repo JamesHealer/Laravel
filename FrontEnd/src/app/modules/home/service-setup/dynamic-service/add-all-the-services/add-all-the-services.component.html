@@ -1,0 +1,93 @@
+<input type="hidden" #ServiceSetupDetail name="ServiceSetupDetail" value="ServiceSetupDetail">
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panelBgColor1">
+        <!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+        <div class="card-toolbar" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="text-dark ArFontStyle header_color" lang="AR-SA" id="ServiceSetupDetail">{{lang == "en" ?
+                'Services Details' : "تفاصيل الخدمات"}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example"
+                *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <!-- <button type="button" class="btn btn-primary ArFontStyle ArFontStyle btn_green-pool-tb" lang="AR-SA"
+                    routerLink="/service-setup/add-service-setup">{{lang == "en" ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle btn_green-pool-tb" lang="AR-SA">{{lang == "en" ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</button> -->
+            </div>
+        </h3>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        <!--begin::Table container-->
+        <div class="table-responsive mt-3" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+            <!-- <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                    <mat-label>Search</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                        class="ArFontStyle" />
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form> -->
+            <div class="table-container">
+                <table mat-table class="w-100" [dataSource]="serviceSetupDto" matSort>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="ArFontStyle w-15">{{lang == "en" ? bodyLabel[0].title :
+                            bodyLabel[0].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="text-center">
+                            <button class="btn btn-success ArFontStyle p-2" (click)="actionBtnSelect(item)"> Add
+                                Service</button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="services">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                            {{lang == "en" ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.serviceTypeName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="serviceType">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+                            {{lang == "en" ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.subServiceTypeName}}</td>
+                    </ng-container>
+                    <tr mat-header-row class="row_header" *matHeaderRowDef="columnsToDisplay; sticky:true"
+                        [ngClass]="{'hidden':!isLoadingCompleted}"></tr>
+                    <tr mat-row *matRowDef="let refTableDto; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <!-- <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="pageChanged($event)"
+                    showFirstLastButtons>
+                </mat-paginator>
+            </div> -->
+        </div>
+
+    </div>
+    <!--begin::Body-->
+    <div class="card-footer">
+
+    </div>
+</div>
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ lang == 'en' ? modalLabels[0].Delete.title :
+            modalLabels[0].Delete.arabicTitle}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <span>D{{ lang == 'en' ? modalLabels[0].Doyouwanttodeletethisrecord.title :
+                    modalLabels[0].Doyouwanttodeletethisrecord.arabicTitle}}</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="warn" (click)="modal.close('yes')">{{ lang == 'en' ? modalLabels[0].Yes.title :
+            modalLabels[0].Yes.arabicTitle}}</button> &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="modal.close('Save click')">{{ lang == 'en' ?
+            modalLabels[0].No.title : modalLabels[0].No.arabicTitle}}</button>
+    </div>
+</ng-template>

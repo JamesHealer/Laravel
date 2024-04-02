@@ -1,0 +1,70 @@
+<div class="card mb-5 mb-xl-10"> 
+    <!--begin::Card header added in sheet--> 
+    <div class="card-header card-header-stretch pb-0 panel1bgColor">
+        <!--begin::Title-->
+        <div class="card-title">
+            <h3 class="m-0 text-white ArFontStyle header_color" lang="AR-SA">{{lang=='en' ? formBodyLabels[0].ManageAppLanguage.title : formBodyLabels[0].ManageAppLanguage.arabicTitle}}</h3>
+        </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3>-->
+            <!--end::Title-->
+            <div class="row gx-9 gy-6">
+                <form [formGroup]="formGroup">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                        <mat-label>{{lang=='en' ? formBodyLabels[0].Search.title : formBodyLabels[0].Search.arabicTitle}}</mat-label>
+                        <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                            class="ArFontStyle" />
+                        <mat-icon matPrefix class="material-icons">search</mat-icon>
+                        <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                    </mat-form-field>
+                </form>
+                <div class="table-container">
+                    <table mat-table class="w-100" [dataSource]="formTitleHd" matSort [dir]="direction">
+                        <ng-container matColumnDef="formID">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang=='en' ? formBodyLabels[0].FormId.title : formBodyLabels[0].FormId.arabicTitle}}</th>
+                            <td mat-cell *matCellDef="let item" class="w-25 ArFontStyle">{{item.formID}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="formName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang=='en' ? formBodyLabels[0].FormName.title : formBodyLabels[0].FormName.arabicTitle}}</th>
+                            <td mat-cell *matCellDef="let item" class="w-25 ArFontStyle">{{item.formName}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="headerNameEn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang=='en' ? formBodyLabels[0].HeaderNameEn.title : formBodyLabels[0].HeaderNameEn.arabicTitle}}</th>
+                            <td mat-cell *matCellDef="let item" class="w-25 ArFontStyle">{{item.headerName}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="subHeaderNameEn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang=='en' ? formBodyLabels[0].SubHeaderEn.title : formBodyLabels[0].SubHeaderEn.arabicTitle}}</th>
+                            <td mat-cell *matCellDef="let item" class="w-25 ArFontStyle">{{item.subHeaderName}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef>{{lang=='en' ? formBodyLabels[0].Action.title : formBodyLabels[0].Action.arabicTitle}}</th>
+                            <td mat-cell *matCellDef="let item">
+                                <button mat-raised-button color="accent"
+                                    routerLink="/references/update-labels/{{item.formID}}"
+                                    id={{item.formID}}>{{lang=='en' ? formBodyLabels[0].Select.title : formBodyLabels[0].Select.arabicTitle}}</button>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                            [ngClass]="{'hidden':!isLoadingCompleted}" class="table_header_bg"></tr>
+                        <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                        <!-- <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"
+                            [style.display]="formTitleHd.language == 2 ? 'none' : '' "></tr> -->
+
+                    </table>
+                </div>
+                <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                    <mat-paginator [pageSize]="10" [pageSizeOptions]="[00,20,30]" (page)="pageChanged($event)" showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

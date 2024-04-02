@@ -1,0 +1,59 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #ImportEmployeeMonthlyPayment name="ImportEmployeeMonthlyPayment"
+    value="ImportEmployeeMonthlyPayment">
+
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panel2bgColor">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let label of formBodyLabels; let i = index">
+            <h3 class="m-0 ArFontStyle header_color" lang="AR-SA" id="lblHeader">{{lang== 'en' ? label[1].title :
+                label[1].arabicTitle}}</h3>
+        </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+
+
+
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <form autocomplete="off">
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label class="form-label ArFontStyle" lang="AR-SA">{{lang== 'en' ? bodyLabel[0].title :
+                                    bodyLabel[0].arabicTitle}} </label>
+                                <input class="form-control" type="date">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA">{{lang== 'en' ?
+                                    bodyLabel[1].title : bodyLabel[1].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+
+    </div>
+    <!--end::Tab content-->
+    <div class="card-footer d-flex justify-content-end py-6 px-9"
+        *ngFor="let bodyLabel of formBodyLabels; let i = index">
+        <button type="button" class="btn btn-primary float-right ArFontStyle btn-bg" lang="AR-SA">{{lang== 'en' ?
+            bodyLabel[2].title : bodyLabel[2].arabicTitle}}</button>
+
+    </div>
+</div>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"// #fake-start#\nexport { AuthHTTPService } from './fake/auth-fake-http.service'; // You have to comment this, when your real back-end is done\n// #fake-end#\n// #real-start#\n// export { AuthHTTPService } from './auth-http.service'; // You have to uncomment this, when your real back-end is done\n// #real-end#","map":null,"metadata":{},"sourceType":"module"}

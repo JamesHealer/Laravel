@@ -1,0 +1,121 @@
+
+<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mb-3">
+    <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+        <div class="row">
+            <div class="btn-group " role="group" aria-label="Basic example"
+                *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary float-left ArFontStyle creamBrulee"
+                    lang="AR-SA">{{bodyLabel[0].title}}
+                </button>
+                <button type="button" class="btn btn-primary float-left ArFontStyle sandyBeach"
+                    lang="AR-SA">{{bodyLabel[1].title}}
+                </button>
+                <button type="button" class="btn btn-primary float-left ArFontStyle peach"
+                    lang="AR-SA">{{bodyLabel[2].title}}
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<app-search-tab [pageName]="'AddEmployeeMovementP'"></app-search-tab>
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panelBgColor">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="m-0 text-white ArFontStyle" lang="AR-SA" id="MembershipTransactions">{{label.headerName}}</h3>
+        </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Job Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <form autocomplete="off">                    
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[3].title}}</label>
+                            <input type="date" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[4].title}}</label>
+                            <select class="form-control form-control-solid">
+                                <option>-Select-</option>
+                                <option>Service 1</option>
+                                <option>Service 2</option>
+                                <option>Service 13</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[5].title}}</label>
+                            <select class="form-control form-control-solid">
+                                <option>-Select-</option>
+                                <option>Type 1</option>
+                                <option>Type 2</option>
+                                <option>Type 13</option>
+                            </select>
+                        </div>                       
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[6].title}}</label>
+                            <select class="form-control form-control-solid">
+                                <option>-Select-</option>
+                                <option>Reason 1</option>
+                                <option>Reason 2</option>
+                                <option>Reason 13</option>
+                            </select>
+                        </div>   
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[7].title}}
+                            </label>
+                            <select class="form-control form-control-solid">
+                                <option>-Select-</option>
+                                <option>Year 1</option>
+                                <option>Year 2</option>
+                                <option>Year 13</option>
+                            </select>
+                        </div> 
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[8].title}}
+                            </label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>                      
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[9].title}}
+                            </label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>   
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle"
+                            lang="AR-SA">{{bodyLabel[10].title}}
+                            </label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>                     
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+    </div>
+</div>
+
+<app-financial-detials></app-financial-detials>
+<br>
+<app-approval-detials></app-approval-detials>

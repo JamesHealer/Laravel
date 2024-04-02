@@ -1,0 +1,70 @@
+
+.panelBgColor_membership{
+    background-color: var(--mySin) 
+}
+
+.panelBgColor_references{
+    background-color: var(--green);
+
+}
+
+.panelBgColor_service{
+    background-color: var(--green);
+}
+
+.panelBgColor_service_sub{
+    background-color: var(--green);
+}
+
+.service_route_change{
+    background-color: var(--green);
+
+}
+.ArFontStyle{
+    font-family: Cairo;;
+    color: white;
+
+}
+input:focus {
+    background-color: #E9E9E9;
+  }
+
+.search_green_apple{
+    background-color: var(--grannysmithapple);
+}
+
+.search_sunglow{
+    background-color: var(--sunglow);
+    color: #000;
+    &.btn {
+        &.btn-success:hover, .btn-success:focus, .btn-success:active {
+            background-color: var(--goldenTinoi) !important; 
+            color: #000 !important;
+
+        }
+    }
+}
+
+.search_color_service{
+    background-color: var(--leaf);
+    color: #000;
+    &.btn {
+        &.btn-success:hover, .btn-success:focus, .btn-success:active {
+            background-color: var(--grass) !important; 
+            color: #000 !important;
+
+        }
+    }
+}
+
+.fringy_flower{
+    background: var(--fringy_flower);
+    color: #000;
+
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--surf_crest) !important; 
+            color: #000 !important;
+        }
+    }
+}

@@ -1,0 +1,193 @@
+<input type="hidden" #FinancialDetails name="FinancialDetails" value="FinancialDetails">
+<ngb-accordion #acc="ngbAccordion" class="mb-2" activeIds="ngb-panel-0">
+    <ngb-panel>
+        <ng-template ngbPanelTitle *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="FinancialDetails">{{label.headerName}}</h3>  
+          </ng-template>
+      <ng-template ngbPanelContent >
+        <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index"> 
+                <form>
+                <table class="table table-row-bordered">                
+                    <thead>
+                        <tr class="fw-bolder">
+                            <th class="ArFontStyle" lang="AR-SA" style="width: 30%">{{bodyLabel[0].title}}</th>
+                            <th class="ArFontStyle" lang="AR-SA" style="width: 10%"></th>
+                            <th class="ArFontStyle" lang="AR-SA" >Name in English</th>
+                            <th class="ArFontStyle" lang="AR-SA" >Name in Arabic</th>              
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" id="loanAct" name="loanAct" [(ngModel)]="addEmployeeForm.loanAct"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyLoanAccount()">Verify</button>
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblloanActNameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblloanActNameInArabic"></label>       
+                                
+                            </td> 
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[1].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="hajjAct"  id="hajjAct" name="hajjAct"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyHajjAccount()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblHajjActNameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblHajjActNameInArabic"></label>   
+                            </td>  
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[2].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="persLoanAct"  id="persLoanAct" name="persLoanAct"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyPerLoanAct()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblPersLoanActNameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblPersLoanNameInArabic"></label>   
+                            </td>   
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[3].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="consumerLoanAct" id="consumerLoanAct" name="consumerLoanAct"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyConsumerLoanAct()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblConsumerLoanActNameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblConsumerLoanNameInArabic"></label>   
+                            </td>   
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[4].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="otherAct1"  id="otherAct1" name="otherAct1"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyOtherAct1()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct1NameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct1NameInArabic"></label>   
+                            </td>    
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[5].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="otherAct2" id="otherAct2" name="otherAct2"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyOtherAct2()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct2NameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct2NameInArabic"></label>   
+                            </td>  
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[6].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="otherAct3"  id="otherAct3" name="otherAct3"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyOtherAct3()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct3NameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct3NameInArabic"></label>   
+                            </td>  
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                {{bodyLabel[7].title}}
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="otherAct4" id="otherAct4" name="otherAct4"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyOtherAct4()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct4NameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct4NameInArabic"></label>   
+                            </td>  
+                        </tr>
+                        <tr>                        
+                            <td class="fw-bolder">
+                                Other Act # 5
+                            </td>
+                        </tr>
+                        <tr>                        
+                            <td>
+                                <input type="number" class="form-control" formControlName="otherAct5" id="otherAct5" name="otherAct5"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary mt-1" (click)="verifyOtherAct5()">Verify</button>
+                            </td> 
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct5NameInEnglish"></label>                            
+                            </td>
+                            <td class="mt-2">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" id="lblOtherAct5NameInArabic"></label>   
+                            </td>  
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+      </ng-template>
+    </ngb-panel>
+</ngb-accordion>

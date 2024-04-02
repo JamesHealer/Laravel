@@ -1,0 +1,22 @@
+.panel3bgColor{
+    background-color: #ffa500;
+}
+.m_approval_thead{
+    background-color: var(--texasRose);
+    
+    .mat-header-cell{
+        color: black !important;
+    }
+}
+.modalTable{
+    width: 100%;
+}
+.modalTable tr{
+    border-bottom: 1px solid rgb(206, 206, 206);
+}
+.modalTable td{    
+    padding: 10px 6px;
+}
+.modalTable tr:nth-child(odd) {
+    background: #dddddd;
+  }

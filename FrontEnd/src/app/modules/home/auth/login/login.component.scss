@@ -1,0 +1,92 @@
+:host {
+    width: 100%;
+    @media (min-width: 992px) {
+      .login-form {
+        width: 100%;
+        max-width: 450px;
+  
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .ArFontStyle{
+    font-family: Cairo;
+    // font-family: "Reem Kufi Fun";
+}
+
+.text-danger{
+  position: absolute;
+}
+.form-control{
+  background-color: #f0f4f6;
+}
+
+input{
+  border-radius: 50px;
+  border: 1px solid #40484d!important;
+  padding-left: 40px;
+}
+
+input:hover{
+  border: 1px solid #1e92db!important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 #86acc3!important;
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+  
+.loginBtn{
+  border: 1px solid #40484d;
+  background-color: #1e92db;
+  border-radius: 50px;
+  color: #fff;
+  padding: 10px 40px;
+}
+
+.loginBtn {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.loginBtn:after {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.loginBtn:hover {
+  transform: scale(1.02);
+}
+.forgotPass:hover{
+  text-decoration: underline!important;
+}
+
+.loginHeader{
+  color: #1e92db;
+}
+.signIn{
+  color: #0e537e;
+}
+.bi{
+  position: absolute;
+    margin: 13px;
+    display: inline-block;
+}
+.optionalLogo{
+  height: 280px;
+  margin-top:35px
+}
+.logoImg{
+  width: 380px; height: 70px;
+}
+
+.mainDiv{
+  height: 460px;
+}
+@media screen and (max-width: 992px){
+  .optionalLogo{
+    display: none!important;
+  }  
+  .mainDiv{
+    display: block!important;
+  }
+}

@@ -1,0 +1,63 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #OfferDetails name="OfferDetails" value="OfferDetails">
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 t_header_orm2">       
+        <h3 class="m-0 ArFontStyle" lang="AR-SA">{{lang=='en' ? formBodyLabels[0].hdrspecialOfferReceivedHandling.title : formBodyLabels[1].hdrspecialOfferReceivedHandling.title}}</h3>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        
+        <!--begin::Table container-->
+        <div class="table-responsive mt-3">
+            <!--begin::Table-->
+            <div class="table-container">
+                <table mat-table class="w-100" [dataSource]="offersWebsite" matSort>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="ArFontStyle w-10">{{lang=='en' ? formBodyLabels[0].lblAction.title : formBodyLabels[1].lblAction.title}}</th>
+                        <td mat-cell *matCellDef="let item" class=" text-center">
+                            <a (click)="sbscriptionRedirect(item)" href="javascript:void(0)" ><i
+                                class="bi bi-box-arrow-up-right fs-2 text-success"></i></a>
+                      </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="ArFontStyle text-center">{{lang=='en' ? formBodyLabels[0].lblEmployeeName.title : formBodyLabels[1].lblEmployeeName.title}}</th>
+                        <td mat-cell *matCellDef="let item">
+                            {{item.englishName}}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="employeeId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang=='en' ? formBodyLabels[0].lblEmployeeId.title : formBodyLabels[1].lblEmployeeId.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle ">{{item.employeeId }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="offersRecievedDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang=='en' ? formBodyLabels[0].lblOffersReceivedDate.title : formBodyLabels[1].lblOffersReceivedDate.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle ">{{item.offersRecievedDate | date:'dd/MM/yyyy'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="civilId" class="w-30">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang=='en' ? formBodyLabels[0].lblCivilId.title : formBodyLabels[1].lblCivilId.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle ">{{item.civilId | date:'dd/MM/yyyy'}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="mobileNo" class="w-20">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{lang=='en' ? formBodyLabels[0].lblMobileNo.title : formBodyLabels[1].lblMobileNo.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle ">{{item.mobileNo }}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                         class="som_t_header"></tr>
+                    <tr mat-row *matRowDef="let offers; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div >
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="onPaginationChange($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+            <!--end::Table-->
+        </div>
+        <!--end::Table container-->
+    </div>
+    <!--begin::Body-->
+   
+</div>

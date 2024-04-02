@@ -1,0 +1,23 @@
+.panel1bgColor {
+  // background-color: #3f838ffc;
+  background-color: var(--fluroscent-blue);
+}
+.ArFontStyle {
+  font-family: Cairo;
+}
+.header_color {
+  color: #000 !important;
+}
+.light-sea-green {
+  background-color: var(--light-sea-green) !important;
+  margin-left: 10px;
+
+  &.btn {
+    &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+      background-color: var(--comm-btn-hover) !important;
+    }
+  }
+}
+.t_row_header {
+  background-color: #8fdedc !important;
+}

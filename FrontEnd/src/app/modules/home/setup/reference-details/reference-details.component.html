@@ -1,0 +1,315 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #RefTableEntry name="RefTableEntry" value="RefTableEntry">
+<div class="card mb-5 mb-xl-8">
+  <!--begin::Header-->
+  <div class="card-header border-0 pt-5 setup-bg-header">
+    <!--<div class="card-toolbar" *ngFor="let label of formHeaderLabels; let i = index">-->
+    <h3 class="text-dark ArFontStyle theader" lang="AR-SA" id="RefTableEntry">{{ lang == 'en' ? formHeaderLabels[0].headerName : formHeaderLabels[1].headerName}}</h3>
+    <!--</div>-->
+
+  </div>
+  <!--end::Header-->
+  <!--begin::Body-->
+  <div class="card-body py-3">
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <label class="form-label" for="form3Example1">{{ lang == 'en' ? formBodyLabels[0].lblReferenceType.title : formBodyLabels[1].lblReferenceType.title}}</label>
+        <ng-select [items]="refType$ | async" bindLabel="refType"
+                   (change)="onRefTypeChange($event)">
+        </ng-select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" for="form3Example2">{{ lang == 'en' ? formBodyLabels[0].lblReferenceSubType.title : formBodyLabels[1].lblReferenceSubType.title}}</label>
+        <ng-select [items]="refSubType$" bindLabel="refSubType" [multiple]="false"
+                   (change)="onRefSubTypeChange($event)">
+        </ng-select>
+      </div>
+      <div class="col-md-4">
+        <button mat-raised-button color="primary" [disabled]="!isRefSubTypeEmpty" (click)="open(mymodal)"
+                style="margin-top: 30px">
+          {{ lang == 'en' ? formBodyLabels[0].lblAddRefTable.title : formBodyLabels[1].lblAddRefTable.title}}
+        </button>
+      </div>
+    </div>
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+        <mat-label>{{ lang == 'en' ? formBodyLabels[0].lblSearch.title : formBodyLabels[1].lblSearch.title}}</mat-label>
+        <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)" class="ArFontStyle" />
+        <!-- <mat-icon matPrefix class="material-icons">{{ lang == 'en' ? formBodyLabels[0].lblSearch.title : formBodyLabels[1].lblSearch.title}}</mat-icon> -->
+        <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+      </mat-form-field>
+    </form>
+    <div class="table-container">
+      <table mat-table class="w-100" [dataSource]="refTableDto" matSort>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="ArFontStyle">{{ lang == 'en' ? formBodyLabels[0].lblAction.title : formBodyLabels[1].lblAction.title}}</th>
+          <td mat-cell *matCellDef="let item" class="w-10 text-right">
+            <div *ngIf="item.infrastructure == 'Y'">
+              <button mat-raised-button color="warn" [disabled]="true" (click)="openDeleteModal(deleteModal,item.refid)">Delete</button>
+              &nbsp; <button mat-raised-button color="accent" (click)="openEditModal(editModal,item.refid)">Edit</button>
+            </div>
+            <div *ngIf="item.infrastructure == 'N'">
+              <button mat-raised-button color="warn" (click)="openDeleteModal(deleteModal,item.refid)">Delete</button>
+              &nbsp; <button mat-raised-button color="accent" (click)="openEditModal(editModal)">Edit</button>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Sr">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-10 ArFontStyle">
+            {{ lang == 'en' ? formBodyLabels[0].lblRefMainColumn.title : formBodyLabels[1].lblRefMainColumn.title}}
+          </th>
+          <td mat-cell *matCellDef="let item" class="w-10 ArFontStyle">
+            {{item.refid }} {{item.reftype }}
+            {{item.refsubtype }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="shortName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+            {{ lang == 'en' ? formBodyLabels[0].lblShortName.title : formBodyLabels[1].lblShortName.title}}
+          </th>
+          <td mat-cell *matCellDef="let item" class="w-10 ArFontStyle">{{item.shortname}}</td>
+        </ng-container>
+        <ng-container matColumnDef="englishName1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+            {{ lang == 'en' ? formBodyLabels[0].lblEnglishName1.title : formBodyLabels[1].lblEnglishName1.title}}
+          </th>
+          <td mat-cell *matCellDef="let item" class="w-10 ArFontStyle">
+            {{item.refname1}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="arabicName2">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+            {{ lang == 'en' ? formBodyLabels[0].lblArabicName2.title : formBodyLabels[1].lblArabicName2.title}}
+          </th>
+          <td mat-cell *matCellDef="let item" class="w-10 ArFontStyle">
+            {{item.refname1}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+            [ngClass]="{'hidden':!isLoadingCompleted}" class="setup-search-header"></tr>
+        <tr mat-row *matRowDef="let refTableDto; columns: columnsToDisplay"></tr>
+      </table>
+    </div>
+    <div [ngClass]="{'hidden':!isLoadingCompleted}">
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="onPaginationChange($event)" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+  <!--begin::Body-->
+  <div class="card-footer">
+
+  </div>
+</div>
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">  {{ lang == 'en' ? formBodyLabels[0].lblDelete.title : formBodyLabels[1].lblDelete.title}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <span>{{ lang == 'en' ? formBodyLabels[0].lblDeleteMsg.title : formBodyLabels[1].lblDeleteMsg.title}}</span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer text-right">
+    <button mat-raised-button color="warn" (click)="modal.close('yes')">{{ lang == 'en' ? formBodyLabels[0].lblYes.title : formBodyLabels[1].lblYes.title}}</button> &nbsp;&nbsp;
+    <button mat-raised-button color="accent" (click)="modal.close('Save click')">{{ lang == 'en' ? formBodyLabels[0].lblNo.title : formBodyLabels[1].lblNo.title}}</button>
+  </div>
+</ng-template>
+
+<!--Add New Record-->
+<ng-template #mymodal let-modal>
+  <div class="modal-header bg-light">
+    <button type="button" class="close" data-dismiss="modal" (click)="modal.dismiss('Cross click')">&times;</button>
+    <h4 class="modal-title" id="modal-basic-title">{{ lang == 'en' ? formBodyLabels[0].lblReferenceTableEntry.title : formBodyLabels[1].lblReferenceTableEntry.title}} </h4>
+  </div>
+  <div class="modal-body">
+    <form autocomplete="off" [formGroup]="userForm" id="userForm">
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" [hidden]="true" for="form3Example2">{{this.selectedItems?.refType}}</label>
+            <input type="hidden" value="{{selectedItems?.refType}}" formControlName="refType" />
+            <input type="hidden" value="{{selectedItemsSub?.refSubType}}" formControlName="refSubType" />
+
+            <label class="form-label" for="form3Example2">   {{ lang == 'en' ? formBodyLabels[0].lblShortName.title : formBodyLabels[1].lblShortName.title}}</label>
+            <input type="text" class="form-control" formControlName="shortName" id="shortName" name="shortName" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">
+            {{ lang == 'en' ? formBodyLabels[0].lblEnglishName1.title : formBodyLabels[1].lblEnglishName1.title}}</label>
+            <input type="text" class="form-control" formControlName="refname3" id="refname3"
+                   name="refname3" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">
+            {{ lang == 'en' ? formBodyLabels[0].lblArabicName2.title : formBodyLabels[1].lblArabicName2.title}}</label>
+            <input type="text" class="form-control" formControlName="refname2" id="refname2" name="refname2" />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">
+              {{ lang == 'en' ? formBodyLabels[0].lblSwitch1.title : formBodyLabels[1].lblSwitch1.title}}
+            </label>
+            <input type="number" class="form-control" formControlName="switch1" id="switch1" name="switch1" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">
+              {{ lang == 'en' ? formBodyLabels[0].lblSwitch2.title : formBodyLabels[1].lblSwitch2.title}}
+            </label>
+            <input type="number" class="form-control" formControlName="switch2" id="switch2" name="switch2" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">
+              {{ lang == 'en' ? formBodyLabels[0].lblSwitch3.title : formBodyLabels[1].lblSwitch3.title}}
+            </label>
+            <input type="number" class="form-control" formControlName="switch3" id="switch3" name="switch3" />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">
+              {{ lang == 'en' ? formBodyLabels[0].lblRefImage.title : formBodyLabels[1].lblRefImage.title}}
+            </label>
+            <input type="file" class="form-control" formControlName="refImage" id="refImage" name="refImage" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="col-lg-11 col-form-label fw-bold ArFontStyle">
+              {{ lang == 'en' ? formBodyLabels[0].lblActive.title : formBodyLabels[1].lblActive.title}}
+            </label>
+            <div class="col-lg-1 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input class="form-check-input w-45px h-30px" type="checkbox" formControlName="active" id="active"
+                       name="active" checked="checked">
+                <label class="form-check-label" for="allowmarketing"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="col-lg-11 col-form-label fw-bold ArFontStyle">
+              {{ lang == 'en' ? formBodyLabels[0].lblInfrastructure.title : formBodyLabels[1].lblInfrastructure.title}}
+            </label>
+            <div class="col-lg-1 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input class="form-check-input w-45px h-30px" type="checkbox" formControlName="infrastructure"
+                       id="infrastructure" name="infrastructure" checked="checked">
+                <label class="form-check-label" for="allowmarketing"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">
+            {{ lang == 'en' ? formBodyLabels[0].lblRemarks.title : formBodyLabels[1].lblRemarks.title}}</label>
+            <textarea class="form-control" formControlName="remarks" id="remarks" name="remarks"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer bg-light">
+    <button mat-raised-button color="primary" (click)="onUserFormSubmit()" form="userForm">
+      {{ lang == 'en' ? formBodyLabels[0].lblSave.title : formBodyLabels[1].lblSave.title}}
+    </button>
+    &nbsp; <button mat-raised-button color="accent" (click)="resetForm()">Cancel</button>
+  </div>
+</ng-template>
+
+<!--Edit Record-->
+<ng-template #editModal let-modal>
+  <div class="modal-header bg-light">
+    <button type="button" class="close" data-dismiss="modal" (click)="modal.dismiss('Cross click')">&times;</button>
+    <h4 class="modal-title" id="modal-basic-title">  {{ lang == 'en' ? formBodyLabels[0].lblEdit.title : formBodyLabels[1].lblEdit.title}} </h4>
+  </div>
+  <div class="modal-body">
+    <form autocomplete="off" [formGroup]="userEditForm" id="userEditForm">
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="hidden" value="{{selectedItems?.refType}}" formControlName="refType" />
+            <input type="hidden" value="{{selectedItemsSub?.refSubType}}" formControlName="refSubType" />
+            <input type="hidden" value="{{refid}}" formControlName="refid" />
+            <label class="form-label" for="form3Example2">{{ lang == 'en' ? formBodyLabels[0].lblShortName.title : formBodyLabels[1].lblShortName.title}}</label>
+            <input type="text" class="form-control" formControlName="refname1" id="refname1" name="refname1" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">{{ lang == 'en' ? formBodyLabels[0].lblArabicName2.title : formBodyLabels[1].lblArabicName2.title}}</label>
+            <input type="text" class="form-control ArFontStyle" formControlName="refname2" id="refname2"
+                   name="refname2" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">{{ lang == 'en' ? formBodyLabels[0].lblEnglishName1.title : formBodyLabels[1].lblEnglishName1.title}}</label>
+            <input type="text" class="form-control" formControlName="refname3" id="refname3" name="refname3" />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">{{ lang == 'en' ? formBodyLabels[0].lblRefImage.title : formBodyLabels[1].lblRefImage.title}}</label>
+            <input type="file" class="form-control" formControlName="refImage" id="refImage" name="refImage" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="col-lg-11 col-form-label fw-bold ArFontStyle">
+              {{ lang == 'en' ? formBodyLabels[0].lblActive.title : formBodyLabels[1].lblActive.title}}
+            </label>
+            <div class="col-lg-1 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input class="form-check-input w-45px h-30px" type="checkbox" formControlName="active" id="active"
+                       name="active" checked="checked">
+                <label class="form-check-label" for="allowmarketing"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">
+              {{ lang == 'en' ? formBodyLabels[0].lblRemarks.title : formBodyLabels[1].lblRemarks.title}}
+            </label>
+            <textarea class="form-control" formControlName="remarks" id="remarks" name="remarks"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer bg-light">
+    <button mat-raised-button color="primary" (click)="onEditFormSubmit()" form="userForm">
+      {{ lang == 'en' ? formBodyLabels[0].lblSave.title : formBodyLabels[1].lblSave.title}}
+    </button>
+    &nbsp; <button mat-raised-button color="accent" (click)="resetForm()">
+  {{ lang == 'en' ? formBodyLabels[0].lblCancel.title : formBodyLabels[1].lblCancel.title}}
+</button>
+  </div>
+</ng-template>

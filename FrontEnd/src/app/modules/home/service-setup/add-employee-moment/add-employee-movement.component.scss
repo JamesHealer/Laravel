@@ -1,0 +1,38 @@
+.panelBgColor{
+    background-color: var(--texasRose);
+}
+.ArFontStyle{
+    font-family: Cairo;;
+    color: black !important;
+}
+
+.creamBrulee{
+    background-color: var(--creamBrulee);
+    color: #000;
+}
+
+.peach{
+    background-color: var(--peach);
+    color: #000;
+  
+}
+
+.sandyBeach{
+    background-color: var(--sandyBeach);
+    color: #000;
+}
+
+.creamBrulee, .peach, .sandyBeach {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--wheat) !important; 
+        }
+    }
+}
+
+
+
+
+.btn-group{
+    column-gap: 12px;
+}

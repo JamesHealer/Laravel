@@ -1,0 +1,187 @@
+<div class="card mb-5 mb-xl-8 ">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panel1bgColor">
+        <div class="card-toolbar" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="text-white ArFontStyle header_color" lang="AR-SA" id="IncomingLetterDetails">{{lang== 'en' ? label.headerName : "تفاصيل الرسالة الواردة "}}
+            </h3>
+        </div>
+    </div>
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        <div class="w-100 d-flex justify-content-center">
+            <div class="w-90">
+                <div class="row mt-3" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                    <form [formGroup]="reportForm">
+                        <div class="row">
+                            <div class="col-md-6 left-div">
+                                <label class="col-lg-3 col-form-label fw-bold fs-6 ArFontStyle filter-label" lang="AR-SA">
+                                    {{ lang == 'en' ? "University": "جامعة" }}:
+                                </label>
+                                <div class="col-lg-9">
+                                    <ng-select formControlName="universityId" [items]="universities"
+                                    bindLabel="univName3" bindValue="univId" [(ngModel)]="formData.universityId">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 right-div">
+                                <label class="col-lg-3 col-form-label fw-bold fs-6 ArFontStyle filter-label" lang="AR-SA">{{ lang == 'en' ? "ContractType": "عقد" }}:</label>
+                                <div class="col-lg-9">
+                                    <ng-select [items]="contractTypes" bindValue="refid" bindLabel="shortname"
+                                        formControlName="contractTypeId" [(ngModel)]="formData.contractTypeId">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6 left-div">
+                                <label class="col-lg-3 col-form-label fw-bold fs-6 ArFontStyle filter-label" lang="AR-SA">{{ lang == 'en' ? "Department": "قسم" }}:</label>
+                                <div class="col-md-9">
+                                    <div>From: </div>
+                                    <ng-select formControlName="departmentIdFrom" [items]="departments" bindValue="refid"
+                                    bindLabel="shortname" [(ngModel)]="formData.departmentIdFrom" (change)="onDepartmentFromChange()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 right-div">
+                                <label class="col-md-3"></label>
+                                <div class="col-md-9">
+                                    <div>To: </div>
+                                    <ng-select formControlName="departmentIdTo" [items]="departments" bindValue="refid"
+                                    bindLabel="shortname" [(ngModel)]="formData.departmentIdTo" (change)="onDepartmentToChange()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6 left-div">
+                                <label class="col-md-3 col-form-label fw-bold fs-6 ArFontStyle filter-label" lang="AR-SA">
+                                    {{ lang == 'en' ? "Position": "موضع" }} :
+                                </label>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="positionId" [items]="occupations" bindValue="refid"
+                                    bindLabel="shortname" [(ngModel)]="formData.positionId">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 right-div">
+                                <label class="col-md-3 col-form-label fw-bold fs-6 ArFontStyle filter-label" lang="AR-SA">
+                                    {{ lang == 'en' ? "Services": "خدمات" }} :
+                                </label>
+                                <div class="col-md-9 fv-row">
+                                    <ng-select formControlName="serviceTypeId" [items]="serviceTypes" bindValue="refid"
+                                    bindLabel="shortname" [(ngModel)]="formData.serviceTypeId">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6 left-div">
+                                <label class="col-md-3 col-form-label fw-bold fs-6 ArFontStyle filter-label" lang="AR-SA">
+                                    {{ lang == 'en' ? "Period": "فترة" }} :
+                                </label>
+                                <div class="col-lg-9">
+                                    <div>From: </div>
+                                    <ng-select formControlName="periodFrom" [items]="periods" bindValue="code"
+                                    bindLabel="shortname" [(ngModel)]="formData.periodFrom" (change)="onPeriodFromChange()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 right-div">
+                                <label class="col-md-3"></label>
+                                <div class="col-md-9">
+                                    <div>To: </div>
+                                    <ng-select formControlName="periodTo" [items]="periods" bindValue="code"
+                                    bindLabel="shortname" [(ngModel)]="formData.periodTo" (change)="onPeriodToChange()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="button" class="btn btn-primary light-sea-green" lang="AR-SA" (click)="filterRecords()">
+                        {{lang== 'en' ? "Go" : "يذهب" }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" [class]="{'hidden':(tableData.data.length==0)}">
+            <div class="d-flex justify-content-end mt-4">
+                <div class="btn-group d-flex" role="group">
+                    <button type="button" class="btn btn-primary light-sea-green mx-2"
+                        (click)="exportToExcel()">{{lang== 'en' ? "Export to Excel" : "تصدير إلى Excel" }}</button>
+                    <button (click)="generateLoansDeducationReport()" type="button" class="btn btn-primary ArFontStyle light-sea-green"
+                        lang="AR-SA">{{lang== 'en' ? "Print PDF" : "طباعة قوات الدفاع الشعبي" }}
+                    </button>
+                </div>
+            </div>
+            <div class="table-container service-details-table mt-4">
+                <table mat-table class="w-100" [dataSource]="tableData" matSort>
+                    <ng-container matColumnDef="empId">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "معرف الموظف_PFID" : "EmpployeeID" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.empId}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Name">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "اسم" : "Name" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.name}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Loan Value">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "قيمة القرض" : "Loan Value" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.loan_value}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Installments">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "أقساط" : "Installments" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.installments}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Installment Value">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "قيمة القسط" : "Installment Value" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.Installment_value}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Loan">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "يُقرض" : "Loan" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.loan}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Loan Desc">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "وصف القرض" : "Loan Desc" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.loan_desc}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Start Deduction">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "بدء الخصم" : "Start Deduction" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.start_deduct}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="End Deduction">
+                        <th class="tableArFontStyle" mat-header-cell *matHeaderCellDef>
+                            {{ lang == 'ar' ? "بدء الخصم" : "End Deduction" }}
+                        </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.end_deduct}}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true" class="row_header"></tr>
+                    <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div>
+                <mat-paginator [pageSizeOptions]="[10,20,50]" (page)="pageChanged($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer"></div>
+</div>

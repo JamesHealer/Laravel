@@ -1,0 +1,223 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #AddIncomingLetters name="AddIncomingLetters" value="AddIncomingLetters">
+<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mb-3">
+    <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+        <div class="row">
+            <div class="btn-group" role="group" aria-label="Basic example"
+                *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary ArFontStyle fluro_btn_shade_i1" lang="AR-SA"
+                    (click)="saveClick()">{{lang == "en" ? bodyLabel[0].title : bodyLabel[0].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle fluro_btn_shade_i2"
+                    routerLink="/communication/incoming-letter-details" lang="AR-SA">{{lang == "en" ? bodyLabel[1].title
+                    : bodyLabel[1].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle fluro_btn_shade_i3" lang="AR-SA"
+                    routerLink="/communication/incoming-letter-details" routerLinkActive="active">{{lang == "en" ?
+                    bodyLabel[2].title : bodyLabel[2].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle fluro_btn_shade_i4 " lang="AR-SA">{{lang ==
+                    "en" ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngb-accordion #acc="ngbAccordion" class="mb-2" activeIds="ngb-panel-0">
+    <ngb-panel id="ngb-panel-0">
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="DocumentAttachments">{{lang == "en" ?
+                formHeaderLabels[0].headerName : "أضف الرسائل الواردة"}}</h3>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <div id="kt_billing_payment_tab_content" class="card-body tab-content"
+                *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+                    <div class="row gx-9 gy-6">
+                        <ngb-panel>
+                            <form autocomplete="off" [formGroup]="inCommunicationForm">
+                                <div class="row">
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang ==
+                                            "en" ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</label>
+                                        <!-- <ng-select [items]="letterType$ | async" bindLabel="shortName" bindValue="refId"
+                                            lang="AR-SA" formControlName="lType"
+                                            formGroup="fg"
+                                            [ngModel]="lType" (ngModelChange)="lType = $event"
+                                            >
+                                        </ng-select> -->
+                                        <!-- <ng-select [items]="letterType$ | async" bindLabel="shortName" bindValue="refId" lang="AR-SA"
+                                        formControlName="LetterType" formGroup="fg"
+                                        [(ngModel)]="lType" (ngModelChange)="lType = $event"> -->
+
+                                        <!-- </ng-select> -->
+
+
+                                                <select class="form-control" formControlName="letterType" disabled>
+                                                    <option *ngFor="let lType of (letterType$ | async); let i = index"
+                                                        [ngValue]="lType.refId"
+
+                                                        [attr.selected]='i>0 ? "selected" : null'>
+                                                        {{lType.shortName}}
+                                                    </option>
+                                                </select>
+
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.letterType.errors?.required">
+                                            Letter type is required
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                            lang="AR-SA">{{lang == "en" ? bodyLabel[5].title :
+                                            bodyLabel[5].arabicTitle}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fas fa-calendar"></i>
+                                            </span>
+                                            <input type="text" class="form-control" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',containerClass: 'theme-dark-blue' }"
+                                                formControlName="receivedSentDate" lang="AR-SA" />
+                                        </div>
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.receivedSentDate.errors?.required">
+                                            Document date is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang ==="en" ? bodyLabel[6].title : bodyLabel[6].arabicTitle}}</label>
+                                        <!-- <ng-select [items]="partyType$ | async" bindLabel="refname1" bindValue="refId"
+                                            lang="AR-SA" formControlName="senderReceiverParty">
+                                        </ng-select> -->
+                                        <select class="form-control" formControlName="senderReceiverParty">
+                                            <ng-container *ngFor="let pType of (partyType$ | async)">
+                                                <option [value]="pType.refId">
+                                               {{pType.refname1}}
+                                           </option>
+                                            </ng-container>
+
+                                        </select>
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.senderReceiverParty.errors?.required">
+                                            Receiving party is required
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                            lang="AR-SA">{{lang == "en" ? bodyLabel[7].title :
+                                            bodyLabel[7].arabicTitle}}</label>
+                                        <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                            formControlName="representative" />
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.representative.errors?.required">
+                                            Representative type is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang ==
+                                            "en" ? bodyLabel[8].title : bodyLabel[8].arabicTitle}}</label>
+                                        <!-- <ng-select [items]="users$ | async" bindLabel="firstName" bindValue="userId"
+                                            formControlName="employeeId">
+                                        </ng-select> -->
+                                        <input type="text" class="form-control"
+                                                formControlName="approvedBy" lang="AR-SA" />
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.approvedBy.errors?.required">
+                                            Approved by is required
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                            lang="AR-SA">{{lang == "en" ? bodyLabel[9].title :
+                                            bodyLabel[9].arabicTitle}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fas fa-calendar"></i>
+                                            </span>
+                                            <input type="text" class="form-control" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',containerClass: 'theme-dark-blue' }"
+                                                formControlName="letterDated" lang="AR-SA" />
+
+                                        </div>
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.letterDated.errors?.required">
+                                            Date is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang ==
+                                            "en" ? bodyLabel[10].title : bodyLabel[10].arabicTitle}}</label>
+                                        <ng-select [items]="filledAt$ | async" bindLabel="shortName" bindValue="refId"
+                                            lang="AR-SA" formControlName="filledAt">
+                                        </ng-select>
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.filledAt.errors?.required">
+                                            Filled type is required
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                            lang="AR-SA">{{lang == "en" ? bodyLabel[11].title :
+                                            bodyLabel[11].arabicTitle}}</label>
+                                        <textarea class="form-control form-control-lg  mb-3 mb-lg-0"
+                                            formControlName="description"></textarea>
+                                        <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.description.errors?.required">
+                                            Description is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                                            lang="AR-SA">{{lang == "en" ? bodyLabel[12].title :
+                                            bodyLabel[12].arabicTitle}}</label>
+                                        <!-- <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                            formControlName="searchTag" /> -->
+                                            <mat-form-field class="example-chip-list" style="width: 100%" appearance="outline">
+                                                <mat-chip-list #chipList aria-label="Fruit selection">
+                                                <mat-chip
+                                                *ngFor="let fruit of metaTag"
+                                                [selectable]="selectable"
+                                                [removable]="removable"
+                                                (removed)="remove(fruit)">
+                                                {{fruit}}
+                                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                                </mat-chip>
+                                                <input
+                                                [formControl]="searchTag"
+                                                [matChipInputFor]="chipList"
+                                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                [matChipInputAddOnBlur]="addOnBlur"
+                                                (matChipInputTokenEnd)="add($event)">
+                                                </mat-chip-list>
+                                                </mat-form-field>
+
+                                    </div>
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">
+                                            User Document Number
+                                            <!-- {{lang == "en" ? bodyLabel[12].title : bodyLabel[12].arabicTitle}} -->
+                                        </label>
+                                        <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                            formControlName="userDocumentNo" />
+                                        <!-- <span class="text-danger"
+                                            *ngIf="isFormSubmitted && inCommunicationFrm.userDocumentNo.errors?.required">
+                                            User Document Number is required
+                                        </span> -->
+                                    </div>
+                                </div>
+
+                            </form>
+                        </ngb-panel>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br />
+<app-document-attachment></app-document-attachment>

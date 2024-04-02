@@ -1,0 +1,147 @@
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panel3bgColor">
+        <div class="card-toolbar">
+            <h3 class="text-dark ArFontStyle" lang="AR-SA">{{ lang == 'ar' ? formHeaderLabels[0].headerName :
+                formHeaderLabels[1].headerName}}</h3>
+        </div>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        <div class="row gx-9 gy-6">
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                    <mat-label class="ArFontStyle">{{ lang == 'ar' ? formBodyLabels[0].lblSearch.title :
+                        formBodyLabels[1].lblSearch.title}}</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                        class="ArFontStyle" />
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form>
+            <div class="table-container">
+                <table mat-table class="w-100" [dataSource]="voucherDto" matSort>
+                    <ng-container matColumnDef="empname">
+                        <th  class="ArFontStyle  text-center w-10" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblEmployeeName.title : formBodyLabels[1].lblEmployeeName.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{ lang == 'ar' ? item.arabicName :
+                            item.englishName}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cepfid">
+                        <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblCivilId.title + '/'+ formBodyLabels[0].lblEmployeeId.title + '/' +
+                            formBodyLabels[0].lblPFId.title :
+                            formBodyLabels[1].lblCivilId.title + '/'+ formBodyLabels[1].lblEmployeeId.title + '/' +
+                            formBodyLabels[1].lblPFId.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle w-20">
+                            {{item.civilId}}/{{item.employeeID}}/{{item.pfid}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="transid">
+                        <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblTransactionId.title : formBodyLabels[1].lblTransactionId.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.mytransid}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="jvid">
+                        <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblJVId.title : formBodyLabels[1].lblJVId.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.jvId}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="services">
+                        <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblServices.title : formBodyLabels[1].lblServices.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.serviceType}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef>{{ lang == 'ar' ? formBodyLabels[0].lblAction.title :
+                            formBodyLabels[1].lblAction.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="text-center">
+                            <a href="javascript:void(0)"> <i class="bi fs-2 bi-card-list text-warning"
+                                    [matMenuTriggerFor]="menu"></i></a> &nbsp;
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('view', item.mytransid)" (click)="openVoucherModal(voucherModal,item.jvId)"><i
+                                        class="bi bi-view-list fs-2 text-info"></i>
+                                    {{lang == 'ar' ? formBodyLabels[0].btnView.title :
+                                    formBodyLabels[1].btnView.title}}</button>
+                                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('print', item.mytransid)" (click)="onPrintClick(item.mytransid)"><i
+                                        class="bi bi-printer fs-2 text-success" ></i>
+                                        {{lang == 'ar' ? formBodyLabels[0].btnPrint.title :
+                                        formBodyLabels[1].btnPrint.title}} </button>
+                            </mat-menu>
+                            <a href="javascript:void(0)" *ngIf="selectedId!=item.mytransid || selectedBtn =='view'"
+                                (click)="openVoucherModal(voucherModal,item.jvId)">
+                                <i class="bi bi-view-list fs-2 text-info"></i></a>
+                            <a href="javascript:void(0)" *ngIf="selectedBtn =='print' && selectedId==item.mytransid"
+                                (click)="onPrintClick(item.mytransid)"><i
+                                    class="bi bi-printer fs-2 text-success"></i></a>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                        [ngClass]="{'hidden':!isLoadingCompleted}" class="m_approval_thead"></tr>
+                    <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[10,20,50]"
+                    (page)="onPaginationChange($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+    <!--begin::Body-->
+    <div class="card-footer">
+
+    </div>
+</div>
+
+<!--APPROVE SERVICE-->
+<ng-template #voucherModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" lang="AR-SA">{{ lang == 'en' ?
+            modalLabels[0].lblVoucherDetails.title : modalLabels[0].lblVoucherDetails.arabicTitle}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="table-container">
+            <table mat-table class="w-100" [dataSource]="voucherDatasource" matSort>
+                <ng-container matColumnDef="accountId">
+                    <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'en' ?
+                        modalLabels[0].lblAccountId.title: modalLabels[1].lblAccountId.title}} </th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.accountId}} </td>
+                    <td mat-footer-cell *matFooterCellDef> </td>
+                </ng-container>
+                <ng-container matColumnDef="accountName">
+                    <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'en' ?
+                        modalLabels[0].lblAccountName.title: modalLabels[1].lblAccountName.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.accountName}}</td>
+                    <td mat-footer-cell *matFooterCellDef> </td>
+                </ng-container>
+                <ng-container matColumnDef="cr">
+                    <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'en' ?
+                        modalLabels[0].lblCredit.title: modalLabels[1].lblCredit.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.cr}}</td>
+                    <td mat-footer-cell *matFooterCellDef> {{crTotal}} </td>
+                </ng-container>
+                <ng-container matColumnDef="dr">
+                    <th  class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'en' ?
+                        modalLabels[0].lblDebit.title: modalLabels[1].lblDebit.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.dr}}</td>
+                    <td mat-footer-cell *matFooterCellDef> {{drTotal}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="voucherColumnsToDisplay; sticky:true" class="row_header"
+                    class="m_approval_thead"></tr>
+                <tr mat-row *matRowDef="let formTitleHd; columns: voucherColumnsToDisplay"></tr>
+                <tr mat-footer-row *matFooterRowDef="voucherColumnsToDisplay; sticky: true"></tr>
+            </table>
+        </div>
+        <!-- <div style="border-top: 1px solid; padding-right: 45px;" class="d-flex justify-content-end">
+            <p style=" min-width: 114px;">{{crTotal}}</p>
+            <p style=" min-width: 114px;">{{drTotal}}</p>
+        </div> -->
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="accent" (click)="modal.close('yes')" (click)="closeVoucharModal()">{{ lang == 'en' ?
+            modalLabels[0].lblClose.title : modalLabels[0].lblClose.arabicTitle}}</button>
+    </div>
+</ng-template>

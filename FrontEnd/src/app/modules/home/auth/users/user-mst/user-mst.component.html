@@ -1,0 +1,332 @@
+<!-- added in sheet -->
+<ngb-accordion #ngbSearchUser="ngbAccordion" activeIds="ngb-panel-0" class="searchUsermst">
+    <ngb-panel title="{{ lang == 'en' ? formBodyLabels[0].SearchUser.title: formBodyLabels[1].SearchUser.title}}">
+        <ng-template ngbPanelContent>
+
+            <div class="row mb-4">
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{ lang == 'en' ?
+                        formBodyLabels[0].TenantId.title: formBodyLabels[1].TenantId.title}}</label>
+                    <select class="form-control bg-light" aria-label="Select example">
+                        <option selected disabled>--{{ lang == 'en' ? formBodyLabels[0].SelectTenant.title:
+                            formBodyLabels[1].SelectTenant.title}}--</option>
+                        <option value="21">21</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{ lang == 'en' ?
+                        formBodyLabels[0].Location.title: formBodyLabels[1].Location.title}}</label>
+                    <select class="form-control bg-light" aria-label="Select example">
+                        <option selected disabled>--{{ lang == 'en' ? formBodyLabels[0].SelectLocation.title:
+                            formBodyLabels[1].SelectLocation.title}}--</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <button mat-raised-button color="accent" style="margin-top: 45px">{{ lang == 'en' ?
+                        formBodyLabels[0].Go.title: formBodyLabels[1].Go.title}}</button>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br />
+<ngb-accordion #ngbAddUser="ngbAccordion" activeIds="ngb-panel-0" opened="true" class="addUsermst">
+    <ngb-panel title="{{ lang == 'en' ? formBodyLabels[0].AddUser.title: formBodyLabels[1].AddUser.title}}">
+        <ng-template ngbPanelContent>
+            <div class="row mb-4">
+                <div class="col-lg-6 fv-row">
+
+                </div>
+                <div class="col-lg-6 fv-row">
+                    <div class="text-left">
+                        <!--[disabled]="!userForm.valid" -->
+                        <button mat-raised-button color="primary" class="float-left" (click)="onUserFormSubmit()"
+                            [disabled]="!userForm.valid" form="userForm">{{ lang == 'en' ? formBodyLabels[0].Add.title:
+                            formBodyLabels[1].Add.title}}</button> |
+                        <button mat-raised-button color="accent" class="float-left" (click)="resetForm()">{{ lang ==
+                            'en' ? formBodyLabels[0].Cancel.title: formBodyLabels[1].Cancel.title}}</button>
+                    </div>
+                </div>
+            </div>
+            <form autocomplete="off" [formGroup]="userForm" id="userForm">
+                <div class="row mb-4">
+                    <div class="col-lg-6 fv-row">
+                        <input type="hidden" formControlName="userId" />
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].FirstName.title: formBodyLabels[1].FirstName.title}}</label>
+                        <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                            formControlName="firstName" name="firstName" id="firstName" />
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.firstName.errors?.required">First name is
+                            required</span>
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].LastName.title: formBodyLabels[1].LastName.title}}</label>
+                        <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" formControlName="lastName"
+                            name="lastName" id="lastName" />
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.lastName.errors?.required">Last name is
+                            required</span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].Email.title: formBodyLabels[1].Email.title}}</label>
+                        <div class="input-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="email" name="email" id="email" lang="AR-SA" />
+                        </div>
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.email.errors?.required">Email is
+                            required</span>
+                        <span class="text-danger" *ngIf="u.email.invalid && u.email.touched">Invalid Email</span>
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].MobileNumber.title: formBodyLabels[1].MobileNumber.title}}</label>
+                        <div class="input-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-mobile-alt"></i>
+                            </span>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="mobile" name="mobile" id="mobile" />
+                        </div>
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.mobile.errors?.required">Mobile is
+                            required</span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].UserType.title: formBodyLabels[1].UserType.title}}</label>
+                        <!-- <select class="form-control" formControlName="userType">
+                            <option disabled selected>--Select User--</option>
+                            <option *ngFor="let user of users$ | async" value="{{user.userId}}">{{user.firstName}}</option>
+                        </select> -->
+                        <ng-select [items]="users$ | async" bindLabel="firstName" bindValue="userId"
+                            formControlName="userType">
+                        </ng-select>
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.userType.errors?.required">
+                            Please select user type</span>
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].LoginId.title: formBodyLabels[1].LoginId.title}}</label>
+                        <div class="input-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="loginId" name="loginId" id="loginId" />
+                        </div>
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.loginId.errors?.required">
+                            Please enter login Id</span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].Password.title: formBodyLabels[1].Password.title}}</label>
+                        <div class="input-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-key"></i>
+                            </span>
+                            <input type="password" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="password" name="password" id="password" />
+                        </div>
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.password.touched && u.password.invalid 
+                        && u.password.errors && u.password.errors['required']">
+                            Please enter password</span>
+                    </div>
+                    <div class="col-lg-6 fv-row">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                            formBodyLabels[0].ConfirmPassword.title: formBodyLabels[1].ConfirmPassword.title}}</label>
+                        <div class="input-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-key"></i>
+                            </span>
+                            <input type="password" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="cpassword" name="cpassword" id="cpassword" />
+                        </div>
+                        <span class="text-danger" *ngIf="isFormSubmitted && u.cpassword.touched && u.cpassword.invalid && 
+                        u.cpassword.errors && u.cpassword.errors['required']">
+                            Please enter confirm password</span>
+
+                        <span class="text-danger" *ngIf="u.cpassword.errors &&
+                         u.cpassword.errors['confirmedValidator']">
+                            Password and confirm password not matched</span>
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br />
+
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panel3bgColor">
+        <div class="card-toolbar">
+            <h3 class="text-dark ArFontStyle" lang="AR-SA">{{ lang == 'en' ? formBodyLabels[0].List.title:
+                formBodyLabels[1].List.title}}</h3>
+        </div>
+    </div>
+    <div class="card-body py-3">
+        <div class="row mb-4">
+        <form [formGroup]="formGroup">
+            <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                <mat-label>{{ lang == 'en' ? formBodyLabels[0].SearchUser.title:
+                    formBodyLabels[1].SearchUser.title}}</mat-label>
+                <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                    class="ArFontStyle" />
+                <mat-icon matPrefix class="material-icons">search</mat-icon>
+                <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+            </mat-form-field>
+        </form>
+        <div class="table-container">
+            <table mat-table class="w-100" [dataSource]="userMst" matSort>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef class="ArFontStyle">{{ lang == 'en' ?
+                        formBodyLabels[0].Action.title: formBodyLabels[1].Action.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="text-right w-10">
+                        <select class="form-control form-control-solid" (change)="onChange($event)"
+                            style="max-width:200px">
+                            <option selected disabled>--{{ lang == 'en' ? formBodyLabels[0].Select.title:
+                                formBodyLabels[1].Select.title}}--</option>
+                            <option value="{{item.userId}}">{{ lang == 'en' ? formBodyLabels[0].Edit.title:
+                                formBodyLabels[1].Edit.title}}</option>
+                            <option value="{{item.userId}}">{{ lang == 'en' ? formBodyLabels[0].Delete.title:
+                                formBodyLabels[1].Delete.title}}</option>
+                            <option value="{{item.userId}}">{{ lang == 'en' ? formBodyLabels[0].ChangePassword.title:
+                                formBodyLabels[1].ChangePassword.title}}</option>
+                            <option value="{{item.userId}}">{{ lang == 'en' ?
+                                formBodyLabels[0].UserRights.title: formBodyLabels[1].UserRights.title}}</option>
+                        </select>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{ lang == 'en' ?
+                        formBodyLabels[0].FirstName.title: formBodyLabels[1].FirstName.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.firstName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{ lang == 'en' ?
+                        formBodyLabels[0].LastName.title: formBodyLabels[1].LastName.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.lastName}}</td>
+                </ng-container>
+                <ng-container matColumnDef="loginId" class="w-30">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{ lang == 'en' ?
+                        formBodyLabels[0].LoginId.title: formBodyLabels[1].LoginId.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.loginId}}</td>
+                </ng-container>
+                <ng-container matColumnDef="isActive" class="w-20">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">{{ lang == 'en' ?
+                        formBodyLabels[0].IsActive.title: formBodyLabels[1].IsActive.title}}</th>
+                    <td mat-cell *matCellDef="let item" class="ArFontStyle w-10">{{item.activeuser ?
+                        'Active':'Inactive'}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                    [ngClass]="{'hidden':!isLoadingCompleted}" class="usermstTableHeader"></tr>
+                <tr mat-row *matRowDef="let item; columns: columnsToDisplay"></tr>
+            </table>
+        </div>
+        <div>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="onPaginationChange($event)"
+                showFirstLastButtons>
+            </mat-paginator>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Change Passowrd Modal-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update Password</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form name="form" [formGroup]="changePasswordForm" id="changePasswordForm">
+            <div class="row">
+                <input type="hidden" formControlName="UserId" />
+                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">Old Password</label>
+                <div class="input-group mb-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input type="password" class="form-control form-control-lg  mb-3 mb-lg-0"
+                        formControlName="oldPassword" name="oldPassword" id="oldPassword" />
+                </div>
+                <span class="text-danger" *ngIf="isFormSubmitted && f.oldPassword.errors?.required">Old password is
+                    required</span>
+
+            </div>
+            <div class="row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">New Password</label>
+                <div class="input-group mb-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input type="password" class="form-control form-control-lg  mb-3 mb-lg-0"
+                        formControlName="newPassword" name="newPassword" id="newPassword" />
+                </div>
+                <!-- <span class="text-danger" *ngIf="isFormSubmitted && f.newPassword.errors?.required">New password is
+                    required</span> -->
+                <span class="text-danger" *ngIf="isFormSubmitted && f.newPassword?.touched && f.newPassword?.invalid 
+                        && f.newPassword?.errors && f.newPassword?.errors['required']">
+                    New password is required</span>
+            </div>
+            <div class="row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">Confirm Password</label>
+                <div class="input-group mb-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input type="password" class="form-control form-control-lg  mb-3 mb-lg-0"
+                        formControlName="confirmPassword" name="confirmPassword" id=confirmPassword />
+                </div>
+                <!-- <span class="text-danger" *ngIf="isFormSubmitted && f.confirmPassword.errors?.required">Confirm password
+                    is
+                    required</span> -->
+                <span class="text-danger" *ngIf="f.confirmPassword?.touched && f.confirmPassword?.invalid && 
+                        f.confirmPassword?.errors && f.confirmPassword?.errors['required']">
+                    Please enter confirm password</span>
+
+                <span class="text-danger" *ngIf="f.confirmPassword?.errors &&
+                         f.confirmPassword?.errors['confirmedValidator']">
+                    Password and confirm password not matched</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="warn" (click)="onFormSubmit()" form="changePasswordForm"
+            [disabled]="!changePasswordForm.valid">{{ lang == 'en' ? formBodyLabels[0].Update.title:
+            formBodyLabels[1].Update.title}}</button>
+        &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="modal.close('cancel')">{{ lang == 'en' ?
+            formBodyLabels[0].Cancel.title: formBodyLabels[1].Cancel.title}}</button>
+    </div>
+</ng-template>
+
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete User</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <span>Do you want to delete this record</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="warn" (click)="modal.close('yes')">Yes</button> &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="modal.close('Save click')">No</button>
+    </div>
+</ng-template>

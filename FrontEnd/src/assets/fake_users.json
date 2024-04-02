@@ -1,0 +1,12 @@
+[
+    {
+      "username": "prog1",
+      "password": "U2hha2ly",
+      "locationId": 1,
+      "tenantId": 1,
+      "userId": 1,
+      "roleId": 1,
+      "periodCode": "aa",
+      "prevPeriodCode": "aa"
+    }
+  ]

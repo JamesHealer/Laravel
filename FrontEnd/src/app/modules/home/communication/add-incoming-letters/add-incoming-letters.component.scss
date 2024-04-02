@@ -1,0 +1,39 @@
+.panel1bgColor{
+    // background-color: #3f838ffc;
+    background-color: #4fcbc8;
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.btn-group{
+    column-gap: 20px;
+}
+
+.fluro_btn_shade_i1{
+    background-color: var(--fluro_btn_shade_i1);
+    color: #fff;
+}
+
+.fluro_btn_shade_i2{
+    background-color: var(--fluro_btn_shade_i2);
+    color: #fff;
+}
+
+.fluro_btn_shade_i3{
+    background-color: var(--fluro_btn_shade_i3);
+    color: #fff;
+}
+
+.fluro_btn_shade_i4{
+    background-color: var(--fluro_btn_shade_i4);
+    color: #fff;
+}
+
+.fluro_btn_shade_i1, .fluro_btn_shade_i2, .fluro_btn_shade_i3, .fluro_btn_shade_i4 {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: #2b9b97 !important; 
+        }
+    }
+}

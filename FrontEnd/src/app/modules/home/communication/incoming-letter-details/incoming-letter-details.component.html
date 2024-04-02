@@ -1,0 +1,149 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #IncomingLetterDetails name="IncomingLetterDetails" value="IncomingLetterDetails">
+<div class="card mb-5 mb-xl-8 ">
+  <!--begin::Header-->
+  <div class="card-header border-0 pt-5 panel1bgColor">
+    <div class="card-toolbar" *ngFor="let label of formHeaderLabels; let i = index">
+      <h3 class="text-white ArFontStyle header_color" lang="AR-SA" id="IncomingLetterDetails">{{lang== 'en' ? label.headerName : "تفاصيل الرسالة الواردة "}}
+      </h3>
+    </div>
+    <h3 class="card-title align-items-start flex-column" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary ArFontStyle light-sea-green" lang="AR-SA"
+                routerLink="/communication/add-incoming-letter">{{lang== 'en' ? bodyLabel[0].title : bodyLabel[0].arabicTitle }}</button>
+        <!-- <button type="button" class="btn btn-primary ArFontStyle light-sea-green"
+            lang="AR-SA"   routerLink="/communication/incoming-barcode-Report">{{lang== 'en' ? bodyLabel[1].title : bodyLabel[1].arabicTitle }}</button>
+   -->
+      </div>
+    </h3>
+  </div>
+  <div class="card-body py-3">
+    <div class="row">
+      <div  class="col-lg-1 fv-row">
+        <label>Letter Copies</label>
+      </div>
+
+      <div  class="col-lg-6 fv-row">
+        <input id="exchageRateDate" class="form-control" type="text" value="Sydney" [(ngModel)]="letterNo" />
+
+      </div>
+      <div  class="col-lg-5 fv-row">
+        <button type="button" class="btn btn-primary ArFontStyle light-sea-green"
+                lang="AR-SA" (click)="printReport(letterNo)">
+          <!-- routerLink="/communication/incoming-barcode-Report" -->
+
+          Print Incoming Letter Detail</button>
+      </div>
+
+    </div>
+
+
+    <div class="table-responsive mt-3" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+
+      <form [formGroup]="formGroup">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+          <mat-label>Search</mat-label>
+          <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                 class="ArFontStyle" />
+          <mat-icon matPrefix class="material-icons">search</mat-icon>
+          <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+        </mat-form-field>
+      </form>
+      <div class="table-container">
+        <table mat-table class="w-100" [dataSource]="incommingCommunicationDto" matSort>
+          <ng-container matColumnDef="letterdated">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+              {{lang== 'en' ? bodyLabel[3].title : bodyLabel[3].arabicTitle }}</th>
+            <td mat-cell *matCellDef="let item" class="ArFontStyle"> {{item.letterdated}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef class="ArFontStyle">{{lang== 'en' ? bodyLabel[2].title : bodyLabel[2].arabicTitle }}</th>
+            <td mat-cell *matCellDef="let item" class="text-center">
+              <a href="javascript:void(0)"> <i class="bi fs-2 bi-card-list text-warning" [matMenuTriggerFor]="menu"></i></a> &nbsp;
+              <mat-menu #menu="matMenu">
+
+                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('edit', item.mytransid)"
+                        routerLink="/communication/add-incoming-letter/{{item.mytransid}}"><i
+                  class="bi bi-pencil-square fs-2 text-success"></i>{{lang == "en" ? "Edit" : "يحرر"}} </button>
+                <button mat-menu-item class="ArFontStyle" (click)="actionBtnSelect('delete', item.mytransid)" (click)="openDeleteModal(deleteModal,item.mytransid)"><i
+                  class="bi bi-trash fs-2 text-danger"></i> {{lang == "en" ? "Delete" : "يمسح"}}</button>
+              </mat-menu>
+              <input type="checkbox"  id="test" (click)="pushCheckBoxValue(item.userDocumentNo)"
+              />
+              <a  *ngIf="selectedBtn =='delete' && selectedId==item.mytransid " href="javascript:void(0)"
+                  (click)="openDeleteModal(deleteModal,item.mytransid)"><i
+                class="bi bi-trash fs-2 text-danger"></i></a>
+              <a *ngIf="selectedId!=item.mytransid || selectedBtn =='edit'"
+                 routerLink="/communication/add-incoming-letter/{{item.mytransid}}" id={{item.mytransid}}><i
+                class="bi bi-pencil-square fs-2 text-success"></i></a>
+
+              <!-- <button mat-raised-button color="warn"
+                  (click)="openDeleteModal(deleteModal,item.mytransid)">Delete</button>
+              &nbsp; <button mat-raised-button color="accent"
+                  routerLink="/communication/add-incoming-letter/{{item.mytransid}}"
+                  id={{item.mytransid}}>Edit</button> -->
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lettertype">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+              {{lang== 'en' ? bodyLabel[4].title : bodyLabel[4].arabicTitle }}</th>
+            <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.lettertype}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="filledat">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+              {{lang== 'en' ? bodyLabel[5].title : bodyLabel[5].arabicTitle }}</th>
+            <td mat-cell *matCellDef="let item" class="ArFontStyle"> {{item. filledat}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="searchtag">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+              {{lang== 'en' ? bodyLabel[6].title : bodyLabel[6].arabicTitle }}
+            </th>
+            <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.searchtag }}</td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+              {{lang== 'en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle }}</th>
+            <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.description}}</td>
+          </ng-container>
+          <ng-container matColumnDef="userDocumentNo">
+            <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header class="ArFontStyle">
+              <!-- {{lang== 'en' ? bodyLabel[6].title : bodyLabel[6].arabicTitle }} -->
+              User Document #
+            </th>
+            <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.userDocumentNo }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+              [ngClass]="{'hidden':!isLoadingCompleted}"></tr>
+          <tr mat-row *matRowDef="let refTableDto; columns: columnsToDisplay"></tr>
+        </table>
+      </div>
+      <div [ngClass]="{'hidden':!isLoadingCompleted}">
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" (page)="onPaginationChange($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <span>Do you want to delete this record</span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer text-right">
+    <button mat-raised-button color="warn" (click)="modal.close('yes')">Yes</button> &nbsp;&nbsp;
+    <button mat-raised-button color="accent" (click)="modal.close('Save click')">No</button>
+  </div>
+</ng-template>

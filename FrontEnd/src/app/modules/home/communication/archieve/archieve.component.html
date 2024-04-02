@@ -1,0 +1,43 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #ImportArchieves name="ImportArchieves" value="ImportArchieves">
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panelBackgroundColor">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="ImportArchieves">{{lang == "en" ? label.headerName : "استيراد Archieves"}}</h3>
+        </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6">
+                <form autocomplete="off">                    
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA" >{{lang=='en' ?bodyLabel[0].title : bodyLabel[0].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                                <span><small class="text-danger ArFontStyle" lang="AR-SA"></small></span>
+                              </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+    </div>
+    <!--end::Tab content-->
+    <div class="card-footer d-flex justify-content-end py-6 px-9 " *ngFor="let bodyLabel of formBodyLabels; let i = index">
+       <div class="d-flex">
+            <a href="#" class="btn btn-primary me-3 ArFontStyle bg-btn-print-labels">{{lang=='en' ?bodyLabel[2].title : bodyLabel[2].arabicTitle}}</a>
+        </div>
+    </div>
+</div>

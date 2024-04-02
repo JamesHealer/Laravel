@@ -1,0 +1,57 @@
+.panel1bgColor{
+  background-color: var(--sweet-brown);
+}
+
+.header_color{
+  color: #fff !important;
+}
+
+table {
+    width: 100%;
+  }
+  .example-margin {
+    margin: 0 12px;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  
+  th {
+    /* row border */
+    border-bottom: 1px solid #b8b6b2;
+  }
+  
+  td.mat-cell {
+    /* row padding */
+    padding: 20px 0;
+    border: none;
+  }
+  
+  tr.mat-row {
+    /* row border */
+    border: 1px solid #b8b6b2;
+  }
+  mat-footer-row, mat-header-row, mat-row {
+    border-bottom-width: 20px;
+  }
+  .mat-header-cell {
+  background-color: rgb(131, 188, 241);
+  
+}
+
+.headerCheckBoxes {
+  background-color: #fafad2;  
+}
+.mat-header-row{
+  height: 40px !important;
+}
+
+.headingBgColor{
+  background-color: #62c5e9 !important;
+}
+.subHeadingBgColor{
+  background-color: #e9e686 !important;
+}
+.ArFontStyle{
+  font-family: Cairo;
+}

@@ -1,0 +1,227 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #AddUniversityTenant name="AddUniversityTenant" value="AddUniversityTenant">
+<div class="card mb-5 mb-xl-10 ">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panelBgColor">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="m-0 text-white ArFontStyle" lang="AR-SA" id="AddUniversityTenant">{{lang == 'en' ? label.headerName : "اضافة جامعة" }}</h3>            
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary ArFontStyle english-vermillion" lang="AR-SA">{{lang == 'en' ? bodyLabel[0].title : bodyLabel[0].arabicTitle }}</button>
+                <button type="button" class="btn btn-primary ArFontStyle candy-pink" lang="AR-SA">{{lang == 'en' ? bodyLabel[2].title : bodyLabel[2].arabicTitle }}</button>
+              </div>
+        </h3>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <form autocomplete="off">
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[5].title : bodyLabel[5].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[6].title : bodyLabel[6].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[8].title : bodyLabel[8].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="nameInArabic" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-3 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[9].title : bodyLabel[9].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-3 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[10].title : bodyLabel[10].arabicTitle}}</label>
+                            <input type="date" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-3 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[11].title : bodyLabel[11].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-3 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[12].title : bodyLabel[12].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[13].title : bodyLabel[13].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[14].title : bodyLabel[14].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[15].title : bodyLabel[15].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[16].title : bodyLabel[16].arabicTitle}}
+                                </label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[17].title : bodyLabel[17].arabicTitle}}
+                                    Line</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[18].title : bodyLabel[18].arabicTitle}}
+                                </label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[19].title : bodyLabel[19].arabicTitle}} </label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[20].title : bodyLabel[20].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[21].title : bodyLabel[21].arabicTitle}} </label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[22].title : bodyLabel[22].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[23].title : bodyLabel[23].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[24].title : bodyLabel[24].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ">
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[25].title : bodyLabel[25].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+
+    </div>
+    <!--end::Tab content-->
+</div>
+
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panelBgColor1">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+            <h3 class="m-0 text-white ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[26].title : bodyLabel[26].arabicTitle}}</h3>
+        </div>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Job Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <form autocomplete="off">
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[27].title : bodyLabel[27].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[28].title : bodyLabel[28].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[29].title : bodyLabel[29].arabicTitle}}                                
+                                </label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[30].title : bodyLabel[30].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[31].title : bodyLabel[31].arabicTitle}}
+                                </label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[32].title : bodyLabel[32].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+    </div>
+</div>
+<app-approval-detials [accordialApprovalDetails]="'setupAddUniversityTenant'"></app-approval-detials>
+<br/>
+<app-financial-detials [accordialDetails]="'setupAddUniversityTenantfinance'"></app-financial-detials>

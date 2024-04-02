@@ -1,0 +1,25 @@
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 350px;
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+:host ::ng-deep .fa {
+    font: var(--fa-font-solid) !important;
+    content: "\f007";
+}
+
+.headcolor_addServiceSetup{
+    color: #fff !important;
+}
+.btn-upload {
+    border: 1px solid gray !important;
+    width: 30%;
+    height: 43px;
+}
+input[type=checkbox]{
+    background-color: #5f6d7a!important;
+}
+.form-switch .form-check-input:checked{
+    background-color: #348be1!important;
+}

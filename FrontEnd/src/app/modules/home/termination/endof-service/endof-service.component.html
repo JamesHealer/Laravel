@@ -1,0 +1,185 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #ServiceDetails name="ServiceDetails" value="ServiceDetails">
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 header_waves">
+        <div class="card-toolbar">
+            <h3 class="text-dark ArFontStyle header_color" lang="AR-SA" id="ServiceDetails">{{lang == 'ar' ? formBodyLabels[0].lblEndService.title :
+                formBodyLabels[1].lblEndService.title}}</h3>
+        </div>
+        <div class="d-flex justify-content-between gap-4">
+            <h3 class="card-title align-items-start flex-column">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary ArFontStyle btn_green-pool-tb" lang="AR-SA"
+                        (click)="exportToExcel()">{{lang == 'ar' ? formBodyLabels[0].btnExportToExcel.title :
+                        formBodyLabels[1].btnExportToExcel.title}}</button>
+                    <button type="button" class="btn btn-primary ArFontStyle btn_green-pool-tb" lang="AR-SA"
+                        (click)="openLoanForm()">{{ lang == 'ar' ? formBodyLabels[0].btnAddService.title :
+                        formBodyLabels[1].btnAddService.title}}</button>
+                    <button type="button" class="btn btn-primary ArFontStyle btn_green-pool-tb" lang="AR-SA">{{ lang ==
+                        'ar' ? formBodyLabels[0].btnPrintServiceDetails.title :
+                        formBodyLabels[1].btnPrintServiceDetails.title}}</button>
+                </div>
+            </h3>
+        </div>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        <div class="row mb-4">
+            <div class="col-lg-4 fv-row">
+                <ng-select (change)="onDraftFilterArray($event)" [clearable]="false" [(ngModel)]="selectedAttributesDraft">
+                    <ng-option *ngFor="let item of DraftFilterArray" [value]="item.id">{{lang == 'ar' ? item.arabicName
+                        : item.name}}</ng-option>
+                </ng-select>
+            </div>
+            <div class="col-lg-4 fv-row">
+                <ng-select (change)="onApproveFilterArray($event)" [clearable]="false" [(ngModel)]="selectedAttributesApprove">
+                    <ng-option *ngFor="let item of ApproveFilterArray" [value]="item.id">{{lang == 'ar' ?
+                        item.arabicName : item.name}}</ng-option>
+                </ng-select>
+            </div>
+            <div class="col-lg-4 fv-row">
+                <ng-select (change)="onFilterItemSelect($event)" [clearable]="false" [(ngModel)]="selectedAttributesFilter">
+                    <ng-option *ngFor="let item of FilterArray" [value]="item.id">{{lang == 'ar' ? item.arabicName :
+                        item.name}}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="row gx-9 gy-6">
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never">
+                    <mat-label class="ArFontStyle">{{ lang == 'ar' ? formBodyLabels[0].lblSearch.title :
+                        formBodyLabels[1].lblSearch.title}}</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords(0)"
+                        class="ArFontStyle" />
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form>
+            <div class="table-container service-details-table">
+                <table mat-table class="w-100" [dataSource]="returnTransactionHdDto" matSort>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="text-center w-10 ArFontStyle">{{ lang == 'ar' ?
+                            formBodyLabels[0].lblAction.title :
+                            formBodyLabels[1].lblAction.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="text-center">
+                            <a href="javascript:void(0)"> <i class="bi fs-2 bi-card-list text-warning selection"
+                                    [matMenuTriggerFor]="menu"></i></a> &nbsp;
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="ArFontStyle"
+                                    (click)="actionBtnSelect('view', item.mytransid)"
+                                    routerLink="/service-setup/view-service-detail/{{item.mytransid}}"><i
+                                        class="bi bi-view-list fs-2 text-primary"></i> {{ lang == 'ar' ?
+                                    formBodyLabels[0].btnView.title : formBodyLabels[1].btnView.title}}</button>
+                                <button mat-menu-item class="ArFontStyle"
+                                    (click)="actionBtnSelect('details', item.mytransid)"
+                                    (click)="onDetailsClick(item.mytransid)"><i
+                                        class="bi bi-ticket-detailed fs-2 text-primary"></i> Details</button>
+                                <button mat-menu-item class="ArFontStyle"
+                                    (click)="actionBtnSelect('edit', item.mytransid)"
+                                    routerLink="/service-setup/add-service/{{item.mytransid}}"><i
+                                        class="bi bi-pencil-square fs-2 text-success"></i> {{ lang == 'ar' ?
+                                    formBodyLabels[0].btnEdit.title : formBodyLabels[1].btnEdit.title}}</button>
+                                <button mat-menu-item class="ArFontStyle"
+                                    (click)="actionBtnSelect('delete', item.mytransid)"
+                                    (click)="openDeleteModal(deleteModal,item.mytransid)"><i
+                                        class="bi bi-trash fs-2 text-danger"></i> {{ lang == 'ar' ?
+                                    formBodyLabels[0].btnDelete.title : formBodyLabels[1].btnDelete.title}} </button>
+                            </mat-menu>
+                            <a *ngIf="selectedBtn =='delete' && selectedId==item.mytransid " href="javascript:void(0)"
+                                (click)="openDeleteModal(deleteModal,item.mytransid)"><i
+                                    class="bi bi-trash fs-2 text-danger"></i></a>
+                            <a *ngIf="selectedId!=item.mytransid || selectedBtn =='edit'"
+                                routerLink="/service-setup/add-service/{{item.mytransid}}"><i
+                                    class="bi bi-pencil-square fs-2 text-success"></i></a>
+                            <a *ngIf="selectedBtn =='details' && selectedId==item.mytransid " href="javascript:void(0)"
+                                (click)="onDetailsClick(item.mytransid)"><i
+                                    class="bi bi-ticket-detailed fs-2 text-primary"></i></a>
+                            <a *ngIf="selectedBtn =='view' && selectedId==item.mytransid "
+                                routerLink="/service-setup/view-service-detail/{{item.mytransid}}"><i
+                                    class="bi bi-view-list fs-2 text-primary"></i></a>
+                                    
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="transId">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblTransId.title : formBodyLabels[1].lblTransId.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.mytransid}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="employeeName">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblEmployeeNameEmpPF.title :
+                            formBodyLabels[1].lblEmployeeNameEmpPF.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="w-70 ArFontStyle">{{ lang == 'ar' ? item.arabicName :
+                            item.englishName }} {{item.employeeId}} {{item.pfId}} {{item.cid}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="services">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblServices.title : formBodyLabels[1].lblServices.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.serviceType}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="installments">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblInstallments.title : formBodyLabels[1].lblInstallments.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.installment}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblAmount.title : formBodyLabels[1].lblAmount.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.amount}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dated">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblDate.title : formBodyLabels[1].lblDate.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.payDate}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="paid">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblPaid.title : formBodyLabels[1].lblPaid.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.paid==null ? 0 : item.paid}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="payDate">
+                        <th class="ArFontStyle" mat-header-cell *matHeaderCellDef mat-sort-header>{{ lang == 'ar' ?
+                            formBodyLabels[0].lblPayDate.title : formBodyLabels[1].lblPayDate.title}}</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.payDate}}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                        [ngClass]="{'hidden':!isLoadingCompleted}" class="row_header"></tr>
+                    <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [length]="10" [pageSize]="[10,20,30]" [pageSizeOptions]="[10,20,50]"
+                    (page)="pageChanged($event)" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+    <!--begin::Body-->
+    <div class="card-footer">
+
+    </div>
+</div>
+<!--Delete Modal-->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ lang == 'en' ? modalLabels[0].Delete.title :
+            modalLabels[0].Delete.arabicTitle}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <span>{{ lang == 'en' ? modalLabels[0].Doyouwanttodeletethisrecord.title :
+                    modalLabels[0].Doyouwanttodeletethisrecord.arabicTitle}}</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="warn" (click)="modal.close('yes')">{{ lang == 'en' ? modalLabels[0].Yes.title :
+            modalLabels[0].Yes.arabicTitle}}</button> &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="modal.close('Save click')">{{ lang == 'en' ?
+            modalLabels[0].No.title : modalLabels[0].No.arabicTitle}}</button>
+    </div>
+</ng-template>

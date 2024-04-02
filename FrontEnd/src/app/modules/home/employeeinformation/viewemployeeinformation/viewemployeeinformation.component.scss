@@ -1,0 +1,23 @@
+.ArFontStyle{
+    font-family: Cairo;
+}
+.panelBgColor{
+    background-color: var(--celtic-blue);
+    .header_color{
+        color: #fff;
+    }
+}
+.fontSizeHeader{
+font-size: 13px;
+}
+
+.viewEmployee_thead{
+    background-color: var(--blueberry);
+
+     .mat-header-cell{
+        color: #fff !important;
+    }
+}
+.actionTdClass{
+    min-width: 175px;
+}

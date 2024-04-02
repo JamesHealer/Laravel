@@ -1,0 +1,32 @@
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.btn-group{
+    column-gap: 20px;
+}
+
+.bg-header{
+    background-color: var(--fluroscent-green);
+}
+
+.btn-website{
+    background-color: #127000;
+}
+
+.btn-website_cancel{
+    background-color: #317c23;
+
+}
+
+.btn-website_back {
+    background-color: #3d8530;
+}
+
+.btn-website, .btn-website_cancel, .btn-website_back {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: #1f4c17 !important; 
+        }
+    }
+}

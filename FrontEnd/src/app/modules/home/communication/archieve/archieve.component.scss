@@ -1,0 +1,16 @@
+.panelBackgroundColor{
+    background-color: var(--fluroscent-blue);
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.bg-btn-print-labels{
+    background-color: var(--light-sea-green);
+
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: #2b9b97 !important; 
+        }
+    }
+}

@@ -1,0 +1,243 @@
+<input type="hidden" #AddEmployee name="AddEmployee" value="AddEmployee">
+
+<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mb-3">
+  <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+    <div class="row">
+      <div class="btn-group " role="group" aria-label="Basic example"
+        *ngFor="let bodyLabel of formBodyLabels; let i = index">
+        <!-- Save Button -->
+        <button type="button" class="btn btn-primary float-left ArFontStyle" lang="AR-SA"
+          (click)="submitForm()">{{bodyLabel[0].title}}</button>
+        <!-- Cancel Button -->
+        <button type="button" class="btn btn-warning float-left ArFontStyle"
+          lang="AR-SA">{{bodyLabel[1].title}}</button>
+        <!-- Back Button -->
+        <button type="button" class="btn btn-danger float-left ArFontStyle" routerLink="/employee/view-employee"
+          routerLinkActive="active" lang="AR-SA">{{bodyLabel[2].title}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<ngb-accordion #acc="ngbAccordion" class="mb-2" >
+  <ngb-panel>
+      <ng-template ngbPanelTitle *ngFor="let label of formHeaderLabels; let i = index">
+          <h3 class="m-0 ArFontStyle" lang="AR-SA" id="FinancialDetails">{{label.headerName}}</h3>  
+        </ng-template>
+    <ng-template ngbPanelContent>
+      <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index"> 
+        <form autocomplete="off" [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()" id="employeeForm">
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[4].title}}</label>
+                <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="englishName"
+                  [(ngModel)]='employeeData.englishName' [formControl]='addEmployeeForm.controls["englishName"]'/>
+
+            </div>
+            <div class="col-lg-6 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[5].title}}</label>
+                <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="arabicName"
+                [(ngModel)]='employeeData.arabicName' [formControl]='addEmployeeForm.controls["arabicName"]' />
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[6].title}}</label>              
+                <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-calendar"></i>
+                  </span>
+                  <input type="text" class="form-control" 
+                  bsDatepicker 
+                  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                  [(ngModel)]='employeeData.empBirthday' [formControl]='addEmployeeForm.controls["empBirthday"]' />
+              </div>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{bodyLabel[7].title}}</label>              
+              <ng-select [(ngModel)]="selectedGender" [formControl]='addEmployeeForm.controls["empGender"]' [(ngModel)]='employeeData.empGender'  >
+                <ng-option *ngFor="let item of genderArray" [value]="item.id">{{item.name}}</ng-option>
+             </ng-select>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{bodyLabel[8].title}}</label>             
+              <ng-select [(ngModel)]="selectedStatus" [formControl]='addEmployeeForm.controls["empMaritalStatus"]' [(ngModel)]='employeeData.empMaritalStatus'>
+                <ng-option *ngFor="let item of maritalStatusArray" [value]="item.id">{{item.name}}</ng-option>
+             </ng-select>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[9].title}}</label>
+              <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-mobile-alt"></i>
+                  </span>                
+                  <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="nameInArabic"
+                  [(ngModel)]='employeeData.mobileNumber' [formControl]='addEmployeeForm.controls["mobileNumber"]' />
+              </div>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[10].title}}</label>
+                <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">                      
+                      <i class="fas fa-phone"></i>                      
+                  </span>                
+                  <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="nameInArabic"
+                  [(ngModel)]='employeeData.empWorkTelephone' [formControl]='addEmployeeForm.controls["empWorkTelephone"]' />
+              </div>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[11].title}}</label>
+                <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">                     
+                      <i class="fas fa-envelope"></i>                    
+                  </span>                
+                  <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="nameInArabic"
+                  [(ngModel)]='employeeData.empWorkEmail' [formControl]='addEmployeeForm.controls["empWorkEmail"]' />
+              </div>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[12].title}}</label>
+                <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="next2KinName"
+                [(ngModel)]='employeeData.next2KinName' [formControl]='addEmployeeForm.controls["next2KinName"]' />              
+            </div>
+            <div class="col-lg-6 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"
+                lang="AR-SA">{{bodyLabel[13].title}}</label>
+                <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">                     
+                      <i class="fas fa-mobile-alt"></i>                    
+                  </span>                
+                  <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="next2KinMobNumber"
+                  [(ngModel)]='employeeData.next2KinMobNumber' [formControl]='addEmployeeForm.controls["next2KinMobNumber"]' />
+              </div>              
+            </div>
+          </div>
+        </form> 
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+<br/>
+
+  <ngb-accordion #acc="ngbAccordion" class="mb-2 mt-4">
+    <ngb-panel>
+        <ng-template ngbPanelTitle *ngFor="let bodyLabel of formBodyLabels; let i = index">
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="FinancialDetails">{{bodyLabel[14].title}}</h3>  
+          </ng-template>
+      <ng-template ngbPanelContent >
+        <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index"> 
+          <form autocomplete="off">
+            <div class="row mb-6">
+              <div class="col-lg-6 fv-row">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{bodyLabel[15].title}}</label>                
+                <ng-select [items]="departments$ | async" bindLabel="shortname" bindValue="refid" [formControl]='addEmployeeForm.controls["department"]' [(ngModel)]='employeeData.department'>                            
+               </ng-select>
+              </div>
+              <div class="col-lg-6 fv-row">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{bodyLabel[16].title}}</label>
+                <ng-select [items]="occupations$ | async" bindLabel="shortname" bindValue="refid" [formControl]='addEmployeeForm.controls["departmentName"]' [(ngModel)]='employeeData.departmentName'>                            
+                </ng-select>
+              </div>              
+            </div>
+            <div class="row mb-6">
+              <div class="col-lg-3 fv-row">
+                <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                  lang="AR-SA">{{bodyLabel[17].title}}</label>
+                <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0"
+                  [formControl]='addEmployeeForm.controls["salary"]' [(ngModel)]='employeeData.salary'/>
+              </div>
+              <div class="col-lg-3 fv-row">
+                <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                  lang="AR-SA">{{bodyLabel[18].title}}</label>
+                <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                  [formControl]='addEmployeeForm.controls["empCidNum"]' [(ngModel)]='employeeData.empCidNum'/>
+              </div>
+              <div class="col-lg-3 fv-row">
+                <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                  lang="AR-SA">{{bodyLabel[19].title}}</label>
+                <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="nameInArabic"
+                  [formControl]='addEmployeeForm.controls["empPaciNum"]' [(ngModel)]='employeeData.empPaciNum'/>
+              </div>   
+              <div class="col-lg-3 fv-row">
+                <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle"
+                  lang="AR-SA">{{bodyLabel[20].title}}</label>
+                <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" name="nameInArabic"
+                  [formControl]='addEmployeeForm.controls["empOtherId"]' [(ngModel)]='employeeData.empOtherId'/>
+              </div>           
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </ngb-panel>
+</ngb-accordion> 
+<br/>
+  
+  <ngb-accordion #acc="ngbAccordion" class="mb-2" activeIds="ngb-panel-0">
+    <ngb-panel>
+        <ng-template ngbPanelTitle *ngFor="let bodyLabel of formBodyLabels; let i = index">
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="FinancialDetails">{{bodyLabel[21].title}}</h3>  
+          </ng-template>
+      <ng-template ngbPanelContent >
+        <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index"> 
+          <form autocomplete="off">
+            <div class="row">
+              <div class="col-lg-6 fv-row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6">{{bodyLabel[22].title}}</label>
+                <input type="text" class="form-control" name="nameInArabic" 
+                [formControl]='addEmployeeForm.controls["membership"]' [(ngModel)]='employeeData.membership'/>
+              </div>
+              <div class="col-lg-6 fv-row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6">{{bodyLabel[23].title}}</label>
+                <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-calendar"></i>                     
+                  </span>
+                  <input type="text" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                  [formControl]='addEmployeeForm.controls["membershipJoiningDate"]' [(ngModel)]='employeeData.membershipJoiningDate'/>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 fv-row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6">{{bodyLabel[24].title}}</label>
+                <ng-select [items]="terminations$ | async" bindLabel="shortname" bindValue="refid"
+                [formControl]='addEmployeeForm.controls["termination"]' [(ngModel)]='employeeData.termination'>                            
+                </ng-select>
+              </div>
+              <div class="col-lg-6 fv-row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6">{{bodyLabel[25].title}}</label>                
+                <div class="input-group mb-5">
+                  <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-calendar"></i>                     
+                  </span>
+                  <input type="text" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                  [formControl]='addEmployeeForm.controls["terminationDate"]' [(ngModel)]='employeeData.terminationDate'/>
+              </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br/>
+    <app-edit-financial-details 
+    [formData]="addEmployeeForm"
+    (onFormGroupChange)="onChange($event)">
+  </app-edit-financial-details> 
+
+  
+
+ 

@@ -1,0 +1,32 @@
+.ArFontStyle{
+    font-family: Cairo;
+}
+.panel3bgColor{
+    background-color: #4f81cb;
+}
+.importTableHeader{
+    background-color: #4f81cb;
+}
+.header_bg{
+    background-color: var(--celtic-blue);
+}
+
+.btn-bg{
+    background-color: var(--blueberry);
+}
+.highlightRow{
+    background-color: #f4d2d2;
+}
+
+.isDisabled{
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+td.mat-cell {
+    padding: 2px 5px !important;
+}
+
+mat-header-cell, mat-cell, mat-sort-header-container {
+    justify-content: center;
+}

@@ -1,0 +1,284 @@
+<!-- begin::Header -->
+<div class="card-header border-0">
+  <h3 class="card-title fw-bolder text-dark">Employee Performance</h3>
+  <div class="card-toolbar">
+    <!-- begin::Menu -->
+    <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+      data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+      <span [inlineSVG]="'assets/media/icons/duotune/general/gen024.svg'" class="svg-icon svg-icon-2"></span>
+    </button>
+    <app-dropdown-menu1></app-dropdown-menu1>
+    <!-- end::Menu -->
+  </div>
+</div>
+<!-- end::Header -->
+<!-- begin::Body -->
+<div class="card-body pt-0">
+  <!-- begin::Item -->
+  <div class="d-flex align-items-center rounded p-5 mb-7 employeePerformanceDiv"
+    (click)="open(employeePerformanceModal)">
+    <!-- begin::Icon -->
+    <span class="svg-icon svg-icon-warning me-5">
+      <span [inlineSVG]="'assets/media/icons/duotune/abstract/abs027.svg'" class="svg-icon svg-icon-1"></span>
+    </span>
+    <!-- end::Icon -->
+    <!-- begin::Title -->
+    <div class="flex-grow-1 me-2">
+      <a href="javascript:void(0)" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+        Hussain's Transaction
+      </a>
+      <span class="text-muted fw-bold d-block">14 Week of 2022</span>
+    </div>
+    <!-- end::Title -->
+    <!-- begin::Lable -->
+    <span class="fw-bolder text-warning py-1">+28%</span>
+    <!-- end::Lable -->
+  </div>
+  <!-- end::Item -->
+  <!-- begin::Item -->
+  <div class="d-flex align-items-center  rounded p-5 mb-7 employeePerformanceDiv"
+    (click)="open(employeePerformanceModal)">
+    <!-- begin::Icon -->
+    <span class="svg-icon svg-icon-success me-5">
+      <span [inlineSVG]="'assets/media/icons/duotune/abstract/abs027.svg'" class="svg-icon svg-icon-1"></span>
+    </span>
+    <!-- end::Icon -->
+    <!-- begin::Title -->
+    <div class="flex-grow-1 me-2">
+      <a href="javascript:void(0)" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+        Abdullah Transactions
+      </a>
+      <span class="text-muted fw-bold d-block">233 in the 5th Week of the year</span>
+    </div>
+    <!-- end::Title -->
+    <!-- begin::Lable -->
+    <span class="fw-bolder text-success py-1">+50%</span>
+    <!-- end::Lable -->
+  </div>
+  <!-- end::Item -->
+  <!-- begin::Item -->
+  <div class="d-flex align-items-center rounded p-5 mb-7 employeePerformanceDiv"
+    (click)="open(employeePerformanceModal)">
+    <!-- begin::Icon -->
+    <span class="svg-icon svg-icon-danger me-5">
+      <span [inlineSVG]="'assets/media/icons/duotune/abstract/abs027.svg'" class="svg-icon svg-icon-1"></span>
+    </span>
+    <!-- end::Icon -->
+    <!-- begin::Title -->
+    <div class="flex-grow-1 me-2">
+      <a href="javascript:void(0)" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+        Abdul Baqi Transactions
+      </a>
+      <span class="text-muted fw-bold d-block">25 Week of 2022</span>
+    </div>
+    <!-- end::Title -->
+    <!-- begin::Lable -->
+    <span class="fw-bolder text-danger py-1">-27%</span>
+    <!-- end::Lable -->
+  </div>
+  <!-- end::Item -->
+  <!-- begin::Item -->
+  <div class="d-flex align-items-center rounded p-5 employeePerformanceDiv" (click)="open(employeePerformanceModal)">
+    <!-- begin::Icon -->
+    <span class="svg-icon svg-icon-info me-5">
+      <span [inlineSVG]="'assets/media/icons/duotune/abstract/abs027.svg'" class="svg-icon svg-icon-1"></span>
+    </span>
+    <!-- end::Icon -->
+    <!-- begin::Title -->
+    <div class="flex-grow-1 me-2">
+      <a href="javascript:void(0)" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+        Shakir Ali
+      </a>
+      <span class="text-muted fw-bold d-block"> Week of 15 2022</span>
+    </div>
+    <!-- end::Title -->
+    <!-- begin::Lable -->
+    <span class="fw-bolder text-info py-1">+8%</span>
+    <!-- end::Lable -->
+  </div>
+  <!-- end::Item -->
+</div>
+<!-- end::Body -->
+
+
+<ng-template #employeePerformanceModal let-modal>
+  <div class="modal-header bg-light">
+    <button type="button" class="close" data-dismiss="modal" (click)="modal.dismiss('Cross click')">&times;</button>
+    <h4 class="modal-title" id="modal-basic-title">Employee Performance</h4>
+  </div>
+  <div class="modal-body">
+    <!-- end::Header-->
+    <!-- begin::Body-->
+    <div class="card-body pt-5">
+      <div class="row mb-4">        
+        <div class="col-lg-6 fv-row">
+          <select class="form-control form-control-solid">
+            <option>-Select User-</option>
+            <option>User 1</option>
+            <option>User 2</option>
+            <option>User 3</option>
+            <option>User 4</option>
+          </select>
+        </div>
+        <div class="col-lg-6">
+          <select class="form-control form-control-solid">
+            <option>-Select Week-</option>
+            <option>Week 1</option>
+            <option>Week 2</option>
+            <option>Week 3</option>
+            <option>Week 4</option>
+          </select>
+        </div>
+      </div>      
+      <!-- begin::Timeline-->
+      <div class="timeline-label">
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">08:42</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-warning fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Text-->
+          <div class="fw-mormal timeline-content text-muted ps-3">
+            Outlines keep you honest. And keep structure
+          </div>
+          <!-- end::Text-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">10:00</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-success fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Content-->
+          <div class="timeline-content d-flex">
+            <span class="fw-bolder text-gray-800 ps-3">AEOL meeting</span>
+          </div>
+          <!-- end::Content-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">14:37</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-danger fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Desc-->
+          <div class="timeline-content fw-bolder text-gray-800 ps-3">
+            Make deposit
+            <a href="#" class="text-primary">KWD 700</a>. to ESL
+          </div>
+          <!-- end::Desc-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">16:50</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-primary fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Text-->
+          <div class="timeline-content fw-mormal text-muted ps-3">
+            Indulging in poorly driving and keep structure keep great
+          </div>
+          <!-- end::Text-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">21:03</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-danger fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Desc-->
+          <div class="timeline-content fw-bold text-gray-800 ps-3">
+            New order placed
+            <a href="#" class="text-primary">#XF-2356</a>.
+          </div>
+          <!-- end::Desc-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">16:50</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-primary fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Text-->
+          <div class="timeline-content fw-mormal text-muted ps-3">
+            Indulging in poorly driving and keep structure keep great
+          </div>
+          <!-- end::Text-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">21:03</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-danger fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Desc-->
+          <div class="timeline-content fw-bold text-gray-800 ps-3">
+            New order placed
+            <a href="#" class="text-primary">#XF-2356</a>.
+          </div>
+          <!-- end::Desc-->
+        </div>
+        <!-- end::Item-->
+        <!-- begin::Item-->
+        <div class="timeline-item">
+          <!-- begin::Label-->
+          <div class="timeline-label fw-bolder text-gray-800 fs-6">10:30</div>
+          <!-- end::Label-->
+          <!-- begin::Badge-->
+          <div class="timeline-badge">
+            <i class="fa fa-genderless text-success fs-1"></i>
+          </div>
+          <!-- end::Badge-->
+          <!-- begin::Text-->
+          <div class="timeline-content fw-mormal text-muted ps-3">
+            Finance KPI Mobile app launch preparion meeting
+          </div>
+          <!-- end::Text-->
+        </div>
+        <!-- end::Item-->
+      </div>
+      <!-- end::Timeline-->
+    </div>
+    <!-- end: Card Body-->
+  </div>
+  <div class="modal-footer bg-light">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-warning" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </div>
+</ng-template>

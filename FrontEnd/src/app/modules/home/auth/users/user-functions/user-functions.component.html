@@ -1,0 +1,297 @@
+<div class="card mb-5 mb-xl-8 ">
+    <!--begin::Header sheet added-->
+    <div class="card-header border-0 pt-5 panel1bgColor">
+        <div class="card-toolbar">
+            <h3 class="text-dark ArFontStyle header_color" lang="AR-SA">{{ lang == 'en' ?
+                formBodyLabels[0].UserFunctions.title: formBodyLabels[1].UserFunctions.title}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+
+        </h3>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3">
+        <div class="row mb-6">
+            <div class="col-lg-3 fv-row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                    formBodyLabels[0].TenentId.title: formBodyLabels[1].TenentId.title}}</label>
+                <select class="form-control bg-light" aria-label="Select example" [(ngModel)]="tenantId">
+                    <option disabled>--{{ lang == 'en' ? formBodyLabels[0].SelectTenantId.title:
+                        formBodyLabels[1].SelectTenantId.title}}--</option>
+                    <option value="21" selected disabled>21</option>
+                </select>
+                <span class="text-danger" *ngIf="isSubmitted && !tenantId">
+                    Kindly select tenant id
+                </span>
+            </div>
+            <div class="col-lg-3 fv-row">
+                <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle">{{ lang == 'en' ?
+                    formBodyLabels[0].LocationId.title: formBodyLabels[1].LocationId.title}}</label>
+                <select class="form-control bg-light" aria-label="Select example" [(ngModel)]="locationId">
+                    <option disabled>--{{ lang == 'en' ? formBodyLabels[0].SelectLocationId.title:
+                        formBodyLabels[1].SelectLocationId.title}}--</option>
+                    <option value="1" selected disabled>1</option>
+                </select>
+                <span class="text-danger" *ngIf="isSubmitted && !locationId">
+                    Kindly select location id
+                </span>
+            </div>
+            <div class="col-lg-3 fv-row">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{ lang == 'en' ?
+                    formBodyLabels[0].Users.title: formBodyLabels[1].Users.title}}</label>
+                <select class="form-control" [(ngModel)]="userId" (change)="onUsertemSelect($event)">
+                    <option disabled selected>--{{ lang == 'en' ? formBodyLabels[0].SelectUser.title:
+                        formBodyLabels[1].SelectUser.title}}--</option>
+                    <option *ngFor="let user of users$ | async" value="{{user.userId}}">
+                        {{user.loginId}}</option>
+                </select>
+                <span class="text-danger" *ngIf="isSubmitted && !userId">
+                    Kindly select users
+                </span>
+            </div>
+
+        </div>
+        <hr />
+
+        <ngb-accordion #acc="ngbAccordion" class="setupUser_functions">
+            <ngb-panel
+                title="{{ lang == 'en' ? formBodyLabels[0].ModuleWiseMenu.title: formBodyLabels[1].ModuleWiseMenu.title}}">
+                <ng-template ngbPanelContent>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <select class="form-control bg-light" (change)="onMenuItemSelect($event)"
+                                [(ngModel)]="SelectedMenuId">
+                                <option disabled selected>--{{ lang == 'en' ? formBodyLabels[0].ModuleWiseMenu.title:
+                                    formBodyLabels[1].ModuleWiseMenu.title}}--</option>
+                                <option *ngFor="let item of moduleWiseMenuItems$ | async" [value]="item.modulE_ID" [disabled]="!userId">
+                                    {{item.menU_NAMEEnglish}}</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-lg-4 text-left">
+                            <select class="form-control bg-light">
+                                <option disabled selected>--{{ lang == 'en' ? formBodyLabels[0].SelechMasterId.title:
+                                    formBodyLabels[1].SelechMasterId.title}}--</option>
+                                <option *ngFor="let ids of masterIds$ | async" value="{{ids.masterId}}" [disabled]="!userId">
+                                    {{ids.menU_NAMEEnglish}}
+                                </option>
+                            </select>
+                        </div> -->
+                        <div class="col-lg-4 text-left">
+                            <button mat-raised-button color="primary" class="m-2" (click)="savedata()">{{ lang == 'en' ?
+                                formBodyLabels[0].SubmitMenuModuleWise.title:
+                                formBodyLabels[1].SubmitMenuModuleWise.title}}</button>
+                            <!-- <button mat-raised-button color="accent" class="mt-4">Add</button> -->
+                        </div>
+                    </div>
+                    <!--Mat Table Below here-->
+                    <form action="" [formGroup]="headerCheckboxForm">
+                        <div class="table-responsive mt-3">
+                            <!--begin::Table-->
+                            <table class="table table-row-bordered table-hover">
+                                <!--begin::Table head-->
+                                <thead class="headingBgColor">
+                                    <tr class="text-center">
+                                        <th class="min-w-240px text-center ArFontStyle" lang="AR-SA">{{ lang == 'en' ?
+                                            formBodyLabels[0].MenuandSubMenu.title:
+                                            formBodyLabels[1].MenuandSubMenu.title}}</th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'useR_TYPE')"
+                                                formControlName="AdminFlg" name="AdminFlg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'addflage')"
+                                                formControlName="AddFlg" name="AddFlg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'editflage')"
+                                                formControlName="EditFlg" name="EditFlg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'delflage')"
+                                                formControlName="DelFlg" name="DelFlg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'printflage')"
+                                                formControlName="PrintFlg" name="PrintFlg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'emty')"
+                                                formControlName="EmptyFlg" name="EmptyFlg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px text-center ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'sP1')" formControlName="Sp1Flg"
+                                                name="Sp1Flg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'sP2')" formControlName="Sp2Flg"
+                                                name="Sp2Flg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'sP3')" formControlName="Sp3Flg"
+                                                name="Sp3Flg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'sP4')" formControlName="Sp4Flg"
+                                                name="Sp4Flg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'sP5')" formControlName="Sp5Flg"
+                                                name="Sp5Flg"></mat-checkbox>
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            <mat-checkbox class="example-margin"
+                                                (change)="checkAllCheckBoxvalue($event,'activE_FLAG')"
+                                                formControlName="ActiveFlg" name="ActiveFlg"></mat-checkbox>
+                                        </th>
+                                    </tr>
+
+                                </thead>
+                                <thead class="subHeadingBgColor">
+                                    <tr class="text-center">
+                                        <th class="min-w-240px text-right ArFontStyle" lang="AR-SA">{{ lang == 'en' ?
+                                            formBodyLabels[0].MenuItems.title: formBodyLabels[1].MenuItems.title}}</th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].Admin.title:
+                                            formBodyLabels[1].Admin.title}}
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].Add.title: formBodyLabels[1].Add.title}}
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].Edit.title:
+                                            formBodyLabels[1].Edit.title}}
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].Delete.title:
+                                            formBodyLabels[1].Delete.title}}
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].Print.title:
+                                            formBodyLabels[1].Print.title}}
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].Label.title:
+                                            formBodyLabels[1].Label.title}}
+                                        </th>
+                                        <th class="min-w-20px text-center ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].SP.title: formBodyLabels[1].SP.title}}1
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].SP.title: formBodyLabels[1].SP.title}}2
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].SP.title: formBodyLabels[1].SP.title}}3
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].SP.title: formBodyLabels[1].SP.title}}4
+                                        </th>
+                                        <th class="min-w-20px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].SP.title: formBodyLabels[1].SP.title}}5
+                                        </th>
+                                        <th class="min-w-40px ArFontStyle" lang="AR-SA">
+                                            {{ lang == 'en' ? formBodyLabels[0].ActiveMenu.title:
+                                            formBodyLabels[1].ActiveMenu.title}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody id="functionsTable">
+                                    <tr *ngFor="let item of checkData">
+                                        <div *ngIf="lang == 'ar'">
+                                            <td class="text-right ArFontStyle" lang="AR-SA">
+                                                {{item.menU_NAMEArabic}}
+                                            </td>
+                                        </div>
+                                        <div *ngIf="lang == 'en'">
+                                            <td class="text-right">
+                                                {{item.menU_NAMEEnglish}}
+                                            </td>
+                                        </div>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="useR_TYPE"
+                                                [checked]="item.useR_TYPE === 1"
+                                                (change)="checkCheckBoxvalue($event,item,'useR_TYPE')"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="addflage"
+                                                [(ngModel)]="item.addflage" [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="editflage"
+                                                [(ngModel)]="item.editflage" [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="delflage"
+                                                [(ngModel)]="item.delflage" [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="printflage"
+                                                [(ngModel)]="item.printflage" [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="emty"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="sP1" [(ngModel)]="item.sP1"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="sP2" [(ngModel)]="item.sP2"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="sP3" [(ngModel)]="item.sP3"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="sP4" [(ngModel)]="item.sP4"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="sP5" [(ngModel)]="item.sP5"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <mat-checkbox class="example-margin" name="activE_FLAG"
+                                                [(ngModel)]="item.activE_FLAG" [ngModelOptions]="{standalone: true}"
+                                                (change)="checkCheckBoxvalue($event,item)"></mat-checkbox>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                            <!--end::Table-->
+                        </div>
+                    </form>
+                </ng-template>
+
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>

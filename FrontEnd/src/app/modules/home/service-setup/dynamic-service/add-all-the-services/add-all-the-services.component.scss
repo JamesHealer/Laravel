@@ -1,0 +1,35 @@
+.ArFontStyle{
+    font-family: Cairo;
+    &.header_color{
+        color: #fff !important;
+    }
+}
+.row_header{
+    background-color: var(--leaf);
+    color: #fff !important;
+}
+.mat-header-cell{
+    color: #fff!important;
+}
+.panelBgColor1{
+    background-color: green;
+}
+input:focus {
+    background-color: #E9E9E9;
+  }
+
+.btn-group{
+    column-gap: 20px;
+}
+
+.english-vermillion, .candy-pink{
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--setup-btn-hover) !important; 
+        }
+    }
+}
+
+.header-color {
+    color: #fff !important;
+}

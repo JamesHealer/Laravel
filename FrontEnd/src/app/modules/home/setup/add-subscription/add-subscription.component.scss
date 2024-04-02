@@ -1,0 +1,40 @@
+.panelBgColor{
+    background-color: var(--texasRose);
+}
+.ArFontStyle{
+    font-family: Cairo;;
+    color: black !important;
+}
+
+.creamBrulee{
+    background: var(--creamBrulee);
+    color: #000;
+}
+
+.creamBrulee, .peach, .sandyBeach, .sazerac {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--wheat) !important; 
+        }
+    }
+}
+
+.peach{
+    background: var(--peach);
+    color: #000;
+  
+}
+
+.sandyBeach{
+    background: var(--sandyBeach);
+    color: #000;
+}
+
+.sazerac{
+    background: var(--sazerac);
+    color: #000;
+}
+
+.btn-group{
+    column-gap: 20px;
+}

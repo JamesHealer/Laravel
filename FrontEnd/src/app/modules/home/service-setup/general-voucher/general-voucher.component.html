@@ -1,0 +1,78 @@
+<ngb-accordion #acc="ngbAccordion" class="mb-2" activeIds="ngb-panel-1">
+    <ngb-panel id="ngb-panel-1">
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="DocumentAttachments">Search Employee</h3>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <div id="kt_account_email_preferences" class="collapse show">
+                <form>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example1 " lang="AR-SA" >Receipt Type</label>
+                            <input type="text" class="form-control" formControlName="employeePFId" name="employeePFId"
+                                />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example2 " lang="AR-SA"
+                                >Cheque for Services</label>
+                            <input type="text" class="form-control"  name="employeeCID" />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example1 " lang="AR-SA" >Subscription Number</label>
+                            <input type="text" class="form-control"  name="employeePFId"
+                                />
+                        </div>
+                    </div>    
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example1 " lang="AR-SA" >Date</label>
+                            <input type="text" class="form-control"  name="employeePFId"
+                                />
+                        </div>
+                    </div>         
+                </form>
+                <form [formGroup]="formGroup">                
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="never" >
+                        <mat-label>Search</mat-label>
+                        <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords()" class="ArFontStyle"/>
+                        <mat-icon matPrefix class="material-icons">search</mat-icon>                        
+                        <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                    </mat-form-field>
+                </form>
+                <div class="table-container">
+                    <table mat-table class="w-100" [dataSource]="voucherDetailsDto" matSort>
+                        <ng-container matColumnDef="sin">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SIN </th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle th-right">1</td>
+                        </ng-container>
+                        <ng-container matColumnDef="accountNumber">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25">Account Number</th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle">4312324</td>
+                        </ng-container> 
+                        <ng-container matColumnDef="accountDescription">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Id</th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle"></td>
+                        </ng-container>
+                        <ng-container matColumnDef="dr">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dr</th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle"></td>
+                        </ng-container>
+                        <ng-container matColumnDef="cr">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cr</th>
+                            <td mat-cell *matCellDef="let item" class="ArFontStyle"></td>
+                        </ng-container>                                                                 
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                            [ngClass]="{'hidden':!isLoadingCompleted}" class="row_header"></tr>
+                        <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                    </table>
+                </div>
+                <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

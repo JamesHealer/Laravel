@@ -1,0 +1,18 @@
+.header_waves{
+    background-color: var(--green);
+}
+.ArFontStyle{
+    font-family: Cairo;;
+    &.header_color{
+        color: #fff !important;
+    }
+}
+.row_header{
+        background-color: var(--leaf) !important;
+        color: #fff !important;
+}
+
+.edd_theader{
+    background-color: var(--leaf) !important;
+    color: #fff !important;
+}

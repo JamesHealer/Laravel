@@ -1,0 +1,203 @@
+<div *ngFor="let heading of sidebarMenuItem">
+  <!-- highlight heading -->
+  <div class="menu-item" *ngIf="heading['menuItems'].length>0">
+    <div class="menu-content pt-2 pb-2">
+      <span class="menu-section text-muted text-uppercase fs-6 ls-1 ArFontStyle">{{ lang == 'en' ?
+        heading.highLightHeadingtitle :
+        heading.highLightHeadingarabicTitle}} </span>
+    </div>
+  </div>
+
+  <!-- main heading -->
+
+  <div class="menu-item menu-sub-indention menu-accordion here hidding" data-kt-menu-trigger="click"
+    routerLinkActive="here show">
+    <span class="menu-link" *ngIf="heading['menuItems'].length!=0">
+      <span class="menu-icon">
+        <span [innerHTML]="sanitizer.bypassSecurityTrustHtml(heading.headingIconPath)"></span>
+      </span>
+      <span class="menu-title arrowHeading px-2 ArFontStyle">{{ lang == 'en' ? heading.headingNameEnglish :
+        heading.headingNameArabic}}</span>
+      <span class="menu-arrow">
+      </span>
+    </span>
+
+    <!-- <span class="menu-link" *ngIf="heading['menuItems'].length==0">
+      <span class="menu-icon">
+        <span [innerHTML]="sanitizer.bypassSecurityTrustHtml(heading.headingIconPath)"></span>
+      </span>
+      <a id="{{heading.headingNameEnglish}}"
+        [routerLink]="heading.headingURLOption == '' ? undefined : heading.headingURLOption"
+        (click)="refreshPage(heading.headingURLOption)">
+        <span class="menu-title arrowHeading px-2 ArFontStyle">{{ lang == 'en' ? heading.headingNameEnglish :
+          heading.headingNameArabic}}</span>
+      </a>
+    </span> -->
+
+    <!-- sub heading 1-->
+
+    <div class="menu-sub menu-sub-accordion px-2" routerLinkActive="menu-active-bg">
+      <div *ngFor="let subHeading of heading['menuItems']">
+        <div class="menu-item" *ngIf="subHeading['menuItems'].length==0">
+          <a class="menu-link without-sub" [routerLink]="[subHeading.menuItemURLOption, {id:subHeading.menU_ID}]"
+            routerLinkActive="active">
+            <span class="menu-bullet">
+              <span class="bullet bullet-dot"></span>
+            </span>
+            <span
+              class="menu-title px-2 ArFontStyle sub_heading">{{
+              lang == 'en' ?subHeading.menuItemNameEnglish :
+              subHeading.menuItemNameArabic}}
+            </span>
+          </a>
+        </div>
+
+        <div class="menu-item menu-accordion" *ngIf="subHeading['menuItems'].length > 0" data-kt-menu-trigger="click">
+          <a class="menu-link py-3">
+            <span class="menu-bullet">
+              <span class="bullet bullet-dot"></span>
+            </span>
+            <span class="menu-title px-2 arrowHeading">{{ lang == 'en' ? subHeading.menuItemNameEnglish :
+              subHeading.menuItemNameArabic}}</span>
+            <span class="menu-arrow"></span>
+          </a>
+
+
+          <!-- sub heading 2-->
+
+          <div class="menu-sub menu-sub-accordion px-2 pt-2">
+            <div *ngFor="let sub1Heading of subHeading['menuItems']">
+
+              <div class="menu-item menu-lvl-2" *ngIf="sub1Heading['menuItems'].length==0">
+                <a class="menu-link without-sub"
+                  [routerLink]="[sub1Heading.menuItemURLOption, {id:sub1Heading.menU_ID}]"
+                  routerLinkActive="active"><span class="menu-bullet"><span
+                      class="bullet bullet-line"></span></span><span class="menu-title px-2 ArFontStyle sub_heading">{{
+                    lang == 'en' ?sub1Heading.menuItemNameEnglish :
+                    sub1Heading.menuItemNameArabic}}</span></a>
+              </div>
+
+              <div class="menu-item menu-lvl-2 menu-accordion" *ngIf="sub1Heading['menuItems'].length>0"
+                data-kt-menu-trigger="click">
+                <a class="menu-link py-3">
+                  <span class="menu-bullet">
+                    <span class="bullet bullet-line"></span>
+                  </span>
+                  <span class="menu-title px-2 arrowHeading">{{ lang == 'en' ?sub1Heading.menuItemNameEnglish :
+                    sub1Heading.menuItemNameArabic}}</span>
+                  <span class="menu-arrow"></span>
+                </a>
+
+                <!-- sub heading 3-->
+
+                <div class="menu-sub menu-lvl-3 menu-sub-accordion px-2 pt-2">
+                  <div *ngFor="let sub2Heading of sub1Heading['menuItems']">
+
+                    <div class="menu-item" *ngIf="sub2Heading['menuItems'].length==0">
+                      <a class="menu-link without-sub"
+                        [routerLink]="[sub2Heading.menuItemURLOption, {id:sub2Heading.menU_ID}]"
+                        routerLinkActive="active"><span class="menu-bullet"><span
+                            class="bullet bullet-dot"></span></span><span
+                          class="menu-title px-2 ArFontStyle sub_heading">{{
+                          lang == 'en' ?sub2Heading.menuItemNameEnglish :
+                          sub2Heading.menuItemNameArabic}}</span></a>
+                    </div>
+
+                    <div class="menu-item menu-accordion" *ngIf="sub2Heading['menuItems'].length>0"
+                      data-kt-menu-trigger="click">
+                      <a class="menu-link py-3">
+                        <span class="menu-bullet">
+                          <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title px-2 arrowHeading">{{ lang == 'en' ?sub2Heading.menuItemNameEnglish :
+                          sub2Heading.menuItemNameArabic}}</span>
+                        <span class="menu-arrow"></span>
+                      </a>
+
+                      <!-- sub heading 4-->
+
+                      <div class="menu-sub menu-sub-accordion px-2 pt-2">
+                        <div *ngFor="let sub3Heading of sub2Heading['menuItems']">
+
+                          <div class="menu-item" *ngIf="sub3Heading['menuItems'].length==0">
+                            <a class="menu-link without-sub"
+                              [routerLink]="[sub3Heading.menuItemURLOption, {id:sub3Heading.menU_ID}]"
+                              routerLinkActive="active"><span class="menu-bullet"><span
+                                  class="bullet bullet-dot"></span></span><span
+                                class="menu-title px-2 ArFontStyle sub_heading">{{
+                                lang == 'en' ?sub3Heading.menuItemNameEnglish :
+                                sub3Heading.menuItemNameArabic}}</span></a>
+                          </div>
+
+                          <div class="menu-item menu-accordion" *ngIf="sub3Heading['menuItems'].length>0"
+                            data-kt-menu-trigger="click">
+                            <a class="menu-link py-3">
+                              <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                              </span>
+                              <span class="menu-title px-2 arrowHeading">{{ lang == 'en'
+                                ?sub3Heading.menuItemNameEnglish :
+                                sub3Heading.menuItemNameArabic}}</span>
+                              <span class="menu-arrow"></span>
+                            </a>
+
+                            <!-- sub heading 5-->
+
+                            <div class="menu-sub menu-sub-accordion px-2 pt-2">
+                              <div *ngFor="let sub4Heading of sub3Heading['menuItems']">
+
+                                <div class="menu-item" *ngIf="sub4Heading['menuItems'].length==0">
+                                  <a class="menu-link without-sub"
+                                    [routerLink]="[sub4Heading.menuItemURLOption, {id:sub4Heading.menU_ID}]"
+                                    routerLinkActive="active"><span class="menu-bullet"><span
+                                        class="bullet bullet-dot"></span></span><span
+                                      class="menu-title px-2 ArFontStyle sub_heading">{{
+                                      lang == 'en' ?sub4Heading.menuItemNameEnglish :
+                                      sub4Heading.menuItemNameArabic}}</span></a>
+                                </div>
+
+                                <div class="menu-item menu-accordion" *ngIf="sub4Heading['menuItems'].length>0"
+                                  data-kt-menu-trigger="click">
+                                  <a class="menu-link py-3">
+                                    <span class="menu-bullet">
+                                      <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title px-2 arrowHeading">{{ lang == 'en'
+                                      ?sub4Heading.menuItemNameEnglish :
+                                      sub4Heading.menuItemNameArabic}}</span>
+                                    <span class="menu-arrow"></span>
+                                  </a>
+                                  <div class="menu-sub menu-sub-accordion pt-2">
+                                    <div *ngFor="let sub5Heading of sub4Heading['menuItems']">
+                                      <a [routerLink]="[sub5Heading.menuItemURLOption, {id:sub5Heading.menU_ID}]"
+                                        class="menu-link py-3">
+                                        <span class="menu-bullet">
+                                          <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title px-2 sub_heading">{{ lang == 'en'
+                                          ?sub5Heading.menuItemNameEnglish :
+                                          sub5Heading.menuItemNameArabic}}</span>
+                                      </a>
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,64 @@
+<ngb-accordion #ngbOfferDetails="ngbAccordion" activeIds="ngb-panel-1" opened="true">
+    <ngb-panel id="ngb-panel-1">
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA">Voucher Details</h3>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <form [formGroup]="formGroup">                
+                <mat-form-field appearance="fill" class="w-100" floatLabel="never" >
+                    <mat-label>Search</mat-label>
+                    <input type="search" matInput formControlName="searchTerm" (keyup.enter)="filterRecords()" class="ArFontStyle"/>
+                    <mat-icon matPrefix class="material-icons">search</mat-icon>                        
+                    <mat-icon matSuffix (click)="clearFilter()" class="material-icons">close</mat-icon>
+                </mat-form-field>
+            </form>
+            <div class="table-container">
+                <table mat-table class="w-100" [dataSource]="voucherDetailsDto" matSort>
+                    <ng-container matColumnDef="voucherDetailId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>V-Detail Id </th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle th-right">{{item.voucherDetailID}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="accountName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25">Account Name</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.accountName}}</td>
+                    </ng-container> 
+                    <ng-container matColumnDef="accountId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Id</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.accountId}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.amount}}</td>
+                    </ng-container>  
+                    <ng-container matColumnDef="chequeNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cheque No</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.chequeNo}}</td>
+                    </ng-container>   
+                    <ng-container matColumnDef="chequeDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cheque Date</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.totalAmount}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dr">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Dr</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.dr}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="cr">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cr</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.cr}}</td>
+                    </ng-container>  
+                    <ng-container matColumnDef="cName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cost Center Name</th>
+                        <td mat-cell *matCellDef="let item" class="ArFontStyle">{{item.costCenterName}}</td>
+                    </ng-container>                                      
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"
+                        [ngClass]="{'hidden':!isLoadingCompleted}" class="row_header"></tr>
+                    <tr mat-row *matRowDef="let formTitleHd; columns: columnsToDisplay"></tr>
+                </table>
+            </div>
+            <div [ngClass]="{'hidden':!isLoadingCompleted}">
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

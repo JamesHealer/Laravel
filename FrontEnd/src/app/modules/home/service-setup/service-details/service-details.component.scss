@@ -1,0 +1,29 @@
+.header_waves{
+    background-color: green;
+}
+.ArFontStyle{
+    font-family: Cairo;;
+
+    &.header_color{
+        color: #fff !important;
+    }
+}
+tr:hover td {
+    background: #d8ecfa !important;    
+}
+
+.row_header{
+    background-color: var(--leaf);
+    color: #fff !important;
+}
+
+.actionTdClass{
+    min-width: 249px;
+}
+
+.mat-sort-header-content {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+

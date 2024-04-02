@@ -1,0 +1,84 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #AddCarousal name="AddCarousal" value="AddCarousal">
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 bg-header">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="AddCarousal">{{lang == 'en' ? label.headerName : "تفاصيل Carousal"}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example"
+                *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary ArFontStyle btn-website"
+                    lang="AR-SA">{{lang == 'en' ? bodyLabel[0].title : bodyLabel[0].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle btn-website_cancel"
+                    lang="AR-SA">{{lang == 'en' ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle btn-website_back" lang="AR-SA"
+                    routerLink="/website-maintenace/carousal-details">{{lang == 'en' ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}</button>
+            </div>
+
+        </h3>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <form autocomplete="off">
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                lang="AR-SA">{{lang == 'en' ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                lang="AR-SA">{{lang == 'en' ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle"
+                                    lang="AR-SA">{{lang == 'en' ? bodyLabel[5].title : bodyLabel[5].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle"
+                                    lang="AR-SA">{{lang == 'en' ? bodyLabel[6].title : bodyLabel[6].arabicTitle}}</label>
+                                <input class="form-control" type="date">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle"
+                                    lang="AR-SA">{{lang == 'en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</label>
+                                <input class="form-control" type="date">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,146 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #AddDocuments name="AddDocuments" value="AddDocuments">
+
+<div class="card mb-5 mb-xl-10" >
+    
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panel2bgColor">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="m-0 ArFontStyle header-color" lang="AR-SA">{{lang=='en' ? label.headerName : 'أضف وثيقة'}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary ArFontStyle english-vermillion" lang="AR-SA">{{lang=='en' ? bodyLabel[0].title : bodyLabel[0].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle candy-pink" lang="AR-SA">{{lang=='en' ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</button>
+              </div>              
+        </h3>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">               
+                <form autocomplete="off">  
+                   <div class="row mb-4"> 
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" lang="AR-SA">{{lang=='en' ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" lang="AR-SA">{{lang=='en' ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" readonly
+                                name="nameInArabic" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" lang="AR-SA">{{lang=='en' ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Service 1</option>
+                                <option value="2">Service 2</option>
+                                <option value="3">Service 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[5].title : bodyLabel[5].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Document 1</option>
+                                <option value="2">Document 2</option>
+                                <option value="3">Document 3</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[6].title : bodyLabel[6].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <!--from Reftable where refsubtype=’DocType’-->
+                                <option>-Select-</option>
+                                <option value="1">Document 1</option>
+                                <option value="2">Document 2</option>
+                                <option value="3">Document 3</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[8].title : bodyLabel[8].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[9].title : bodyLabel[9].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Document 1</option>
+                                <option value="2">Document 2</option>
+                                <option value="3">Document 3</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabelarabicT : [10].title}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[11].title : bodyLabel[11].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Document 1</option>
+                                <option value="2">Document 2</option>
+                                <option value="3">Document 3</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[12].title : bodyLabel[12].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[13].title : bodyLabel[13].arabicTitle}}</label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Document 1</option>
+                                <option value="2">Document 2</option>
+                                <option value="3">Document 3</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <div class="mt-4">
+                                <label for="formFile" class="form-label ArFontStyle" lang="AR-SA">{{lang=='en' ? bodyLabel[14].title : bodyLabel[14].arabicTitle}}</label>
+                                <input class="form-control" type="file" id="formFile">
+                              </div>
+                        </div>
+                    </div> 
+
+                 </form>
+            </div>
+            <!--end::Row-->
+        </div>
+
+    </div>
+    
+</div>

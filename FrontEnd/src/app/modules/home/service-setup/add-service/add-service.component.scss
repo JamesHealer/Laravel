@@ -1,0 +1,130 @@
+.panel1bgColor{
+    background-color: var(--dark-sea-green);
+}
+.panel2bgColor{
+    background-color: #FFD3B5;
+}
+.panel3bgColor{
+    background-color: #acc784;
+}
+.panel4BgColor{
+    background-color: #83AF9B 
+}
+.ArFontStyle{
+    font-family: Cairo;
+}
+input:focus {
+    background-color: #E9E9E9;
+  }
+
+
+  .panelBgColor{
+    background-color: var(--texasRose);
+}
+.ArFontStyle{
+    font-family: Cairo;;
+    color: black !important;
+}
+
+.dark-sea-green{
+    background-color: var(--dark-sea-green);
+    color: #000;
+}
+
+.caledon{
+    background-color: var(--caledon);
+    color: #000;
+  
+}
+
+.tea-green{
+    background-color: var(--tea-green);
+    color: #000;
+}
+
+.dark-sea-green, .tea-green, .caledon {
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--light-moss-green) !important; 
+        }
+    }
+}
+
+
+
+
+.btn-group{
+    column-gap: 12px;
+}
+.example-chip-list {
+    width: 100%;
+  }
+
+  .label-color{
+    color:rgb(21, 95, 138) !important;
+    font-weight: bold !important;
+  }
+
+  .navbar .navbar-brand {
+    font-size: 30px;
+  }
+  .navbar .nav-item {
+    padding: 10px 20px;
+  }
+  .navbar .nav-link {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  .scrollbar {
+    float: left;
+    height: calc(100vh - 250px);
+    background: #F5F5F5;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.custom-nav{
+    background-color: #f1faff!important;
+    border-style: dashed!important;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* If the screen size is 1200px wide or more, set the font-size to 80px */
+@media (min-width: 1200px) {
+    .responsive-font {
+      font-size: 14px;
+    }
+  }
+  /* If the screen size is smaller than 1200px, set the font-size to 80px */
+  @media (max-width: 1199.98px) {
+    .responsive-font {
+      font-size: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  .navbar{
+    margin-left:10px;
+  }
+
+  // input[type=number]::-webkit-inner-spin-button,
+  // input[type=number]::-webkit-outer-spin-button{
+  //   appearance: none;
+  // }
+
+.search_employee .accordion-button{
+  background-color: #6a9a6a!important;
+}
+.disabled {
+  pointer-events: none; /* Disable mouse events */
+  opacity: 0.6; /* Apply a visual disabled effect */
+}

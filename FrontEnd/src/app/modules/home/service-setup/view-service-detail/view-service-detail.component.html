@@ -1,0 +1,619 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #AddService name="AddService" value="AddService">
+
+
+<ngb-accordion #acc="ngbAccordion" class="mb-2" activeIds="ngb-panel-1">
+    <ngb-panel id="ngb-panel-1">
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA" id="DocumentAttachments">
+              {{ lang == 'en' ? formBodyLabels.en.hdrservicedetails.title: formBodyLabels.ar.hdrservicedetails.title}}
+            </h3>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <div id="kt_account_email_preferences" class="collapse show"
+                >
+                <form [formGroup]="employeeForm">
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example1 " lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblPFId.title: formBodyLabels.ar.lblPFId.title}}</label>
+                            <input type="text" class="form-control" formControlName="employeePFId" name="employeePFId"
+                            disabled style="background-color: #43ffcb !important;" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example2 " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblCID.title: formBodyLabels.ar.lblCID.title}}</label>
+                            <input type="text" class="form-control" formControlName="employeeCID" name="employeeCID"
+                            disabled style="background-color: #43ffcb !important;" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label _title" for="form3Example2 " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblEmployeeId.title: formBodyLabels.ar.lblEmployeeId.title}}</label>
+                            <input type="text" class="form-control" formControlName="employeeFormEmployeeId"
+                            disabled name="employeeFormEmployeeId" style="background-color: #43ffcb !important;" />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblServiceType.title : formBodyLabels.ar.lblServiceType.title}}</label>
+                            <ng-select [items]="selectServiceType" bindLabel="shortname"
+                                formControlName="serviceType" bindValue="refId" lang="AR-SA"
+                                (change)="onServiceTypeChange($event)" [(ngModel)]="serviceTypeSelected" readonly>
+                            </ng-select>
+                            <span class="text-danger"
+                                *ngIf="isFormSubmitted && addServiceFrm.serviceType.errors?.required">
+                                Service Type is required
+                            </span>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblSubServiceType.title : formBodyLabels.ar.lblSubServiceType.title}}</label>
+                            <ng-select [items]="selectServiceSubType" bindLabel="shortName"
+                                formControlName="serviceSubType" bindValue="refId" lang="AR-SA"
+                                (change)="onServiceSubTypeChange($event)" disabled>
+                            </ng-select>
+                            <span class="text-danger"
+                                *ngIf="isFormSubmitted && addServiceFrm.serviceSubType.errors?.required">
+                                Service Sub Type is required
+                            </span>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblTransDate.title : formBodyLabels.ar.lblTransDate.title}}</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control" bsDatepicker
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="transDate"
+                                    name="transDate" lang="AR-SA" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <input type="hidden" class="form-control" formControlName="employeeId" name="employeeId" />
+                            <label class="form-label" for="englishName " lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblEnglishName.title: formBodyLabels.ar.lblEnglishName.title}}</label>
+                            <input type="text" class="form-control" formControlName="englishName" name="englishName"
+                                lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="arabicName " lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblArabicName.title: formBodyLabels.ar.lblArabicName.title}}
+                            </label>
+                            <input type="text" class="form-control" formControlName="arabicName" name="arabicName"
+                                lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="empGender " lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblGender.title: formBodyLabels.ar.lblGender.title}}</label>
+                            <ng-select formControlName="empGender" disabled>
+                                <ng-option *ngFor="let item of genderArray" [value]="item.id"
+                                    [disabled]="true">{{item.name}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="joinedDate" lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblJoiningDate.title: formBodyLabels.ar.lblJoiningDate.title}}</label>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="joinedDate"
+                                name="joinedDate" lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="mobileNumber " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblMobile.title: formBodyLabels.ar.lblMobile.title}}</label>
+                            <input type="text" id="mobileNumber" class="form-control" formControlName="mobileNumber"
+                                name="mobileNumber" lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="empMaritalStatus " lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblMartialStatus.title: formBodyLabels.ar.lblMartialStatus.title}}</label>
+                            <ng-select formControlName="empMaritalStatus" disabled>
+                                <ng-option *ngFor="let item of maritalStatusArray" [value]="item.id"
+                                    [disabled]="true">{{item.name}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="nationName " lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblNation.title: formBodyLabels.ar.lblNation.title}}</label>
+                            <input type="text" id="CountryNameEnglish" class="form-control"
+                                formControlName="CountryNameEnglish" name="CountryNameEnglish" lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="contractType " lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblContractType.title: formBodyLabels.ar.lblContractType.title}}
+                                </label>
+                                <ng-select [items]="contractType$ | async" bindLabel="shortname" bindValue="refid"
+                                formControlName="contractType">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="kinName" lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblKinName.title: formBodyLabels.ar.lblKinName.title}}
+                                </label>
+                            <input type="text" id="kinName" class="form-control" formControlName="kinName"
+                                name="kinName" lang="AR-SA" disabled />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="kinMobile " lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblKinMobile.title: formBodyLabels.ar.lblKinMobile.title}}</label>
+                            <input type="text" id="kinMobile" class="form-control" formControlName="kinMobile"
+                                name="kinMobile" lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="subscriptionAmount " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblSubscriptionAmount.title: formBodyLabels.ar.lblSubscriptionAmount.title}}</label>
+                            <input type="text" id="subscriptionAmount" class="form-control"
+                                formControlName="subscriptionAmount" name="subscriptionAmount" lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="subscriptionPaid " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblSubscriptionPaid.title: formBodyLabels.ar.lblSubscriptionPaid.title}} </label>
+                            <input type="text" id="subscriptionPaid" class="form-control"
+                                formControlName="subscriptionPaid" name="subscriptionPaid" lang="AR-SA" disabled />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="lastSubscriptionPaid " lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblLastSubscriptionPaid.title: formBodyLabels.ar.lblLastSubscriptionPaid.title}}
+                                 </label>
+                            <input type="number" id="lastSubscriptionPaid" class="form-control"
+                                formControlName="lastSubscriptionPaid" name="lastSubscriptionPaid" lang="AR-SA"
+                                disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="subscriptionDueAmount " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblSubscriptionDueAmount.title: formBodyLabels.ar.lblSubscriptionDueAmount.title}}</label>
+                            <input type="number" id="subscriptionDueAmount" class="form-control"
+                                formControlName="subscriptionDueAmount" name="subscriptionDueAmount" lang="AR-SA"
+                                disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="subscriptionStatus " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblSubscriptionStatus.title: formBodyLabels.ar.lblSubscriptionStatus.title}}</label>
+                                <input type="text" id="subscriptionStatus" class="form-control"
+                                formControlName="subscriptionStatus" name="subscriptionStatus" lang="AR-SA"
+                                disabled />
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="terminationDate " lang="AR-SA"
+                                >{{ lang == 'en' ? formBodyLabels.en.lblTerminationDate.title: formBodyLabels.ar.lblTerminationDate.title}}</label>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="terminationDate"
+                                name="terminationDate" lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="endDate " lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblEndDate.title: formBodyLabels.ar.lblEndDate.title}}</label>
+                            <input type="text" class="form-control" bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="endDate" name="endDate"
+                                lang="AR-SA" disabled />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="form-label" for="employeeStatus" lang="AR-SA" >
+                                {{ lang == 'en' ? formBodyLabels.en.lblEmployeeStatus.title: formBodyLabels.ar.lblEmployeeStatus.title}}</label>
+                            <input type="text" id="employeeStatus" class="form-control"
+                                formControlName="employeeStatus" name="employeeStatus" lang="AR-SA" disabled />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<br />
+<div *ngIf="isSearched">
+    <!--Service Information-->
+    <div class="card mb-5 mb-xl-10">
+        <!--begin::Card header-->
+        <div class="card-header card-header-stretch pb-0 panel1bgColor">
+            <!--begin::Title-->
+            <div class="card-title">
+                <h3 class="m-0 ArFontStyle" lang="AR-SA" id="MembershipTransactions">{{lang == 'en' ? formBodyLabels.en.hdrAddService.title : formBodyLabels.ar.hdrAddService.title}}</h3>
+            </div>
+            <div class="card-title">
+                <h3 class="m-0 text-danger ArFontStyle" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.hdrServiceStatus.title : formBodyLabels.ar.hdrServiceStatus.title}}</h3>
+            </div>
+            <!--end::Title-->
+        </div>
+        <!--end::Card header-->
+        <!--begin::Tab content-->
+
+        <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+            <!--begin::Tab panel-->
+            <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+                <!--begin::Title-->
+                <!-- <h3 class="mb-5">Job Information</h3> -->
+                <!--end::Title-->
+                <!--begin::Row-->
+                <div class="row gx-9 gy-6">
+                    <form autocomplete="off" [formGroup]="addServiceForm">                        
+                        <div class="row mb-6">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblAmount.title : formBodyLabels.ar.lblAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg mb-lg-0"
+                                    (keyup)="calculateInstallments()" formControlName="totamt"
+                                    disabled />
+                                <span class="text-danger"
+                                    *ngIf="isFormSubmitted && addServiceFrm.totamt.errors?.required">
+                                    Amount is required
+                                </span>
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA"><small
+                                        class="text-danger">{{ lang == 'en' ? formBodyLabels.en.IncaseofGiftByDefault.title : formBodyLabels.ar.IncaseofGiftByDefault.title}} </small>
+                                        {{ lang == 'en' ? formBodyLabels.en.lblAmount.title : formBodyLabels.ar.lblAmount.title}}
+                                </label>
+                                <input type="number" class="form-control form-control-lg mb-lg-0"
+                                    formControlName="allowDiscountAmount" (keyup)="calculateInstallments()" disabled/>
+                                <span class="text-danger"
+                                    *ngIf="isFormSubmitted && addServiceFrm.allowDiscountAmount.errors?.required">
+                                    Discount Amount is required
+                                </span>
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblNoOfInstallments.title : formBodyLabels.ar.lblNoOfInstallments.title}}</label>
+                                <input type="number" class="form-control form-control-lg mb-lg-0"
+                                    formControlName="totinstallments" (keyup)="calculateInstallments()"
+                                    disabled/>
+                                <span class="text-danger"
+                                    *ngIf="isFormSubmitted && addServiceFrm.totinstallments.errors?.required">
+                                    No of Installment(s) is required
+                                </span>
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblInstallmentAmount.title : formBodyLabels.ar.lblInstallmentAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg mb-lg-0" value="0.00"
+                                    formControlName="installmentAmount" disabled/>
+                                <span class="text-danger"
+                                    *ngIf="isFormSubmitted && addServiceFrm.installmentAmount.errors?.required">
+                                    Installment Amount is required
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" for="subscriptionStatus "
+                                    lang="AR-SA" >{{ lang == 'en' ? formBodyLabels.en.lblDownPayment.title : formBodyLabels.ar.lblDownPayment.title}}</label>
+                                <input type="number" id="downPayment" class="form-control" formControlName="downPayment"
+                                    (keyup)="calculateInstallments()" name="downPayment" lang="AR-SA"
+                                    disabled />
+                            </div>
+
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblStartDedMonth.title : formBodyLabels.ar.lblStartDedMonth.title}}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control" bsDatepicker [minDate]="minDate"
+                                        [bsConfig]="{ dateInputFormat: 'MMM-YYYY' }" lang="AR-SA"
+                                        (bsValueChange)="calculateUntilMonth($event)"
+                                        formControlName="installmentsBegDate" disabled/>
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="isFormSubmitted && addServiceFrm.installmentsBegDate.errors?.required">
+                                    Installment Begin Date is required
+                                </span>
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblUntilaMonth.title : formBodyLabels.ar.lblUntilaMonth.title}}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                        formControlName="untilMonth" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblExpTransNum.title : formBodyLabels.ar.lblExpTransNum.title}}</label>
+                                <input type="text" class="form-control form-control-lg mb-lg-0"
+                                    formControlName="searialNo" disabled />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblPfId.title : formBodyLabels.ar.lblPfId.title}}</label>
+                                <input type="text" class="form-control form-control-lg  mb-lg-0" formControlName="pfId"
+                                    />
+                            </div>
+                            <div class="col-lg-9 fv-row">
+                                <div class="text-left " style="margin-top: 3rem">
+                                    <button mat-raised-button color="accent"
+                                    routerLink="/service-setup/manage-approvals">{{ lang == 'en' ? formBodyLabels.en.btnBack.title : formBodyLabels.ar.btnBack.title}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--end::Row-->
+            </div>
+
+        </div>
+        <!--end::Tab content *ngIf="isPFIdNull"-->
+        <ngb-accordion #acc="ngbAccordion" class="financial_calculation" activeIds="ngb-panel-0">
+            <ngb-panel>
+                <ng-template ngbPanelTitle>
+                    <h3 class="m-0 ArFontStyle header_color" lang="AR-SA" id="FinancialCalculation">
+                        {{ lang == 'en' ? formBodyLabels.en.hdrFinancialCalculation.title : formBodyLabels.ar.hdrFinancialCalculation.title}} </h3>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="row">
+                        <div class="text-left">
+                            <button mat-raised-button color="primary"
+                                (click)="calculateFinancialAmount()">{{ lang == 'en' ? formBodyLabels.en.btnCalculate.title : formBodyLabels.ar.btnCalculate.title}}</button>
+                        </div>
+                    </div>
+                    <form autocomplete="off" [formGroup]="financialCalculationForm">
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color">{{ lang == 'en' ? formBodyLabels.en.lblYearOfService.title : formBodyLabels.ar.lblYearOfService.title}}</label>
+                                <input type="text" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="yearOfService" readonly style="background-color: #e9e9e9;" disabled/>
+
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels.en.lblNoOfTrans.title : formBodyLabels.ar.lblNoOfTrans.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="noOfTransactions" readonly style="background-color: #e9e9e9;" disabled/>
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels.en.lblPaidSubAmount.title : formBodyLabels.ar.lblPaidSubAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="subscriptionPaidAmount" disabled
+                                    style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblSubDueAmount.title: formBodyLabels.ar.lblSubDueAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="subscriptionDueAmount" readonly
+                                    style="background-color: #e9e9e9;" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">(-)
+                                    {{ lang == 'en' ? formBodyLabels.en.lblLoanAmtBal.title : formBodyLabels.ar.lblLoanAmtBal.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="loanPendingAmount" readonly style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">(-)
+                                    {{ lang == 'en' ? formBodyLabels.en.lblFinAid.title : formBodyLabels.ar.lblFinAid.title}} (1 %)</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="financialAid" readonly style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">(-)
+                                    {{ lang == 'en' ? formBodyLabels.en.lblPfFundRev.title : formBodyLabels.ar.lblPfFundRev.title}} (10 %)</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="pfFundRevenue" readonly style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels.en.lblUpdateToDate.title : formBodyLabels.ar.lblUpdateToDate.title}}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control" bsDatepicker
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" formControlName="UpdateToDate"
+                                        name="UpdateToDate" lang="AR-SA" readonly style="background-color: #e9e9e9;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">(+)
+                                    {{ lang == 'en' ? formBodyLabels.en.lblAdjustAmount.title : formBodyLabels.ar.lblAdjustAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="adjustmentAmount" (keyup)="calculateFinancialAmount()" />
+                            </div>
+                            <div class="col-lg-9 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblRemarks.title : formBodyLabels.ar.lblRemarks.title}}</label>
+                                <input type="text" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="adjustmentAmountRemarks" disabled/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">(+)
+                                    {{ lang == 'en' ? formBodyLabels.en.lblFinAidAmount.title : formBodyLabels.ar.lblFinAidAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="financialAidAmount" (keyup)="calculateFinancialAmount()" />
+                            </div>
+                            <div class="col-lg-9 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblRemarks.title : formBodyLabels.ar.lblRemarks.title}}</label>
+                                <input type="text" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="finAidAmountRemarks" disabled/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">
+                                    {{ lang == 'en' ? formBodyLabels.en.lblTotalAmount.title : formBodyLabels.ar.lblTotalAmount.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="totalAmount" readonly style="background-color: #e9e9e9;" />
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12" style="background-color: #C7EA46;">
+                                <h1 lang="AR-SA" class="display-4 text-center mt-3"> {{ lang == 'en' ? formBodyLabels.en.hdrSponsorship.title : formBodyLabels.ar.hdrSponsorship.title}}</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color"
+                                    lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblSponsored.title : formBodyLabels.ar.lblSponsored.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="noOfSponsor" readonly style="background-color: #e9e9e9;" />
+                            </div>
+                            <div class="col-lg-3 fv-row">
+                                <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">(-)
+                                    {{ lang == 'en' ? formBodyLabels.en.lblSponsoreDueAmt.title : formBodyLabels.ar.lblSponsoreDueAmt.title}}</label>
+                                <input type="number" class="form-control form-control-lg  mb-lg-0"
+                                    formControlName="sponsorLoanPendingAmount" readonly
+                                    style="background-color: #e9e9e9;" />
+
+
+                            </div>
+                            <div class="col-lg-3 fv-row" style="margin-top: 43px;">
+                                <div class="text-right">
+                                    <button mat-raised-button color="accent"
+                                        (click)="openCashierInformation(cashierInformationModal)">
+                                        {{ lang == 'en' ? formBodyLabels.en.btnCashierInformation.title : formBodyLabels.ar.btnCashierInformation.title}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+    <!--Document Information-->
+    <app-document-attachment [parentFormGroup]="parentForm"
+        [documentAccordialDetails]="'ServiceFinanceAccordian'"></app-document-attachment>
+    <br />
+    <!--Financial Details-->
+    <app-financial-detials [parentFormGroup]="parentForm"
+        [accordialDetails]="'ServiceFinanceAccordian'"></app-financial-detials>
+    <br />
+
+    <!--Approval Details-->
+
+    <app-approval-detials [parentFormGroup]="parentForm"
+        [accordialApprovalDetails]="'ServiceApprovalAccordian'"></app-approval-detials>
+</div>
+
+<!--PopupModal Modal-->
+<ng-template #popupModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="popUpForm" id="popUpForm">
+            <div class="mb-3">
+                <span>{{ lang == 'en' ? formBodyLabels.en.lblYourTransId.title : formBodyLabels.ar.lblYourTransId.title}}:- <strong>{{popUpForm.controls.transactionId.value}}</strong></span>
+                <br />
+                <br />
+                <span>{{ lang == 'en' ? formBodyLabels.en.lblAttachmentId.title : formBodyLabels.ar.lblAttachmentId.title}}:- <strong>{{popUpForm.controls.attachId.value}}</strong></span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="accent" (click)="modal.close('yes')">{{ lang == 'en' ? formBodyLabels.en.btnOkay.title : formBodyLabels.ar.btnOkay.title}}</button>
+    </div>
+</ng-template>
+
+<!--Cashier Information PopupModal Modal-->
+<ng-template #cashierInformationModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title bg-light" id="modal-basic-title" lang="AR-SA"><strong> {{ lang == 'en' ? formBodyLabels.en.btnCashierInformation.title : formBodyLabels.ar.btnCashierInformation.title}}
+                </strong></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body ">
+        <form [formGroup]="cashierInformationForm">
+            <div class="row">
+                <h4><strong> {{ lang == 'en' ? formBodyLabels.en.lblInstallment.title : formBodyLabels.ar.lblInstallment.title}} # 1 </strong></h4>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">%</label>
+                    <input type="text" class="form-control" formControlName="payPer1" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblDate.title : formBodyLabels.ar.lblDate.title}}</label>
+                    <input type="text" class="form-control" formControlName="draftDate1" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold fs-6 ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblDraft.title : formBodyLabels.ar.lblDraft.title}} #</label>
+                    <input type="text" class="form-control" formControlName="draftNumber1" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblAmount.title : formBodyLabels.ar.lblAmount.title}} %</label>
+                    <input type="text" class="form-control" formControlName="draftAmount1" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 ">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblReceivedBy.title : formBodyLabels.ar.lblReceivedBy.title}}</label>
+                    <input type="text" class="form-control" formControlName="receivedBy1" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lbtDateReceived.title : formBodyLabels.ar.lbtDateReceived.title}}</label>
+                    <input type="text" class="form-control" formControlName="deliveryDate1" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <h4><strong> {{ lang == 'en' ? formBodyLabels.en.lblInstallment.title : formBodyLabels.ar.lblInstallment.title}} # 2 </strong></h4>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">%</label>
+                    <input type="text" class="form-control" formControlName="payPer2" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblDate.title : formBodyLabels.ar.lblDate.title}}</label>
+                    <input type="text" class="form-control" formControlName="draftDate2" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblDraft.title : formBodyLabels.ar.lblDraft.title}} #</label>
+                    <input type="text" class="form-control" formControlName="draftNumber2" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblAmount.title : formBodyLabels.ar.lblAmount.title}}</label>
+                    <input type="text" class="form-control" formControlName="draftAmount2" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lblReceivedBy.title : formBodyLabels.ar.lblReceivedBy.title}}</label>
+                    <input type="text" class="form-control" formControlName="receivedBy2" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                    <label class="col-form-label fw-bold ArFontStyle label-color" lang="AR-SA">{{ lang == 'en' ? formBodyLabels.en.lbtDateReceived.title : formBodyLabels.ar.lbtDateReceived.title}}</label>
+                    <input type="text" class="form-control" formControlName="deliveryDate2" readonly
+                        style="background-color: #e9e9e9;" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button mat-raised-button color="primary" (click)="modal.close('yes')">{{ lang == 'en' ? formBodyLabels.en.btnOkay.title : formBodyLabels.ar.btnOkay.title}}</button>
+    </div>
+</ng-template>

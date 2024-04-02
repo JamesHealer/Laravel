@@ -1,0 +1,252 @@
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panelBgColor1">
+        <!--begin::Title-->
+        <div class="card-title">
+            <h3 class="m-0 ArFontStyle theader">{{lang=='en' ? "Add Service Setup" : 'إضافة إعداد الخدمة'}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary ArFontStyle english-vermillion" (click)="addServiceSetup()">{{lang=='en' ? formBodyLabels[1].btnSaveServiceSetup.title : formBodyLabels[1].btnSaveServiceSetup.arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle candy-pink">{{lang=='en' ? formBodyLabels[1].btnCancelServiceSetup.title : formBodyLabels[1].btnCancelServiceSetup.arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle ruddy-pink" routerLink="/service-setup/service-setup-details" routerLinkActive="active" >{{lang=='en' ? formBodyLabels[1].btnBackServiceSetup.title : formBodyLabels[1].btnBackServiceSetup.arabicTitle}}</button>
+              </div>              
+        </h3>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6">
+                <form [formGroup]="addServiceSetupForm" id="addServiceSetupForm" autocomplete="off">
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblServiceID.title : formBodyLabels[1].lblServiceID.arabicTitle}}
+                                </span></label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 readonly" formControlName="serviceId" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblServiceNameEnglish.title : formBodyLabels[1].lblServiceNameEnglish.arabicTitle}}
+                                </span></label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" 
+                            formControlName="serviceName1"/>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblArabic.title : formBodyLabels[1].lblArabic.arabicTitle}}</span></label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="serviceName2" />
+                        </div>
+                    </div>
+                    <div class="row mb-0">
+                        <!--begin::Label-->
+                        <div class="col-lg-1 d-flex align-items-center">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" id="allowedNonEmployes"
+                                    checked="checked" formControlName="allowedNonEmployes">
+                                <label class="form-check-label" for="allowmarketing"></label>
+                            </div>
+                        </div>
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <label class="col-lg-11 col-form-label fw-bold fs-6 ArFontStyle">{{lang=='en' ? formBodyLabels[1].lblAllowedNonEmployes.title : formBodyLabels[1].lblAllowedNonEmployes.arabicTitle}}</label>
+                        <!--begin::Label-->
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].MasterService.title : formBodyLabels[1].MasterService.arabicTitle}}</span></label>                           
+                            <ng-select [items]="masterServiceType$" bindValue="refId" bindLabel="refname3"
+                                formControlName="masterServiceId" lang="AR-SA" multiple="true" (change)="onMasterServiceChange($event)">                            
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblServiceType.title : formBodyLabels[1].lblServiceType.arabicTitle}}</span></label>
+                            <ng-select [items]="serviceType$ " bindValue="refId" bindLabel="shortname" formControlName="serviceType" lang="AR-SA" (change)="onServiceTypeChange(selection)" [(ngModel)]="selection">                            
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].ServiceSubType.title : formBodyLabels[1].ServiceSubType.arabicTitle}}</span></label>
+                            <ng-select [items]="serviceSubType$" bindValue="refId" bindLabel="shortName" formControlName="serviceSubType" lang="AR-SA">                            
+                            </ng-select>
+                        </div>
+                    </div>
+                   
+                    <div class="row mb-6">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblMinimumMonthOfServices.title : formBodyLabels[1].lblMinimumMonthOfServices.arabicTitle}}</span></label>                           
+                            <ng-select formControlName="minMonthsService">     
+                                <ng-option *ngFor="let item of minimumMonthOfServices" [value]="item.id">{{item.name}}</ng-option>                       
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblMinimumInstallment.title : formBodyLabels[1].lblMinimumInstallment.arabicTitle}}</span></label>                            
+                            <ng-select formControlName="minInstallment">     
+                                <ng-option *ngFor="let item of minInstallment" [value]="item.id">{{item.name}}</ng-option>                       
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].lblMaximumInstallment.title : formBodyLabels[1].lblMaximumInstallment.arabicTitle}}</span></label> 
+                            <ng-select formControlName="maxInstallment">     
+                                <ng-option *ngFor="let item of maxInstallment" [value]="item.id">{{item.name}}</ng-option>                       
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <div class="col-lg-1 d-flex align-items-center ArFontStyle">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" id="frozen"
+                                     formControlName="frozen">
+                                <label class="form-check-label" for="allowmarketing"></label>
+                            </div>
+                        </div>
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <label class="col-lg-5 col-form-label fw-bold fs-6 ArFontStyle">{{lang=='en' ? formBodyLabels[1].lblAllowtobeFrozen.title : formBodyLabels[1].lblAllowtobeFrozen.arabicTitle}} </label>
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <div class="col-lg-1 d-flex align-items-center">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" id="previousEmployees"
+                                    formControlName="previousEmployees">
+                                <label class="form-check-label" for="allowmarketing"></label>
+                            </div>
+                        </div>
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <label class="col-lg-5 col-form-label fw-bold fs-6 ArFontStyle">{{lang=='en' ? formBodyLabels[1].lblPreviousEmployments.title : formBodyLabels[1].lblPreviousEmployments.arabicTitle}} </label>
+                        <!--begin::Label-->
+                    </div>
+                    <div class="row mb-6">                        
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <div class="col-lg-1 d-flex align-items-center">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" id="allowmarketing"
+                                    >
+                                <label class="form-check-label" for="allowmarketing"></label>
+                            </div>
+                        </div>                        
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <label class="col-lg-5 col-form-label fw-bold fs-6 ArFontStyle">{{lang=='en' ? formBodyLabels[1].lblInstallmentCanBypassed.title : formBodyLabels[1].lblInstallmentCanBypassed.arabicTitle}} </label>
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <div class="col-lg-1 d-flex align-items-center">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" formControlName="allowDiscountPer" 
+                                id="allowDiscountPer" (change)="allowDiscountPerChangeStatus($event)">
+                                <label class="form-check-label" for="allowDiscountPer"></label>
+                            </div>
+                        </div>                        
+                        <!--begin::Label-->
+                        <!--begin::Label-->
+                        <label class="col-lg-5 col-form-label fw-bold fs-6 ArFontStyle">{{lang=='en' ? formBodyLabels[1].AllowDiscount.title : formBodyLabels[1].AllowDiscount.arabicTitle}} </label>   
+                    </div>
+               
+                    <div class="row mb-6" [hidden]="!showHide">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].DiscountType.title : formBodyLabels[1].DiscountType.arabicTitle}}</span></label>                            
+                        
+                            <ng-select formControlName="discountType">     
+                                <ng-option *ngFor="let item of discountTypeArray;let i = index;"  [value]="item.id" [selected]="i==1">{{item.name}}</ng-option>          
+                            </ng-select>
+                             
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].DiscountAmount.title : formBodyLabels[1].DiscountAmount.arabicTitle}}</span></label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" formControlName="allowDiscountAmount" maxlength="3">
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-1 d-flex align-items-center">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" formControlName="allowSponser" 
+                                id="allowSponser">
+                                <label class="form-check-label" for="allowSponser"></label>
+                            </div>
+                        </div>                        
+                        <label class="col-lg-5 col-form-label fw-bold fs-6 ArFontStyle  m-t-20">{{lang=='en' ? formBodyLabels[1].AllowSponsor.title : formBodyLabels[1].AllowSponsor.arabicTitle}} </label> 
+                        
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang=='en' ? formBodyLabels[1].DocumentsCount.title : formBodyLabels[1].DocumentsCount.arabicTitle}}</span></label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" formControlName="documentsCount" (change)="DocumentsCountLength()">
+                            <span class="text-danger" [hidden]="DocumentLength">
+                                Required documents must be less than 6.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-2 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">Add Services</span></label>                           
+                          
+                            <ng-select [items]="tab1$" bindLabel="shortname" bindValue="refid"
+                              formControlName="tab1"  lang="AR-SA">
+                            </ng-select> 
+ 
+                        </div>
+                        <div class="col-lg-2 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">Financial Calculation</span></label>                            
+                            
+                            <ng-select [items]="tab1$" bindLabel="shortname" bindValue="refid"
+                              formControlName="tab2">
+                            </ng-select> 
+                        </div>
+                        <div class="col-lg-2 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">Document Attachment</span></label> 
+                            <ng-select [items]="tab1$" bindLabel="shortname" bindValue="refid"
+                            formControlName="tab3"
+                          >
+                          </ng-select> 
+                        </div>
+                        <div class="col-lg-2 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">Financial</span></label>                           
+                            
+                            <ng-select [items]="tab1$" bindLabel="shortname" bindValue="refid"
+                            formControlName="tab4">
+                          </ng-select> 
+                        </div>  
+                        <div class="col-lg-2 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">Tab 5</span></label>                            
+                            <ng-select formControlName="tab5">     
+                                <ng-option *ngFor="let item of tabSelectionCount" [value]="item.id">{{item.name}}</ng-option>                       
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-2 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle"><span class="">Tab 6</span></label> 
+                            <ng-select formControlName="tab6">     
+                                <ng-option *ngFor="let item of tabSelectionCount" [value]="item.id">{{item.name}}</ng-option>                       
+                            </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+
+    </div>
+    <!--end::Tab content-->
+</div>
+
+
+<br/>
+<app-financial-detials [parentFormGroup]="parentForm" [accordialDetails]="'addServiceSetup'">
+
+</app-financial-detials>
+
+<br/>
+<app-approval-detials [parentFormGroup]="parentForm" [accordialApprovalDetails]="'addServiceSetup'">
+
+</app-approval-detials>
+
+
+

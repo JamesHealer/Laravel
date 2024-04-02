@@ -1,0 +1,104 @@
+<ngb-accordion #acc="ngbAccordion" class="mb-2" [ngClass]="{'panelBgColor_addServiceSetup': accordialHTMLForms === 'addServiceSetup'}">
+    <ngb-panel>
+        <ng-template ngbPanelTitle>
+            <h3 class="m-0 ArFontStyle" lang="AR-SA"
+                [ngClass]="{'headcolor_addServiceSetup': accordialHTMLForms === 'addServiceSetup'}">{{lang == 'en' ? formBodyLabels['en'].lblWebsiteDisplayContent.title :formBodyLabels['ar'].lblWebsiteDisplayContent.title }}</h3>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <form [formGroup]="editorForm" id="editorForm" autocomplete="off">
+                <div class="row mb-4">
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle">{{lang == 'en' ? formBodyLabels['en'].lblWebNameEnglish.title :formBodyLabels['ar'].lblWebNameEnglish.title }}
+                            </label>
+                            <input type="text" class="form-control" placeholder="Web Name English"
+                                formControlName="webEnglish" />
+                               
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle">{{lang == 'en' ? formBodyLabels['en'].lblWebNameArabic.title :formBodyLabels['ar'].lblWebNameArabic.title }}
+                            </label>
+                            <input type="text" class="form-control" placeholder="Web Name Arabic"
+                                formControlName="webArabic" />
+                        </div>
+                    </div>
+                    <div class="row mb-6 ckbox">
+                        <!--begin::Label-->
+                        <div class="col-lg-1 d-flex align-items-center">
+                            <div class="form-check form-check-solid form-switch fv-row">
+                                <input class="form-check-input w-45px h-30px" type="checkbox" id="isElectronicForm"
+                                    formControlName="isElectronicForm">
+                                <label class="form-check-label" for="isElectronicForm"></label>
+                            </div>
+                        </div>
+                        <!--begin::Label-->
+                        <label class="col-lg-5 col-form-label fw-bold fs-6 ArFontStyle"> {{lang == 'en' ? formBodyLabels['en'].lblIsElectronicForm.title :formBodyLabels['ar'].lblIsElectronicForm.title }} </label>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle"><span class="">
+                                {{lang == 'en' ? formBodyLabels['en'].lblElectronicForm.title :formBodyLabels['ar'].lblElectronicForm.title }} 1  
+                                </span></label><br>
+                            <input #file1 type="file" class="form-control form-control-lg  mb-3 mb-lg-0" [hidden]="true"
+                                (change)="onElectronicForm1Select($event)" title="testing" />
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-upload" (mousedown)="file1.click()">Choose file</button>
+                                <div class="border border-secondary rounded p-3 w-100" style="height: 43px;">
+                                    {{!electricform1? "No file choosen":electricform1}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle"><span class="">{{lang == 'en' ? formBodyLabels['en'].lblElectronicForm.title :formBodyLabels['ar'].lblElectronicForm.title }} URL 1</span></label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="electronicForm1URL" />
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle"><span class="">
+                                {{lang == 'en' ? formBodyLabels['en'].lblElectronicForm.title :formBodyLabels['ar'].lblElectronicForm.title }} 2 
+                                </span></label>
+                            <input #file2 type="file" class="form-control form-control-lg  mb-3 mb-lg-0" [hidden]="true"
+                                (change)="onElectronicForm2Select($event)" />
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-upload" (mousedown)="file2.click()">Choose file</button>
+                                <div class="border border-secondary rounded p-3 w-100" style="height: 43px;">
+                                    {{!electricform2? "No file choosen":electricform2}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-8 col-form-label fw-bold fs-6 ArFontStyle"><span class="">
+                                {{lang == 'en' ? formBodyLabels['en'].lblElectronicForm.title :formBodyLabels['ar'].lblElectronicForm.title }} URL 2</span></label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0"
+                                formControlName="electronicForm2URL" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h3 class="mt-2"><strong class="ArFontStyle"> {{lang == 'en' ? formBodyLabels['en'].lblEnglishWebsiteContent.title :formBodyLabels['ar'].lblEnglishWebsiteContent.title }}</strong></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Web URL English Page"
+                            formControlName="englishWebPageName" />
+                    </div>
+                </div>
+                <angular-editor id="editor1" [config]="config" formControlName="englishHtml"></angular-editor>
+                <br />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h3><strong class="ArFontStyle">{{lang == 'en' ? formBodyLabels['en'].lblArabicWebsiteContent.title :formBodyLabels['ar'].lblArabicWebsiteContent.title }}</strong></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Web URL Arabic Page"
+                            formControlName="arabicWebPageName" />
+                    </div>
+                </div>
+                <angular-editor id="editor2" [config]="config" formControlName="arabicHtml"
+                    class="ArFontStyle"></angular-editor>
+            </form>
+
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

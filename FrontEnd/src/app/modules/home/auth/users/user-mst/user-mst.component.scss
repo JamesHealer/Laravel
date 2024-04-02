@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+  }
+  .btn-sm {
+    min-width: 30px;
+    min-height: 30px;
+    
+}
+.panel3bgColor {
+  background-color: #c35e60;
+}
+.icon-space {
+  margin-right: 12px;
+  color: #3979fc;
+  background: transparent;
+}
+
+.usermstTableHeader{
+  background-color: var(--venitan-red2);
+  th {
+    color: #fff !important;
+  }
+}

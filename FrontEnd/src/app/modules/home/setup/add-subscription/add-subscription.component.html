@@ -1,0 +1,120 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #AddSubscription name="AddSubscription" value="AddSubscription">
+<!--Parital View For Search-->
+<app-search-tab [pageName]="'AddSubscription'"></app-search-tab>
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header card-header-stretch pb-0 panelBgColor">
+        <!--begin::Title-->
+        <div class="card-title" *ngFor="let bodyLabel of formBodyLabels; let i = index;">
+            <h3 class="m-0 text-white ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</h3>
+        </div>
+        <h3 class="card-title align-items-start flex-column">
+            <div class="btn-group" role="group" aria-label="Basic example" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                <button type="button" class="btn btn-primary ArFontStyle sazerac" lang="AR-SA">{{lang == 'en' ? bodyLabel[0].title : bodyLabel[0].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle sandyBeach" lang="AR-SA">{{lang == 'en' ? bodyLabel[1].title : bodyLabel[1].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle peach" lang="AR-SA" (click)="open(employeePerformanceModal)">{{lang == 'en' ? bodyLabel[2].title : bodyLabel[2].arabicTitle}}</button>
+                <button type="button" class="btn btn-primary ArFontStyle creamBrulee" lang="AR-SA"
+                    routerLink="/references/subscription-details">{{lang == 'en' ? bodyLabel[3].title : bodyLabel[3].arabicTitle}}</button>
+            </div>
+        </h3>
+        <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Tab content-->
+    <div id="kt_billing_payment_tab_content" class="card-body tab-content">
+        <!--begin::Tab panel-->
+        <div id="kt_billing_creditcard" class="tab-pane fade show active" role="tabpanel">
+            <!--begin::Title-->
+            <!-- <h3 class="mb-5">Personal Information</h3> -->
+            <!--end::Title-->
+            <!--begin::Row-->
+            <div class="row gx-9 gy-6" *ngFor="let bodyLabel of formBodyLabels; let i = index">               
+                <form autocomplete="off">
+                    <div class="row mb-4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[4].title : bodyLabel[4].arabicTitle}}
+                                </label>
+                            <select class="form-control bg-light" aria-label="Select example">
+                                <option>-Select-</option>
+                                <option value="1">Subcriber</option>
+                                <option value="2">Re-Subscriber</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[5].title : bodyLabel[5].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0 ArFontStyle" lang="AR-SA" value="في تَقَدم" readonly/>
+                        </div>
+                    </div>
+                    <div class="row mb-4">                        
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[6].title : bodyLabel[6].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[7].title : bodyLabel[7].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb 4">
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[8].title : bodyLabel[8].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>                       
+                    </div>
+                    <div class="row mb 4">
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ? bodyLabel[9].title : bodyLabel[9].arabicTitle}}</label>
+                            <input type="text" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[10].title : bodyLabel[10].arabicTitle}}</label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                        <!-- <div class="col-lg-4 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{bodybodyLabel[11].title}}</label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div> -->
+                        <div class="col-lg-4 fv-row">
+                            <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[13].title : bodyLabel[13].arabicTitle}}</label>
+                            <input type="date" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                    <div class="row mb 4">
+                        
+                        <div class="col-lg-6 fv-row">
+                            <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA" >{{lang == 'en' ? bodyLabel[12].title : bodyLabel[12].arabicTitle}}<small class="text-muted">{{lang == 'en' ? bodyLabel[15].title : bodyLabel[15].arabicTitle}}</small> </label>
+                            <input type="number" class="form-control form-control-lg  mb-3 mb-lg-0" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Row-->
+        </div>
+
+    </div>
+    <!--end::Tab content-->
+</div>
+
+<!--TO DISPLAY EMPLOYEE CONTACT DETAILS IN MODAL POPUP-->
+<ng-template #employeePerformanceModal let-modal>
+    <div class="modal-header bg-light">
+      <button type="button" class="close" data-dismiss="modal" (click)="modal.dismiss('Cross click')">&times;</button>
+      <h4 class="modal-title" id="modal-basic-title">Employee Performance</h4>
+    </div>
+    <div class="modal-body">
+      <!-- end::Header-->
+      <!-- begin::Body-->
+      
+        <!--begin::Contacts-->
+       <app-contact-details></app-contact-details>
+        <!--end::Contacts-->
+   
+      <!-- end: Card Body-->
+    </div>
+    <div class="modal-footer bg-light">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-warning" (click)="modal.close('Save click')">Close</button>
+      </div>
+    </div>
+  </ng-template>

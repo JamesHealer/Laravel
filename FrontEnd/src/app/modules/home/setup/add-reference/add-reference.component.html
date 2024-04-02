@@ -1,0 +1,212 @@
+<div class="card mb-5 mb-xl-10">
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+      data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">Employee Details</h3>
+      </div>
+    </div>
+    <div id="kt_account_profile_details" class="collapse show">
+      
+      <form   autocomplete="off">
+        <div class="card-body border-top p-9">
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <input type="date" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+            </div>
+            <div class="col-lg-6 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6"><span class="">Arabic</span></label>
+              <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" disabled name="nameInArabic" />
+              
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6"><span class="">Date of Birth</span></label>
+              <input type="date" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+            </div>
+            <!-- <div class="col-lg-4 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["dateOfJoining"]' [label]='"Monthly Salary"' [type]='"date"'></app-text-input>
+            </div> -->
+            <div class="col-lg-4 fv-row">
+              
+              <!-- <label class="col-form-label fw-bold "><span class="">Gender</span></label> -->
+              <!-- <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+              </select> -->
+            </div>
+          </div>
+  
+          <!-- <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Department</span></label>
+              <select class="form-control" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+              </select>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Occupation</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["monthlySalary"]' [label]='"Monthly Salary"'></app-text-input>            
+            </div>
+            <div class="col-lg-4 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["landLine"]' [label]='"Landline"'></app-text-input>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["email"]' [label]='"Email"'></app-text-input>
+            </div>          
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["employeeMobile"]' [label]='"Employee Mobile"'></app-text-input>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Marital Status</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["kinName"]' [label]='"Next of the Kin Name"'></app-text-input>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["kinMobile"]' [label]='"Next of the Kin Mobile"'></app-text-input>
+            </div>          
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">            
+              <app-text-input [formControl]='employeeForm.controls["membership"]' [label]='"Membership"'></app-text-input>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-lg-4 col-form-label fw-bold fs-6"><span class="">Date of Joining</span></label>
+              <input type="date" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+            </div>
+            <div class="col-lg-4 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["termination"]' [label]='"Termination"'></app-text-input>
+            </div>
+          </div>
+          <div class="row mb-6">          
+            <div class="col-lg-6 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["terminationDate"]' [label]='"TerminationDate"'></app-text-input>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["civilId"]' [label]='"Civil ID"'></app-text-input>
+            </div>
+          </div>
+         
+          <div class="row mb-6">          
+            <div class="col-lg-6 fv-row">            
+              <app-text-input [formControl]='employeeForm.controls["paci"]' [label]='"PACI"'></app-text-input>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <app-text-input [formControl]='employeeForm.controls["otherId"]' [label]='"Other ID"'></app-text-input>
+            </div>
+          </div> -->
+          <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">Financial Information</h3>
+            <hr/>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Loan Account</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Hajj Account</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Per Load Act</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Consumer Loan </span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Other Act # 1</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Other Act # 2</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Other Act # 3 </span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+            <div class="col-lg-4 fv-row">
+              <label class="col-form-label fw-bold"><span class="">Other Act # 4</span></label>
+              <select class="form-control form-control-solid" aria-label="Select example">
+                <option>-Select-</option>
+                <option value="1">Married</option>
+                <option value="2">Single</option>
+              </select>
+            </div>
+            
+          </div>        
+        </div>
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <button type="button" class="btn btn-primary float-right" [disabled]="isLoading" (click)="saveSettings()">
+            <ng-container *ngIf="!isLoading">Save Changes</ng-container>
+            <ng-container *ngIf="isLoading">
+              <span clas="indicator-progress" [style.display]="'block'">
+                Please wait...{{ " " }}
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </span>
+            </ng-container>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

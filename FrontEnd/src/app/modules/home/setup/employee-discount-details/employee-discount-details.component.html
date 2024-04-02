@@ -1,0 +1,349 @@
+<!-- TO GET FORM ID AND SETTINGUP LANGAUGE. -->
+<input type="hidden" #EmployeeDiscountDetails name="EmployeeDiscountDetails" value="EmployeeDiscountDetails">
+<div class="card mb-5 mb-xl-8 ">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 header_waves">
+        <div class="card-toolbar" *ngFor="let label of formHeaderLabels; let i = index">
+            <h3 class="text-white ArFontStyle header_color" lang="AR-SA" id="EmployeeDiscountDetails">{{label.headerName}}</h3>
+        </div>       
+        <div class="card-toolbar"> 
+            <h3 class="card-title align-items-start flex-column">
+                <div class="btn-group" role="group" aria-label="Basic example" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+                    <button type="button" class="btn btn-primary ArFontStyle btn_green-pool-tb" lang="AR-SA" routerLink="/references/add-employee-discount">{{bodyLabel[0].title}}</button>
+                    <button type="button" class="btn btn-primary ArFontStyle btn_green-pool-tb" lang="AR-SA" >{{bodyLabel[1].title}}</button>
+                  </div>
+            </h3>
+        </div>        
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-3" *ngFor="let bodyLabel of formBodyLabels; let i = index">
+        <div class="row mb-4">
+            <div class="col-lg-6 fv-row">
+                <div class="card-toolbar">
+                    <!--begin::Menu-->
+                    <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="5" y="5" width="5" height="5" rx="1" fill="currentColor"></rect>
+                                    <rect x="14" y="5" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                                    <rect x="5" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                                    <rect x="14" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                                </g>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </button>
+                    <!--begin::Menu 2-->
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
+                        data-kt-menu="true">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">Quick Actions</div>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu separator-->
+                        <div class="separator mb-3 opacity-75"></div>
+                        <!--end::Menu separator-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">New Ticket</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">New Customer</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
+                            <!--begin::Menu item-->
+                            <a href="#" class="menu-link px-3">
+                                <span class="menu-title">New Group</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <!--end::Menu item-->
+                            <!--begin::Menu sub-->
+                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Admin Group</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Staff Group</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Member Group</a>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu sub-->
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">New Contact</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu separator-->
+                        <div class="separator mt-3 opacity-75"></div>
+                        <!--end::Menu separator-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <div class="menu-content px-3 py-3">
+                                <a class="btn btn-primary btn-sm px-4" href="#">Generate Reports</a>
+                            </div>
+                        </div>
+                        <!--end::Menu item-->
+                    </div>
+                    <!--end::Menu 2-->
+                    <!--end::Menu-->
+                    
+                </div>
+            </div>
+            <div class="col-lg-4 fv-row">
+                <select class="form-control form-control-solid" (change)="getSelectedService($event)">
+                    <option>-Select-</option>
+                    <option>Request for Discount</option>
+                    <option>Request for Loan Removal</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{bodyLabel[2].title}}</label>
+            </div>
+        </div>
+        <!--begin::Table container-->
+        <div class="table-responsive mt-3">
+            <!--begin::Table-->
+            <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                <!--begin::Table head-->
+                <thead class="bg-light-primary edd_theader">
+                    <tr class="fw-bolder">
+                        <th class="min-w-80px text-center ArFontStyle" lang="AR-SA">{{bodyLabel[3].title}}</th>
+                        <th class="min-w-100px ArFontStyle" lang="AR-SA">{{bodyLabel[4].title}}</th>
+                        <th class="min-w-100px ArFontStyle" lang="AR-SA">{{bodyLabel[5].title}}</th>
+                        <th class="min-w-140px ArFontStyle" lang="AR-SA" >{{bodyLabel[6].title}}</th>
+                        <th class="min-w-120px ArFontStyle" lang="AR-SA">{{bodyLabel[7].title}}</th>
+                        <th class="min-w-120px ArFontStyle" lang="AR-SA">{{bodyLabel[8].title}}</th>
+                    </tr>
+                </thead>
+                <!--end::Table head-->
+                <!--begin::Table body-->
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="bi bi-trash3-fill fs-2 text-danger">
+                            </a>
+                            | <a href="javascript:void(0)" class="bi bi-pencil-square fs-2">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA"> X-1234-2343 سالم مرزوق راشد الطحيح	
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">Discount
+                                –
+                                80%			
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Approved
+
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Drop A Membership
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">110.500</a>
+                        </td>                       
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="bi bi-trash3-fill fs-2 text-danger">
+                            </a>
+                            | <a href="javascript:void(0)" class="bi bi-pencil-square fs-2">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">  1234-2343-X نجاه عبدالقادر جاسم القناعي
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">Discount
+                                –
+                                10%			
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Approved
+
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Membership Cessation
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">50.500</a>
+                        </td>                       
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="bi bi-trash3-fill fs-2 text-danger">
+                            </a>
+                            | <a href="javascript:void(0)" class="bi bi-pencil-square fs-2">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                            class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA"> X-1234-2343 على ذياب على المشوط	
+                        </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">Discount
+                                –
+                                40%			
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Waiting for Approved
+
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Withdrawal
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">600.500</a>
+                        </td>                       
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="bi bi-trash3-fill fs-2 text-danger">
+                            </a>
+                            | <a href="javascript:void(0)" class="bi bi-pencil-square fs-2">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                            class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">  1234-2343-X ناصر حسن جوهر حياه	
+                        </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">Discount
+                                –
+                                50%			
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Paid
+
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">End of the Serivce
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">750.500</a>
+                        </td>                       
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="bi bi-trash3-fill fs-2 text-danger">
+                            </a>
+                            | <a href="javascript:void(0)" class="bi bi-pencil-square fs-2">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                            class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA"> 1234-2343-X	يحيى على محمد احمد	
+                        </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">Discount
+                                –
+                                100%			
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Rejected
+
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Death Disability
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">110.000</a>
+                        </td>                       
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="bi bi-trash3-fill fs-2 text-danger">
+                            </a>
+                            | <a href="javascript:void(0)" class="bi bi-pencil-square fs-2">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                            class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA"> X-1234-2343 لمياء حسن جوهر حيات	
+                        </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)"
+                                class="text-dark fw-bolder text-hover-primary  fs-6 ArFontStyle" lang="AR-SA">Discount
+                                –
+                                10%			
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Rejected
+
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">Termination Membership
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ArFontStyle" lang="AR-SA">1010.000</a>
+                        </td>                       
+
+                    </tr>
+                </tbody>
+                <!--end::Table body-->
+            </table>
+            <!--end::Table-->
+        </div>
+        <!--end::Table container-->
+    </div>
+    <!--begin::Body-->
+    <div class="card-footer">
+        
+    </div>
+</div>

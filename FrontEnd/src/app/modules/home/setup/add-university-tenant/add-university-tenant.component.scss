@@ -1,0 +1,31 @@
+.panelBgColor{
+    background-color: var(--sweet-brown);
+}
+
+.panelBgColor1{
+    background-color: var(--english-vermillion);
+}
+
+.ArFontStyle{
+    font-family: Cairo;
+}
+
+.english-vermillion{
+    background-color: var(--english-vermillion);
+}
+
+.candy-pink{
+    background-color: var(--candy-pink);
+}
+
+.btn-group{
+    column-gap: 20px;
+}
+
+.english-vermillion, .candy-pink{
+    &.btn {
+        &.btn-primary:hover, &.btn-primary:focus, &.btn-primary:active {
+            background-color: var(--setup-btn-hover) !important; 
+        }
+    }
+}

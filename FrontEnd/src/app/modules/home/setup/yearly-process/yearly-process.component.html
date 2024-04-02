@@ -1,0 +1,35 @@
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5 panel3bgColor">
+        <div class="card-toolbar">
+            <h3 class="text-dark ArFontStyle" lang="AR-SA">{{lang == 'en' ? formBodyLabels[0].lblYearlyProcess.title :
+                formBodyLabels[1].lblYearlyProcess.title}}</h3>
+        </div>
+    </div>
+    <div class="card-body py-3">
+        <div class="row mb-4">
+
+            <div class="col-lg-6 fv-row">
+                <label class="col-lg-6 col-form-label fw-bold fs-6 ArFontStyle" lang="AR-SA">{{lang == 'en' ?
+                    formBodyLabels[0].lblPeriodCode.title : formBodyLabels[1].lblPeriodCode.title}}</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-calendar"></i>
+                    </span>
+                    <input type="text" class="form-control" bsDatepicker [(ngModel)]="nextPeriodCode"
+                        [bsConfig]="{ dateInputFormat: 'YYYY-MM' }" disabled (onShown)="onOpenCalendar($event)" />
+                </div>
+            </div>
+            <div class="d-flex justify-content-between gap-4 my-4">
+                <h3 class="card-title align-items-start flex-column">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary ArFontStyle" lang="AR-SA"
+                            (click)="calculateYearlyProcessForMembership()">{{lang == 'en' ?
+                            formBodyLabels[0].btnSubmit.title : formBodyLabels[1].btnSubmit.title}}</button>
+                    </div>
+                </h3>
+            </div>
+        </div>
+
+    </div>
+</div>
